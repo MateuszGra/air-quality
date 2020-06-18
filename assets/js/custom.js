@@ -2,9 +2,10 @@
 
 var select = document.querySelector('.select');
 var stationName = document.querySelector('.data__name');
+var sensorsDOM = document.querySelector('.data__sensors');
 var stations;
 var sensors;
-var sensorData;
+var sensorData = [];
 var quality;
 
 var createSelect = function createSelect(stations) {
@@ -35,7 +36,18 @@ var loadSensorData = function loadSensorData(id) {
   }).then(function (response) {
     return response.text();
   }).then(function (response) {
-    sensorData = JSON.parse(response);
+    var respObject = JSON.parse(response);
+    sensorData.push(respObject);
+    var value = 'brak danych';
+
+    for (var i = 0; i < respObject.values.length; i++) {
+      if (respObject.values[i].value != null) {
+        value = respObject.values[i].value;
+        break;
+      }
+    }
+
+    sensorsDOM.innerHTML += "\n            <p class=\"data__sensor\">\n                <span>".concat(respObject.key, ": </span>\n                <span>").concat(value, "</span>\n            </p>\n            ");
   }).catch(function (error) {
     return console.log(error);
   });
@@ -92,6 +104,8 @@ fetch('inc/stations.php', {
   return console.log(error);
 });
 select.addEventListener('change', function () {
+  localStorage.setItem('station', select.value);
+  sensorsDOM.innerHTML = null;
   loadSensors();
   loadQuality();
 });

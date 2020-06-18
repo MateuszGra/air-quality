@@ -1,8 +1,9 @@
 const select = document.querySelector('.select');
 const stationName = document.querySelector('.data__name');
+const sensorsDOM = document.querySelector('.data__sensors');
 let stations;
 let sensors;
-let sensorData;
+let sensorData = [];
 let quality;
 
 const createSelect = (stations) => {
@@ -34,8 +35,23 @@ const loadSensorData = (id) => {
         })
         .then(response => response.text())
         .then(response => {
-            sensorData = JSON.parse(response);
+            const respObject = JSON.parse(response);
+            sensorData.push(respObject);
+            let value = 'brak danych';
 
+            for (let i = 0; i < respObject.values.length; i++) {
+                if (respObject.values[i].value != null) {
+                    value = respObject.values[i].value;
+                    break
+                }
+            }
+
+            sensorsDOM.innerHTML += `
+            <p class="data__sensor">
+                <span>${respObject.key}: </span>
+                <span>${value}</span>
+            </p>
+            `
         })
         .catch(error => console.log(error));
 }
@@ -98,6 +114,9 @@ fetch('inc/stations.php', {
 
 
 select.addEventListener('change', () => {
+
+    localStorage.setItem('station', select.value);
+    sensorsDOM.innerHTML = null;
     loadSensors();
     loadQuality();
 });
