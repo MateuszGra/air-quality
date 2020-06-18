@@ -1,11 +1,22 @@
 // This line height feels natural for most projects
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   line-height: 1.2;
   font-weight: inherit;
 }
 
 // Setting default margin based on font size
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: $base-margin 0;
 }
 
@@ -37,6 +48,10 @@ h6 {
 p {
   font-size: 1rem;
   line-height: 1.6;
+}
+
+select {
+  font-size: 1rem;
 }
 
 cite {
@@ -86,13 +101,22 @@ button {
   h1 {
     font-size: 2rem;
   }
+
   h2 {
     font-size: 1.4rem;
   }
+
   figcaption {
     font-size: .9rem;
   }
-  h1, h2, h3, h4, h5, h6, p {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
     & br {
       display: none;
     }

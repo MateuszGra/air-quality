@@ -1,9 +1,10 @@
 const select = document.querySelector('.select');
 const stationName = document.querySelector('.data__name');
-const sensorsDOM = document.querySelector('.data__sensors');
+let htmlText = ``;
+const dataWrapper = document.querySelector('.data');
+let counter = 0;
 let stations;
 let sensors;
-let sensorData = [];
 let quality;
 
 const createSelect = (stations) => {
@@ -31,7 +32,7 @@ const loadSelectValue = () => {
     localStorage.setItem('station', select.value);
 }
 
-const loadSensorData = (id) => {
+const loadSensorData = (id, index) => {
     const data = new FormData();
     data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/data/getData/' + id);
 
@@ -41,23 +42,25 @@ const loadSensorData = (id) => {
         })
         .then(response => response.text())
         .then(response => {
-            const respObject = JSON.parse(response);
-            sensorData.push(respObject);
+            const sensorData = JSON.parse(response);
             let value = 'brak danych';
 
-            for (let i = 0; i < respObject.values.length; i++) {
-                if (respObject.values[i].value != null) {
-                    value = respObject.values[i].value;
-                    break
+            for (let i = 0; i < sensorData.values.length; i++) {
+                if (sensorData.values[i].value != null) {
+                    value = sensorData.values[i].value;
                 }
             }
 
-            sensorsDOM.innerHTML += `
+            htmlText += `
             <p class="data__sensor">
-                <span>${respObject.key}: </span>
+                <span data-id="${sensors[index].param.idParam}">${sensors[index].param.paramName}: </span>
                 <span>${value}</span>
             </p>
             `
+
+            counter++;
+
+            if (counter == sensors.length) dataWrapper.innerHTML = htmlText;
         })
         .catch(error => console.log(error));
 }
@@ -74,15 +77,20 @@ const loadSensors = () => {
         .then(response => {
             sensors = JSON.parse(response);
 
-            sensors.forEach(sensor => {
-                loadSensorData(sensor.id);
-            });
+            console.log(sensors)
 
+            htmlText += `<p>Sensory:</p>`
+
+            sensors.forEach((sensor, index) => {
+                loadSensorData(sensor.id, index);
+            });
         })
         .catch(error => console.log(error));
 }
 
 const loadQuality = () => {
+    dataWrapper.innerHTML = '<div class="loader"></div>'
+
     const data = new FormData();
     data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/' + select.value);
 
@@ -94,11 +102,18 @@ const loadQuality = () => {
         .then(response => {
             quality = JSON.parse(response);
 
-            const dateDOM = document.querySelector('.js-date');
-            dateDOM.innerText = quality.stCalcDate;
+            htmlText += `
+            <p class="data__date">
+                <span>Data pomiaru: </span>
+                <span>${quality.stCalcDate}</span>
+            </p>
+            <p class="data__quality">
+                <span>Index jakości powietrza: </span>
+                <span class="js-quality">${quality.stIndexLevel.indexLevelName}</span>
+            </p>
+            `
 
-            const indexLevelDOM = document.querySelector('.js-quality');
-            indexLevelDOM.innerText = quality.stIndexLevel.indexLevelName;
+            loadSensors();
         })
         .catch(error => console.log(error));
 }
@@ -118,7 +133,6 @@ const loadStacions = () => {
 
             createSelect(stations);
             loadSelectValue();
-            loadSensors();
             loadQuality();
         })
         .catch(error => console.log(error));
@@ -129,7 +143,7 @@ loadStacions();
 select.addEventListener('change', () => {
 
     localStorage.setItem('station', select.value);
-    sensorsDOM.innerHTML = null;
-    loadSensors();
+    htmlText = ``;
+    counter = 0;
     loadQuality();
 });

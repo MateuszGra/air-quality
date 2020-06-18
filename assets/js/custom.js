@@ -2,10 +2,11 @@
 
 var select = document.querySelector('.select');
 var stationName = document.querySelector('.data__name');
-var sensorsDOM = document.querySelector('.data__sensors');
+var htmlText = "";
+var dataWrapper = document.querySelector('.data');
+var counter = 0;
 var stations;
 var sensors;
-var sensorData = [];
 var quality;
 
 var createSelect = function createSelect(stations) {
@@ -35,7 +36,7 @@ var loadSelectValue = function loadSelectValue() {
   localStorage.setItem('station', select.value);
 };
 
-var loadSensorData = function loadSensorData(id) {
+var loadSensorData = function loadSensorData(id, index) {
   var data = new FormData();
   data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/data/getData/' + id);
   fetch('inc/ajax.php', {
@@ -44,18 +45,18 @@ var loadSensorData = function loadSensorData(id) {
   }).then(function (response) {
     return response.text();
   }).then(function (response) {
-    var respObject = JSON.parse(response);
-    sensorData.push(respObject);
+    var sensorData = JSON.parse(response);
     var value = 'brak danych';
 
-    for (var i = 0; i < respObject.values.length; i++) {
-      if (respObject.values[i].value != null) {
-        value = respObject.values[i].value;
-        break;
+    for (var i = 0; i < sensorData.values.length; i++) {
+      if (sensorData.values[i].value != null) {
+        value = sensorData.values[i].value;
       }
     }
 
-    sensorsDOM.innerHTML += "\n            <p class=\"data__sensor\">\n                <span>".concat(respObject.key, ": </span>\n                <span>").concat(value, "</span>\n            </p>\n            ");
+    htmlText += "\n            <p class=\"data__sensor\">\n                <span data-id=\"".concat(sensors[index].param.idParam, "\">").concat(sensors[index].param.paramName, ": </span>\n                <span>").concat(value, "</span>\n            </p>\n            ");
+    counter++;
+    if (counter == sensors.length) dataWrapper.innerHTML = htmlText;
   }).catch(function (error) {
     return console.log(error);
   });
@@ -71,8 +72,10 @@ var loadSensors = function loadSensors() {
     return response.text();
   }).then(function (response) {
     sensors = JSON.parse(response);
-    sensors.forEach(function (sensor) {
-      loadSensorData(sensor.id);
+    console.log(sensors);
+    htmlText += "<p>Sensory:</p>";
+    sensors.forEach(function (sensor, index) {
+      loadSensorData(sensor.id, index);
     });
   }).catch(function (error) {
     return console.log(error);
@@ -80,6 +83,7 @@ var loadSensors = function loadSensors() {
 };
 
 var loadQuality = function loadQuality() {
+  dataWrapper.innerHTML = '<div class="loader"></div>';
   var data = new FormData();
   data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/' + select.value);
   fetch('inc/ajax.php', {
@@ -89,10 +93,8 @@ var loadQuality = function loadQuality() {
     return response.text();
   }).then(function (response) {
     quality = JSON.parse(response);
-    var dateDOM = document.querySelector('.js-date');
-    dateDOM.innerText = quality.stCalcDate;
-    var indexLevelDOM = document.querySelector('.js-quality');
-    indexLevelDOM.innerText = quality.stIndexLevel.indexLevelName;
+    htmlText += "\n            <p class=\"data__date\">\n                <span>Data pomiaru: </span>\n                <span>".concat(quality.stCalcDate, "</span>\n            </p>\n            <p class=\"data__quality\">\n                <span>Index jako\u015Bci powietrza: </span>\n                <span class=\"js-quality\">").concat(quality.stIndexLevel.indexLevelName, "</span>\n            </p>\n            ");
+    loadSensors();
   }).catch(function (error) {
     return console.log(error);
   });
@@ -110,7 +112,6 @@ var loadStacions = function loadStacions() {
     stations = JSON.parse(response);
     createSelect(stations);
     loadSelectValue();
-    loadSensors();
     loadQuality();
   }).catch(function (error) {
     return console.log(error);
@@ -120,7 +121,7 @@ var loadStacions = function loadStacions() {
 loadStacions();
 select.addEventListener('change', function () {
   localStorage.setItem('station', select.value);
-  sensorsDOM.innerHTML = null;
-  loadSensors();
+  htmlText = "";
+  counter = 0;
   loadQuality();
 });
