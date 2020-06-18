@@ -7,13 +7,19 @@ let sensorData = [];
 let quality;
 
 const createSelect = (stations) => {
+
+    stations.sort((a, b) => a.city.name.localeCompare(b.city.name));
     stations.forEach(station => {
         const option = document.createElement('option');
-        option.text = station.stationName;
+        option.text = station.city.name;
+        if (station.addressStreet != null) {
+            option.text += ' ' + station.addressStreet;
+        }
         option.value = station.id;
         select.add(option);
     });
 }
+
 
 const loadSelectValue = () => {
     if (localStorage.getItem('station') != null) {
@@ -27,9 +33,9 @@ const loadSelectValue = () => {
 
 const loadSensorData = (id) => {
     const data = new FormData();
-    data.append('id', id);
+    data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/data/getData/' + id);
 
-    fetch('inc/sensor-data.php', {
+    fetch('inc/ajax.php', {
             method: "POST",
             body: data,
         })
@@ -58,9 +64,9 @@ const loadSensorData = (id) => {
 
 const loadSensors = () => {
     const data = new FormData();
-    data.append('id', select.value);
+    data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/station/sensors/' + select.value);
 
-    fetch('inc/sensors.php', {
+    fetch('inc/ajax.php', {
             method: "POST",
             body: data,
         })
@@ -78,9 +84,9 @@ const loadSensors = () => {
 
 const loadQuality = () => {
     const data = new FormData();
-    data.append('id', select.value);
+    data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/' + select.value);
 
-    fetch('inc/quality.php', {
+    fetch('inc/ajax.php', {
             method: "POST",
             body: data,
         })
@@ -97,21 +103,28 @@ const loadQuality = () => {
         .catch(error => console.log(error));
 }
 
-fetch('inc/stations.php', {
-        method: "GET",
-    })
-    .then(response => response.text())
-    .then(response => {
-        stations = JSON.parse(response);
 
-        createSelect(stations);
-        loadSelectValue();
-        loadSensors();
-        loadQuality();
-    })
-    .catch(error => console.log(error));
+const loadStacions = () => {
+    const data = new FormData();
+    data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/station/findAll');
 
+    fetch('inc/ajax.php', {
+            method: "POST",
+            body: data,
+        })
+        .then(response => response.text())
+        .then(response => {
+            stations = JSON.parse(response);
 
+            createSelect(stations);
+            loadSelectValue();
+            loadSensors();
+            loadQuality();
+        })
+        .catch(error => console.log(error));
+}
+
+loadStacions();
 
 select.addEventListener('change', () => {
 

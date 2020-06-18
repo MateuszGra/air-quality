@@ -9,9 +9,17 @@ var sensorData = [];
 var quality;
 
 var createSelect = function createSelect(stations) {
+  stations.sort(function (a, b) {
+    return a.city.name.localeCompare(b.city.name);
+  });
   stations.forEach(function (station) {
     var option = document.createElement('option');
-    option.text = station.stationName;
+    option.text = station.city.name;
+
+    if (station.addressStreet != null) {
+      option.text += ' ' + station.addressStreet;
+    }
+
     option.value = station.id;
     select.add(option);
   });
@@ -29,8 +37,8 @@ var loadSelectValue = function loadSelectValue() {
 
 var loadSensorData = function loadSensorData(id) {
   var data = new FormData();
-  data.append('id', id);
-  fetch('inc/sensor-data.php', {
+  data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/data/getData/' + id);
+  fetch('inc/ajax.php', {
     method: "POST",
     body: data
   }).then(function (response) {
@@ -55,8 +63,8 @@ var loadSensorData = function loadSensorData(id) {
 
 var loadSensors = function loadSensors() {
   var data = new FormData();
-  data.append('id', select.value);
-  fetch('inc/sensors.php', {
+  data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/station/sensors/' + select.value);
+  fetch('inc/ajax.php', {
     method: "POST",
     body: data
   }).then(function (response) {
@@ -73,8 +81,8 @@ var loadSensors = function loadSensors() {
 
 var loadQuality = function loadQuality() {
   var data = new FormData();
-  data.append('id', select.value);
-  fetch('inc/quality.php', {
+  data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/' + select.value);
+  fetch('inc/ajax.php', {
     method: "POST",
     body: data
   }).then(function (response) {
@@ -90,19 +98,26 @@ var loadQuality = function loadQuality() {
   });
 };
 
-fetch('inc/stations.php', {
-  method: "GET"
-}).then(function (response) {
-  return response.text();
-}).then(function (response) {
-  stations = JSON.parse(response);
-  createSelect(stations);
-  loadSelectValue();
-  loadSensors();
-  loadQuality();
-}).catch(function (error) {
-  return console.log(error);
-});
+var loadStacions = function loadStacions() {
+  var data = new FormData();
+  data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/station/findAll');
+  fetch('inc/ajax.php', {
+    method: "POST",
+    body: data
+  }).then(function (response) {
+    return response.text();
+  }).then(function (response) {
+    stations = JSON.parse(response);
+    createSelect(stations);
+    loadSelectValue();
+    loadSensors();
+    loadQuality();
+  }).catch(function (error) {
+    return console.log(error);
+  });
+};
+
+loadStacions();
 select.addEventListener('change', function () {
   localStorage.setItem('station', select.value);
   sensorsDOM.innerHTML = null;
