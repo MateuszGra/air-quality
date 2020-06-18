@@ -1,204 +1,97 @@
 "use strict";
 
-var cookies = document.querySelector('.cookies');
-var cookieAccept = document.querySelector('.js-cookie-accept');
+var select = document.querySelector('.select');
+var stationName = document.querySelector('.data__name');
+var stations;
+var sensors;
+var sensorData;
+var quality;
 
-if (cookies !== null) {
-  if (getCookie('cookieAccept') != 1) {
-    cookies.classList.add('visible');
-  }
-}
-
-if (cookieAccept !== null) {
-  cookieAccept.onclick = function (e) {
-    e.preventDefault();
-    setCookie('cookieAccept', 1, 365);
-    cookies.classList.remove('visible');
-  };
-}
-"use strict";
-
-console.log('map');
-"use strict";
-
-var nav = document.querySelector('.nav');
-
-if (nav !== null) {
-  var updateNav = function updateNav() {
-    if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
-      nav.classList.add('shrink');
-    } else {
-      nav.classList.remove('shrink');
-    }
-  };
-
-  window.onscroll = function (e) {
-    updateNav();
-  };
-
-  updateNav();
-}
-"use strict";
-
-var tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-var player;
-
-function onYouTubeIframeAPIReady() {
-  player = new YT.Player('player', {
-    height: '360',
-    width: '640',
-    videoId: 'vD41B2BCkCY',
-    playerVars: {
-      'autoplay': 1,
-      'controls': 0,
-      'enablejsapi': 1,
-      'fs': 1,
-      'iv_load_policy': 3,
-      'modestbranding': 1,
-      'rel': 0,
-      'showinfo': 0
-    }
+var createSelect = function createSelect(stations) {
+  stations.forEach(function (station) {
+    var option = document.createElement('option');
+    option.text = station.stationName;
+    option.value = station.id;
+    select.add(option);
   });
-}
-
-var playerw = document.querySelector('.player');
-var playerwClose = document.querySelector('.player__close');
-var play = document.querySelector('.play');
-
-if (play !== null) {
-  play.onclick = function (e) {
-    e.preventDefault();
-    body.classList.add('stop-scrolling');
-    playerw.classList.add('visible');
-    player.playVideo();
-  };
-}
-
-function closePlayer() {
-  body.classList.remove('stop-scrolling');
-  playerw.classList.remove('visible');
-  player.stopVideo();
-}
-
-if (playerwClose !== null) {
-  playerwClose.onclick = function (e) {
-    closePlayer();
-  };
-}
-
-document.onkeyup = function (e) {
-  if (e.keyCode == 27) {
-    closePlayer();
-  }
 };
-"use strict";
 
-var popupCall = document.querySelector('a[data-popup]');
-var popup = document.querySelector('.popup');
-var popupClose = document.querySelector('.popup__close');
-
-if (popupCall !== null) {
-  popupCall.onclick = function (e) {
-    e.preventDefault();
-    body.classList.add('stop-scrolling');
-    popup.classList.add('visible');
-  };
-}
-
-function closePopup() {
-  body.classList.remove('stop-scrolling');
-  popup.classList.remove('visible');
-}
-
-if (popupClose !== null) {
-  popupClose.onclick = function (e) {
-    closePopup();
-  };
-}
-
-document.onkeyup = function (e) {
-  if (e.keyCode == 27) {
-    closePopup();
-  }
-};
-"use strict";
-
-var jsSwiper1 = new Swiper('.js-swiper-1', {
-  autoplay: 3000,
-  speed: 1000,
-  loop: true,
-  spaceBetween: 0,
-  navigation: {
-    nextEl: '.js-swiper-1 .swiper-button-next',
-    prevEl: '.js-swiper-1 .swiper-button-prev'
-  },
-  pagination: {
-    el: '.js-swiper-1 .swiper-pagination',
-    type: 'bullets',
-    clickable: true
-  }
-});
-var jsSwiper2 = new Swiper('.js-swiper-2', {
-  init: false,
-  autoplay: 3000,
-  speed: 1000,
-  loop: true,
-  spaceBetween: 0
-});
-
-if (getWidth() < 820) {
-  jsSwiper2.init();
-}
-
-window.onresize = function (e) {
-  if (getWidth() < 820) {
-    jsSwiper2.init();
+var loadSelectValue = function loadSelectValue() {
+  if (localStorage.getItem('station') != null) {
+    select.value = localStorage.getItem('station');
   } else {
-    jsSwiper2.destroy(false, true); // For some reason, it doesn't work after like ~ 5 screen changes
+    select.value = 129;
   }
+
+  localStorage.setItem('station', select.value);
 };
-"use strict";
 
-/*
-  Have you ever dreamed of JavaScript variables and functions you can use across multiple files?
-  Put them below.
-*/
-var body = document.querySelector('body');
+var loadSensorData = function loadSensorData(id) {
+  var data = new FormData();
+  data.append('id', id);
+  fetch('inc/sensor-data.php', {
+    method: "POST",
+    body: data
+  }).then(function (response) {
+    return response.text();
+  }).then(function (response) {
+    sensorData = JSON.parse(response);
+  }).catch(function (error) {
+    return console.log(error);
+  });
+};
 
-function getWidth() {
-  return Math.max(document.body.scrollWidth, document.documentElement.scrollWidth, document.body.offsetWidth, document.documentElement.offsetWidth, document.documentElement.clientWidth);
-}
+var loadSensors = function loadSensors() {
+  var data = new FormData();
+  data.append('id', select.value);
+  fetch('inc/sensors.php', {
+    method: "POST",
+    body: data
+  }).then(function (response) {
+    return response.text();
+  }).then(function (response) {
+    sensors = JSON.parse(response);
+    sensors.forEach(function (sensor) {
+      loadSensorData(sensor.id);
+    });
+  }).catch(function (error) {
+    return console.log(error);
+  });
+};
 
-function getHeight() {
-  return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, document.body.offsetHeight, document.documentElement.offsetHeight, document.documentElement.clientHeight);
-}
+var loadQuality = function loadQuality() {
+  var data = new FormData();
+  data.append('id', select.value);
+  fetch('inc/quality.php', {
+    method: "POST",
+    body: data
+  }).then(function (response) {
+    return response.text();
+  }).then(function (response) {
+    quality = JSON.parse(response);
+    var dateDOM = document.querySelector('.js-date');
+    dateDOM.innerText = quality.stCalcDate;
+    var indexLevelDOM = document.querySelector('.js-quality');
+    indexLevelDOM.innerText = quality.stIndexLevel.indexLevelName;
+  }).catch(function (error) {
+    return console.log(error);
+  });
+};
 
-function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-  var expires = "expires=" + d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-
-  return "";
-}
+fetch('inc/stations.php', {
+  method: "GET"
+}).then(function (response) {
+  return response.text();
+}).then(function (response) {
+  stations = JSON.parse(response);
+  createSelect(stations);
+  loadSelectValue();
+  loadSensors();
+  loadQuality();
+}).catch(function (error) {
+  return console.log(error);
+});
+select.addEventListener('change', function () {
+  loadSensors();
+  loadQuality();
+});
