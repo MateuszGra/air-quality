@@ -1,0 +1,24 @@
+/* Please don't touch this, use rem's for specific items. It's rwd thing */
+$base-font-size: 20px !default;
+$hd-font-size: 18px;
+$mobile-font-size: 16px;
+
+/* Font settings */
+$base-font-family: 'Poppins', sans-serif;
+$base-line-height: 1.6 !default;
+$base-margin: 1rem !default;
+
+/* Define all of your colors visely */
+$primary-color: #f37224;
+$secondary-color: #f6f6f6;
+$base-color: #2c3847;
+$background-color: #ffffff;
+$border-color: #ccc;
+
+/* Same thing for weights */
+$light-weight: 300;
+$regular-weight: 400;
+$bold-weight: 700;
+
+/* Additinal settings that repeats through project */
+$shadow: rgba($base-color, 0.25) 0 .25rem .5rem 0;
