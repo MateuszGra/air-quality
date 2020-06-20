@@ -51,9 +51,11 @@ var loadSensorData = function loadSensorData(id, index) {
     for (var i = 0; i < sensorData.values.length; i++) {
       if (sensorData.values[i].value != null) {
         value = sensorData.values[i].value;
+        break;
       }
     }
 
+    console.log(sensorData);
     htmlText += "\n            <p class=\"data__sensor\">\n                <span data-id=\"".concat(sensors[index].param.idParam, "\">").concat(sensors[index].param.paramName, ": </span>\n                <span>").concat(value, "</span>\n            </p>\n            ");
     counter++;
     if (counter == sensors.length) dataWrapper.innerHTML = htmlText;
@@ -72,7 +74,6 @@ var loadSensors = function loadSensors() {
     return response.text();
   }).then(function (response) {
     sensors = JSON.parse(response);
-    console.log(sensors);
     htmlText += "<p>Sensory:</p>";
     sensors.forEach(function (sensor, index) {
       loadSensorData(sensor.id, index);
