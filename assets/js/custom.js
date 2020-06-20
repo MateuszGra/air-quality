@@ -55,7 +55,6 @@ var loadSensorData = function loadSensorData(id, index) {
       }
     }
 
-    console.log(sensorData);
     htmlText += "\n            <p class=\"data__sensor\">\n                <span data-id=\"".concat(sensors[index].param.idParam, "\">").concat(sensors[index].param.paramName, ": </span>\n                <span>").concat(value, "</span>\n            </p>\n            ");
     counter++;
     if (counter == sensors.length) dataWrapper.innerHTML = htmlText;

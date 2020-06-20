@@ -52,8 +52,6 @@ const loadSensorData = (id, index) => {
                 }
             }
 
-            console.log(sensorData);
-
             htmlText += `
             <p class="data__sensor">
                 <span data-id="${sensors[index].param.idParam}">${sensors[index].param.paramName}: </span>
