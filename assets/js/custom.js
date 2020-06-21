@@ -30,7 +30,7 @@ var loadSelectValue = function loadSelectValue() {
   if (localStorage.getItem('station') != null) {
     select.value = localStorage.getItem('station');
   } else {
-    select.value = 129;
+    select.value = 117;
   }
 
   localStorage.setItem('station', select.value);
@@ -92,7 +92,7 @@ var loadSensorData = function loadSensorData(id, index) {
 
     if (percent < 40) {
       color = 'bg-good';
-    } else if (percent < 80) {
+    } else if (percent < 100) {
       color = 'bg-neutral';
     } else {
       color = 'bg-bad';
