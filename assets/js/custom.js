@@ -1,6 +1,6 @@
 "use strict";
 
-var select = document.querySelector('.select');
+var select = document.querySelector('.search__select');
 var stationName = document.querySelector('.data__name');
 var htmlText = "";
 var dataWrapper = document.querySelector('.data');
@@ -55,9 +55,59 @@ var loadSensorData = function loadSensorData(id, index) {
       }
     }
 
-    htmlText += "\n            <p class=\"data__sensor\">\n                <span data-id=\"".concat(sensors[index].param.idParam, "\">").concat(sensors[index].param.paramName, ": </span>\n                <span>").concat(value, "</span>\n            </p>\n            ");
+    var maxValue;
+
+    switch (sensors[index].param.idParam) {
+      case 1:
+        maxValue = 350;
+        break;
+
+      case 3:
+        maxValue = 50;
+        break;
+
+      case 5:
+        maxValue = 120;
+        break;
+
+      case 6:
+        maxValue = 200;
+        break;
+
+      case 8:
+        maxValue = 10000;
+        break;
+
+      case 10:
+        maxValue = 5;
+        break;
+
+      case 69:
+        maxValue = 25;
+        break;
+    }
+
+    var percent = Math.round(value / maxValue * 100);
+    var color = '';
+
+    if (percent < 40) {
+      color = 'bg-good';
+    } else if (percent < 80) {
+      color = 'bg-neutral';
+    } else {
+      color = 'bg-bad';
+    }
+
+    if (value != 'brak danych') {
+      htmlText += "\n            <div class=\"sensor\">\n                <p>\n                    <span class=\"sensor__label\" data-id=\"".concat(sensors[index].param.idParam, "\">").concat(sensors[index].param.paramName, ": </span>\n                    <span>").concat(value, " \xB5g/m3</span>\n                </p>\n                <div class=\"sensor__row\">\n                    <div class=\"sensor__bar\">\n                        <div class=\"sensor__indicator ").concat(color, "\" style=\"width: ").concat(percent, "%\"></div>\n                    </div>\n\n                    <span class=\"sensor__percent ").concat(color, "\" >").concat(percent, "%</span>\n                </div>\n            </div>\n            ");
+    }
+
     counter++;
-    if (counter == sensors.length) dataWrapper.innerHTML = htmlText;
+
+    if (counter == sensors.length) {
+      htmlText += "</div>";
+      dataWrapper.innerHTML = htmlText;
+    }
   }).catch(function (error) {
     return console.log(error);
   });
@@ -73,7 +123,7 @@ var loadSensors = function loadSensors() {
     return response.text();
   }).then(function (response) {
     sensors = JSON.parse(response);
-    htmlText += "<p>Sensory:</p>";
+    htmlText += "<div class=\"box box--right\">";
     sensors.forEach(function (sensor, index) {
       loadSensorData(sensor.id, index);
     });
@@ -93,7 +143,26 @@ var loadQuality = function loadQuality() {
     return response.text();
   }).then(function (response) {
     quality = JSON.parse(response);
-    htmlText += "\n            <p class=\"data__date\">\n                <span>Data pomiaru: </span>\n                <span>".concat(quality.stCalcDate, "</span>\n            </p>\n            <p class=\"data__quality\">\n                <span>Index jako\u015Bci powietrza: </span>\n                <span class=\"js-quality\">").concat(quality.stIndexLevel.indexLevelName, "</span>\n            </p>\n            ");
+    var color = '';
+
+    switch (quality.stIndexLevel.indexLevelName) {
+      case 'Bardzo dobry':
+      case 'Dobry':
+        color = 'font-good';
+        break;
+
+      case 'Umiarkowany':
+      case 'Dostateczny':
+        color = 'font-neutral';
+        break;
+
+      case 'Zły':
+      case 'Bardzo zły':
+        color = 'font-bad';
+        break;
+    }
+
+    htmlText += "\n            <div class=\"box box--left\">\n                <p>\n                    <span>Index jako\u015Bci powietrza:</span>\n                    <span class=\"quality ".concat(color, "\">").concat(quality.stIndexLevel.indexLevelName, "</span>\n                </p>\n                <p>\n                    <span>Data pomiaru:</span>\n                    <span class=\"date\">").concat(quality.stCalcDate, "</span>\n                </p>\n            </div>\n            ");
     loadSensors();
   }).catch(function (error) {
     return console.log(error);
@@ -124,4 +193,16 @@ select.addEventListener('change', function () {
   htmlText = "";
   counter = 0;
   loadQuality();
+});
+"use strict";
+
+var icon = document.querySelector('.search__icon');
+select.addEventListener('focusout', function () {
+  icon.classList.remove('active');
+});
+select.addEventListener('click', function () {
+  icon.classList.toggle('active');
+});
+select.addEventListener('touch', function () {
+  icon.classList.toggle('active');
 });

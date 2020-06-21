@@ -4,21 +4,28 @@ $hd-font-size: 18px;
 $mobile-font-size: 16px;
 
 /* Font settings */
-$base-font-family: 'Poppins', sans-serif;
 $base-line-height: 1.6 !default;
-$base-margin: 1rem !default;
+$base-margin: 0 !default;
 
-/* Define all of your colors visely */
-$primary-color: #f37224;
-$secondary-color: #f6f6f6;
-$base-color: #2c3847;
-$background-color: #ffffff;
-$border-color: #ccc;
 
-/* Same thing for weights */
-$light-weight: 300;
-$regular-weight: 400;
-$bold-weight: 700;
+:root {
 
-/* Additinal settings that repeats through project */
-$shadow: rgba($base-color, 0.25) 0 .25rem .5rem 0;
+    /* Colors: */
+    --color-bg: #F5F9FF;
+    --unnamed-color-c7d5eb: #C7D5EB;
+    --color-blur-light: #FFFFFF;
+    --color-font: #576A8A;
+    --color-blur-dark: #D6E0F0;
+    --color-good: #68E0B7;
+    --color-bad: #F9807D;
+    --color-neutral: #27CBDE;
+    --color-deep: transparent linear-gradient(180deg, #D6E0F0 0%, #D6E0F0 1%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
+    --unnamed-color-2b2f35: #2B2F35;
+    --unnamed-color-3b3e42: #3B3E42;
+    --unnamed-color-181c22: #181C22;
+    --unnamed-color-e8f1ff: #E8F1FF;
+    --unnamed-color-22262c: #22262C;
+
+    /* Font/text values */
+    --font-family: gill-sans-nova, sans-serif;
+}

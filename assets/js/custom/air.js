@@ -1,4 +1,4 @@
-const select = document.querySelector('.select');
+const select = document.querySelector('.search__select');
 const stationName = document.querySelector('.data__name');
 let htmlText = ``;
 const dataWrapper = document.querySelector('.data');
@@ -52,16 +52,65 @@ const loadSensorData = (id, index) => {
                 }
             }
 
-            htmlText += `
-            <p class="data__sensor">
-                <span data-id="${sensors[index].param.idParam}">${sensors[index].param.paramName}: </span>
-                <span>${value}</span>
-            </p>
+            let maxValue;
+            switch (sensors[index].param.idParam) {
+                case 1:
+                    maxValue = 350;
+                    break;
+                case 3:
+                    maxValue = 50;
+                    break;
+                case 5:
+                    maxValue = 120;
+                    break;
+                case 6:
+                    maxValue = 200;
+                    break;
+                case 8:
+                    maxValue = 10000;
+                    break;
+                case 10:
+                    maxValue = 5;
+                    break;
+                case 69:
+                    maxValue = 25;
+                    break;
+            }
+
+            const percent = Math.round(value / maxValue * 100);
+
+            let color = '';
+            if (percent < 40) {
+                color = 'bg-good';
+            } else if (percent < 80) {
+                color = 'bg-neutral';
+            } else {
+                color = 'bg-bad';
+            }
+
+            if (value != 'brak danych') {
+                htmlText += `
+            <div class="sensor">
+                <p>
+                    <span class="sensor__label" data-id="${sensors[index].param.idParam}">${sensors[index].param.paramName}: </span>
+                    <span>${value} µg/m3</span>
+                </p>
+                <div class="sensor__row">
+                    <div class="sensor__bar">
+                        <div class="sensor__indicator ${color}" style="width: ${percent}%"></div>
+                    </div>
+
+                    <span class="sensor__percent ${color}" >${percent}%</span>
+                </div>
+            </div>
             `
+            }
 
             counter++;
-
-            if (counter == sensors.length) dataWrapper.innerHTML = htmlText;
+            if (counter == sensors.length) {
+                htmlText += `</div>`
+                dataWrapper.innerHTML = htmlText;
+            }
         })
         .catch(error => console.log(error));
 }
@@ -77,7 +126,7 @@ const loadSensors = () => {
         .then(response => response.text())
         .then(response => {
             sensors = JSON.parse(response);
-            htmlText += `<p>Sensory:</p>`
+            htmlText += `<div class="box box--right">`
 
             sensors.forEach((sensor, index) => {
                 loadSensorData(sensor.id, index);
@@ -99,16 +148,34 @@ const loadQuality = () => {
         .then(response => response.text())
         .then(response => {
             quality = JSON.parse(response);
+            let color = '';
+
+            switch (quality.stIndexLevel.indexLevelName) {
+                case 'Bardzo dobry':
+                case 'Dobry':
+                    color = 'font-good';
+                    break;
+                case 'Umiarkowany':
+                case 'Dostateczny':
+                    color = 'font-neutral';
+                    break;
+                case 'Zły':
+                case 'Bardzo zły':
+                    color = 'font-bad';
+                    break;
+            }
 
             htmlText += `
-            <p class="data__date">
-                <span>Data pomiaru: </span>
-                <span>${quality.stCalcDate}</span>
-            </p>
-            <p class="data__quality">
-                <span>Index jakości powietrza: </span>
-                <span class="js-quality">${quality.stIndexLevel.indexLevelName}</span>
-            </p>
+            <div class="box box--left">
+                <p>
+                    <span>Index jakości powietrza:</span>
+                    <span class="quality ${color}">${quality.stIndexLevel.indexLevelName}</span>
+                </p>
+                <p>
+                    <span>Data pomiaru:</span>
+                    <span class="date">${quality.stCalcDate}</span>
+                </p>
+            </div>
             `
 
             loadSensors();

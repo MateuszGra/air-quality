@@ -1,0 +1,49 @@
+.sensor {
+
+
+    &:not(:first-child) {
+        margin-top: 2rem;
+    }
+
+    &::first-letter {
+        text-transform: uppercase;
+    }
+
+    &__label {
+        margin-right: 1.1rem;
+    }
+
+    &__row {
+        display: flex;
+        align-items: center;
+    }
+
+
+    &__bar {
+        position: relative;
+        width: 22.75rem;
+        height: 1.35rem;
+        background: var(--color-deep);
+        border-radius: 2.95rem;
+        margin-top: 0.5rem;
+        margin-right: 1.5rem;
+        overflow: hidden;
+    }
+
+    &__indicator {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        max-width: 100%;
+    }
+
+    &__percent {
+        padding: 0.6rem 0.8rem;
+        border-radius: 1.5rem;
+        min-width: 3.5rem;
+        text-align: center;
+        color: var(--color-bg);
+    }
+
+}
