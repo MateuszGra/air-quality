@@ -1,0 +1,53 @@
+.theme-switch {
+    position: relative;
+    margin: 3.53rem 14.7% 0 0;
+    align-self: flex-end;
+    width: 4rem;
+    height: 1.5rem;
+    cursor: pointer;
+
+    &.active .theme-switch__trigger {
+        transform: translateY(-50%) translate(2rem);
+    }
+
+    &__slider {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: var(--color-font);
+        transition: background-color 0.4s;
+        border-radius: 2.95rem;
+    }
+
+    &__trigger {
+        position: absolute;
+        top: 50%;
+        left: -2%;
+        border-radius: 50%;
+        height: 2.25rem;
+        width: 2.25rem;
+        background: var(--color-bg);
+        transform: translateY(-50%);
+        will-change: transform;
+        transition: transform 0.4s;
+
+
+        &--bg-1 {
+            top: calc(50% + 3px);
+            left: calc(-2% + 3px);
+            background: var(--color-blur-dark);
+            filter: blur(4px);
+            z-index: -1;
+        }
+
+        &--bg-2 {
+            top: calc(50% - 3px);
+            left: calc(-2% - 3px);
+            background: var(--color-blur-light);
+            filter: blur(4px);
+            z-index: -1;
+        }
+    }
+}

@@ -206,3 +206,31 @@ select.addEventListener('click', function () {
 select.addEventListener('touch', function () {
   icon.classList.toggle('active');
 });
+"use strict";
+
+var themeBtn = document.querySelector('.theme-switch');
+
+var setTheme = function setTheme(themeName) {
+  localStorage.setItem('theme', themeName);
+  document.documentElement.className = themeName;
+};
+
+var toggleTheme = function toggleTheme() {
+  if (localStorage.getItem('theme') === 'theme-dark') {
+    setTheme('theme-light');
+    themeBtn.classList.remove('active');
+  } else {
+    setTheme('theme-dark');
+    themeBtn.classList.add('active');
+  }
+};
+
+if (localStorage.getItem('theme') === 'theme-dark') {
+  setTheme('theme-dark');
+  themeBtn.classList.add('active');
+} else {
+  setTheme('theme-light');
+  themeBtn.classList.remove('active');
+}
+
+themeBtn.addEventListener('click', toggleTheme);

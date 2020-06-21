@@ -1,10 +1,11 @@
 .search {
     position: relative;
-    margin: 9.65rem auto 0 auto;
+    margin: 4.6rem auto 0 auto;
     background: var(--color-bg);
     border-radius: 3.8rem;
     height: 4.35rem;
     width: 38.28rem;
+    max-width: 90%;
 
     &__select {
         position: absolute;

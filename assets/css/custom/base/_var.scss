@@ -9,13 +9,6 @@ $base-margin: 0 !default;
 
 
 :root {
-
-    /* Colors: */
-    --color-bg: #F5F9FF;
-    --unnamed-color-c7d5eb: #C7D5EB;
-    --color-blur-light: #FFFFFF;
-    --color-font: #576A8A;
-    --color-blur-dark: #D6E0F0;
     --color-good: #68E0B7;
     --color-bad: #F9807D;
     --color-neutral: #27CBDE;
@@ -28,4 +21,18 @@ $base-margin: 0 !default;
 
     /* Font/text values */
     --font-family: gill-sans-nova, sans-serif;
+}
+
+.theme-light {
+    --color-bg: #F5F9FF;
+    --color-blur-light: #FFFFFF;
+    --color-font: #576A8A;
+    --color-blur-dark: #D6E0F0;
+}
+
+.theme-dark {
+    --color-bg: #2B2F35;
+    --color-blur-light: #3B3E42;
+    --color-font: #F5F9FF;
+    --color-blur-dark: #181C22;
 }
