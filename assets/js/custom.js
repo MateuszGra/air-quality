@@ -162,7 +162,7 @@ var loadQuality = function loadQuality() {
         break;
     }
 
-    htmlText += "\n            <div class=\"box box--left\">\n                <p>\n                    <span>Index jako\u015Bci powietrza:</span>\n                    <span class=\"quality ".concat(color, "\">").concat(quality.stIndexLevel.indexLevelName, "</span>\n                </p>\n                <p>\n                    <span>Data pomiaru:</span>\n                    <span class=\"date\">").concat(quality.stCalcDate, "</span>\n                </p>\n            </div>\n            ");
+    htmlText += "\n            <div class=\"box box--left\">\n                <p>\n                    <span>Indeks jako\u015Bci powietrza:</span>\n                    <span class=\"quality ".concat(color, "\">").concat(quality.stIndexLevel.indexLevelName, "</span>\n                </p>\n                <p>\n                    <span>Data pomiaru:</span>\n                    <span class=\"date\">").concat(quality.stCalcDate, "</span>\n                </p>\n            </div>\n            ");
     loadSensors();
   }).catch(function (error) {
     return console.log(error);

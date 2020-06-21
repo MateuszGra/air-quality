@@ -168,7 +168,7 @@ const loadQuality = () => {
             htmlText += `
             <div class="box box--left">
                 <p>
-                    <span>Index jakości powietrza:</span>
+                    <span>Indeks jakości powietrza:</span>
                     <span class="quality ${color}">${quality.stIndexLevel.indexLevelName}</span>
                 </p>
                 <p>
