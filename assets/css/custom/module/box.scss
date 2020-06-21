@@ -53,3 +53,32 @@
     display: block;
     font-weight: 400;
 }
+
+
+@media (max-width: 1000px) {
+    .box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+        padding: 4rem 10%;
+
+        &--left {
+            margin: 0 0 3.5rem 0;
+        }
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .box {
+        padding: 3rem 10%;
+
+        &--left {
+            margin: 0 0 2rem 0;
+        }
+    }
+
+}

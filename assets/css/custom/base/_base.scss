@@ -4,6 +4,8 @@
 
 html {
   font-family: var(--font-family);
+  font-size: $base-font-size;
+  color: var(--color-font);
 }
 
 body {
@@ -11,9 +13,7 @@ body {
   padding: 0;
   position: relative;
   overflow-x: hidden;
-  font-size: 1rem;
   background: var(--color-bg);
-  color: var(--color-font);
 }
 
 main {

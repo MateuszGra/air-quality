@@ -1,9 +1,7 @@
-/* Please don't touch this, use rem's for specific items. It's rwd thing */
-$base-font-size: 20px !default;
-$hd-font-size: 18px;
-$mobile-font-size: 16px;
+$base-font-size: 16px !default;
+$hd-font-size: 14px;
+$mobile-font-size: 12px;
 
-/* Font settings */
 $base-line-height: 1.6 !default;
 $base-margin: 0 !default;
 
@@ -12,14 +10,7 @@ $base-margin: 0 !default;
     --color-good: #68E0B7;
     --color-bad: #F9807D;
     --color-neutral: #27CBDE;
-    --color-deep: transparent linear-gradient(180deg, #D6E0F0 0%, #D6E0F0 1%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
-    --unnamed-color-2b2f35: #2B2F35;
-    --unnamed-color-3b3e42: #3B3E42;
-    --unnamed-color-181c22: #181C22;
-    --unnamed-color-e8f1ff: #E8F1FF;
-    --unnamed-color-22262c: #22262C;
 
-    /* Font/text values */
     --font-family: gill-sans-nova, sans-serif;
 }
 
@@ -28,6 +19,7 @@ $base-margin: 0 !default;
     --color-blur-light: #FFFFFF;
     --color-font: #576A8A;
     --color-blur-dark: #D6E0F0;
+    --color-deep: transparent linear-gradient(180deg, #D6E0F0 0%, #D6E0F0 1%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
 }
 
 .theme-dark {
@@ -35,4 +27,5 @@ $base-margin: 0 !default;
     --color-blur-light: #3B3E42;
     --color-font: #F5F9FF;
     --color-blur-dark: #181C22;
+    --color-deep: transparent linear-gradient(360deg, #21262e 0%, #10131858 53%, #202020 100%) 0% 0% no-repeat padding-box;
 }

@@ -1,6 +1,5 @@
 .sensor {
 
-
     &:not(:first-child) {
         margin-top: 2rem;
     }
@@ -44,6 +43,21 @@
         min-width: 3.5rem;
         text-align: center;
         color: var(--color-bg);
+    }
+
+}
+
+
+@media (max-width: 1000px) {
+    .sensor {
+        display: flex;
+        flex-direction: column;
+
+        width: 100%;
+
+        &__bar {
+            flex-grow: 1;
+        }
     }
 
 }

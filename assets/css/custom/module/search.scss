@@ -5,7 +5,6 @@
     border-radius: 3.8rem;
     height: 4.35rem;
     width: 38.28rem;
-    max-width: 90%;
 
     &__select {
         position: absolute;
@@ -108,4 +107,11 @@
         }
     }
 
+}
+
+@media (max-width: 1000px) {
+    .search {
+        margin: 3.5rem auto 0 auto;
+        width: 90%;
+    }
 }
