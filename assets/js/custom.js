@@ -30,7 +30,7 @@ var loadQuality = function loadQuality() {
         break;
     }
 
-    htmlText += "\n            <div class=\"data__wrapper\">\n                <div class=\"box box--left\">\n                    <p>\n                        <span>Indeks jako\u015Bci powietrza:</span>\n                        <span class=\"quality ".concat(color, "\">").concat(quality.stIndexLevel.indexLevelName, "</span>\n                    </p>\n                    <div class=\"image\" data-q=\"").concat(quality.stIndexLevel.indexLevelName, "\"></div>\n                    <p>\n                        <span>Data pomiaru:</span>\n                        <span class=\"date\">").concat(quality.stCalcDate, "</span>\n                    </p>\n                </div>\n            ");
+    htmlText += "\n            <div class=\"data__wrapper\">\n                <div class=\"box box--left\">\n                    <p>\n                        <span>Indeks jako\u015Bci powietrza:</span>\n                        <span class=\"quality ".concat(color, "\">").concat(quality.stIndexLevel.indexLevelName, "</span>\n                    </p>\n                    <div class=\"image\"></div>\n                    <p>\n                        <span>Data pomiaru:</span>\n                        <span class=\"date\">").concat(quality.stCalcDate, "</span>\n                    </p>\n                </div>\n            ");
     loadSensors();
   }).catch(function (error) {
     return console.log(error);
@@ -179,15 +179,15 @@ select.addEventListener('touch', function () {
 
 var switchImage = function switchImage() {
   var wrapper = document.querySelector('.image');
-  var quality = wrapper.dataset.q;
+  var index = quality.stIndexLevel.indexLevelName;
   var theme = '';
   if (localStorage.getItem('theme') === 'theme-dark') theme = '_Noc';
 
-  if (quality == 'Bardzo dobry' || quality == 'Dobry') {
+  if (index == 'Bardzo dobry' || index == 'Dobry') {
     wrapper.innerHTML = "\n            <img class=\"image__bg\" src=\"./assets/images/Bardzo-dobry_Tlo".concat(theme, ".svg\"> \n            <img class=\"image__cloud\" src=\"./assets/images/Bardzo-dobry_Chmurka").concat(theme, ".svg\"> \n            <img class=\"image__addition\" src=\"./assets/images/Bardzo-dobry_Dodatek").concat(theme, ".svg\"> \n            ");
-  } else if (quality == 'Umiarkowany' || quality == 'Dostateczny') {
+  } else if (index == 'Umiarkowany' || index == 'Dostateczny') {
     wrapper.innerHTML = "\n            <img class=\"image__bg\" src=\"./assets/images/Umiarkowany_Tlo".concat(theme, ".svg\"> \n            <img class=\"image__cloud\" src=\"./assets/images/Umiarkowany_Chmurka").concat(theme, ".svg\"> \n            ");
-  } else if (quality == 'Zły' || quality == 'Bardzo zły') {
+  } else if (index == 'Zły' || index == 'Bardzo zły') {
     wrapper.innerHTML = "\n            <img class=\"image__bg\" src=\"./assets/images/Zly_Tlo".concat(theme, ".svg\"> \n            <img class=\"image__cloud\" src=\"./assets/images/Zly_Chmurka").concat(theme, ".svg\"> \n            ");
   } else {
     wrapper.innerHTML = "\n            <img class=\"image__bg\" src=\"./assets/images/Brak-danych_Tlo".concat(theme, ".svg\"> \n            <img class=\"image__cloud\" src=\"./assets/images/Brak-danych-Chmurka").concat(theme, ".svg\"> \n            ");

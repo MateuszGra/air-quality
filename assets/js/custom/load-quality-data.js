@@ -39,7 +39,7 @@ const loadQuality = () => {
                         <span>Indeks jakości powietrza:</span>
                         <span class="quality ${color}">${quality.stIndexLevel.indexLevelName}</span>
                     </p>
-                    <div class="image" data-q="${quality.stIndexLevel.indexLevelName}"></div>
+                    <div class="image"></div>
                     <p>
                         <span>Data pomiaru:</span>
                         <span class="date">${quality.stCalcDate}</span>
