@@ -38,6 +38,12 @@ var loadQuality = function loadQuality() {
 };
 "use strict";
 
+var decimal = function decimal(n, k) {
+  var factor = Math.pow(10, k + 1);
+  n = Math.round(Math.round(n * factor) / 10);
+  return n / (factor / 10);
+};
+
 var loadSensorData = function loadSensorData(id, index) {
   var data = new FormData();
   data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/data/getData/' + id);
@@ -103,7 +109,7 @@ var loadSensorData = function loadSensorData(id, index) {
     }
 
     if (value != 'brak danych') {
-      htmlText += "\n            <div class=\"sensor\">\n                <p>\n                    <span class=\"sensor__label\" data-id=\"".concat(sensors[index].param.idParam, "\">").concat(sensors[index].param.paramName, ": </span>\n                    <span>").concat(value, " ").concat(unit, "</span>\n                </p>\n                <div class=\"sensor__row\">\n                    <div class=\"sensor__bar\">\n                        <div class=\"sensor__indicator ").concat(color, "\" style=\"width: ").concat(percent, "%\"></div>\n                    </div>\n\n                    <span class=\"sensor__percent ").concat(color, "\" >").concat(percent, "%</span>\n                </div>\n            </div>\n            ");
+      htmlText += "\n            <div class=\"sensor\">\n                <p>\n                    <span class=\"sensor__label\" data-id=\"".concat(sensors[index].param.idParam, "\">").concat(sensors[index].param.paramName, ": </span>\n                    <span>").concat(decimal(value, 5), " ").concat(unit, "</span>\n                </p>\n                <div class=\"sensor__row\">\n                    <div class=\"sensor__bar\">\n                        <div class=\"sensor__indicator ").concat(color, "\" style=\"width: ").concat(percent, "%\"></div>\n                    </div>\n\n                    <span class=\"sensor__percent ").concat(color, "\" >").concat(percent, "%</span>\n                </div>\n            </div>\n            ");
     }
 
     counter++;

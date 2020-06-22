@@ -1,3 +1,9 @@
+const decimal = (n, k) => {
+    const factor = Math.pow(10, k + 1);
+    n = Math.round(Math.round(n * factor) / 10);
+    return n / (factor / 10);
+}
+
 const loadSensorData = (id, index) => {
     const data = new FormData();
     data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/data/getData/' + id);
@@ -62,7 +68,7 @@ const loadSensorData = (id, index) => {
             <div class="sensor">
                 <p>
                     <span class="sensor__label" data-id="${sensors[index].param.idParam}">${sensors[index].param.paramName}: </span>
-                    <span>${value} ${unit}</span>
+                    <span>${decimal(value, 5)} ${unit}</span>
                 </p>
                 <div class="sensor__row">
                     <div class="sensor__bar">
