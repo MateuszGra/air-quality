@@ -56,6 +56,7 @@ var loadSensorData = function loadSensorData(id, index) {
     }
 
     var maxValue;
+    var unit = 'µg/m3';
 
     switch (sensors[index].param.idParam) {
       case 1:
@@ -76,6 +77,7 @@ var loadSensorData = function loadSensorData(id, index) {
 
       case 8:
         maxValue = 10000;
+        unit = 'mg/m3';
         break;
 
       case 10:
@@ -99,7 +101,7 @@ var loadSensorData = function loadSensorData(id, index) {
     }
 
     if (value != 'brak danych') {
-      htmlText += "\n            <div class=\"sensor\">\n                <p>\n                    <span class=\"sensor__label\" data-id=\"".concat(sensors[index].param.idParam, "\">").concat(sensors[index].param.paramName, ": </span>\n                    <span>").concat(value, " \xB5g/m3</span>\n                </p>\n                <div class=\"sensor__row\">\n                    <div class=\"sensor__bar\">\n                        <div class=\"sensor__indicator ").concat(color, "\" style=\"width: ").concat(percent, "%\"></div>\n                    </div>\n\n                    <span class=\"sensor__percent ").concat(color, "\" >").concat(percent, "%</span>\n                </div>\n            </div>\n            ");
+      htmlText += "\n            <div class=\"sensor\">\n                <p>\n                    <span class=\"sensor__label\" data-id=\"".concat(sensors[index].param.idParam, "\">").concat(sensors[index].param.paramName, ": </span>\n                    <span>").concat(value, " ").concat(unit, "</span>\n                </p>\n                <div class=\"sensor__row\">\n                    <div class=\"sensor__bar\">\n                        <div class=\"sensor__indicator ").concat(color, "\" style=\"width: ").concat(percent, "%\"></div>\n                    </div>\n\n                    <span class=\"sensor__percent ").concat(color, "\" >").concat(percent, "%</span>\n                </div>\n            </div>\n            ");
     }
 
     counter++;

@@ -53,6 +53,7 @@ const loadSensorData = (id, index) => {
             }
 
             let maxValue;
+            let unit = 'µg/m3';
             switch (sensors[index].param.idParam) {
                 case 1:
                     maxValue = 350;
@@ -68,6 +69,7 @@ const loadSensorData = (id, index) => {
                     break;
                 case 8:
                     maxValue = 10000;
+                    unit = 'mg/m3';
                     break;
                 case 10:
                     maxValue = 5;
@@ -88,12 +90,13 @@ const loadSensorData = (id, index) => {
                 color = 'bg-bad';
             }
 
+
             if (value != 'brak danych') {
                 htmlText += `
             <div class="sensor">
                 <p>
                     <span class="sensor__label" data-id="${sensors[index].param.idParam}">${sensors[index].param.paramName}: </span>
-                    <span>${value} µg/m3</span>
+                    <span>${value} ${unit}</span>
                 </p>
                 <div class="sensor__row">
                     <div class="sensor__bar">
