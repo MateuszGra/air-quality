@@ -87,8 +87,12 @@ h1 br,h2 br,h3 br,h4 br,h5 br,h6 br,p br{display:none}
 .sensor__bar{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1}
 }.theme-switch{position:relative;margin:3.53rem 14.7% 0 0;-ms-flex-item-align:end;align-self:flex-end;width:4rem;height:1.5rem;cursor:pointer}
 .theme-switch.active .theme-switch__trigger{-webkit-transform:translateY(-50%) translate(2rem);transform:translateY(-50%) translate(2rem)}
+.theme-switch.active .theme-switch__icon--dark{display:block}
+.theme-switch.active .theme-switch__icon--light{display:none}
+.theme-switch__icon--dark{display:none;width:1.125rem;height:1.125rem}
+.theme-switch__icon--light{display:block;width:1.575rem;height:1.575rem}
 .theme-switch__slider{position:absolute;top:0;left:0;bottom:0;right:0;background-color:var(--color-font);-webkit-transition:background-color .4s;transition:background-color .4s;border-radius:2.95rem}
-.theme-switch__trigger{position:absolute;top:50%;left:-2%;border-radius:50%;height:2.25rem;width:2.25rem;background:var(--color-bg);-webkit-transform:translateY(-50%);transform:translateY(-50%);will-change:transform;-webkit-transition:-webkit-transform .4s;transition:-webkit-transform .4s;transition:transform .4s;transition:transform .4s,-webkit-transform .4s}
+.theme-switch__trigger{position:absolute;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;top:50%;left:-2%;border-radius:50%;height:2.25rem;width:2.25rem;background:var(--color-bg);-webkit-transform:translateY(-50%);transform:translateY(-50%);will-change:transform;-webkit-transition:-webkit-transform .4s;transition:-webkit-transform .4s;transition:transform .4s;transition:transform .4s,-webkit-transform .4s}
 .theme-switch__trigger--bg-1{top:calc(50% + 3px);left:calc(-2% + 3px);background:var(--color-blur-dark);-webkit-filter:blur(4px);filter:blur(4px);z-index:-1}
 .theme-switch__trigger--bg-2{top:calc(50% - 3px);left:calc(-2% - 3px);background:var(--color-blur-light);-webkit-filter:blur(4px);filter:blur(4px);z-index:-1}
 @media(max-width:1000px){.theme-switch{margin:3rem 5% 0 0}

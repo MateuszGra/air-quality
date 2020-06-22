@@ -6,9 +6,35 @@
     height: 1.5rem;
     cursor: pointer;
 
-    &.active .theme-switch__trigger {
-        transform: translateY(-50%) translate(2rem);
+    &.active {
+        .theme-switch__trigger {
+            transform: translateY(-50%) translate(2rem);
+        }
+
+        .theme-switch__icon--dark {
+            display: block;
+        }
+
+        .theme-switch__icon--light {
+            display: none;
+        }
     }
+
+
+    &__icon {
+        &--dark {
+            display: none;
+            width: 1.125rem;
+            height: 1.125rem;
+        }
+
+        &--light {
+            display: block;
+            width: 1.575rem;
+            height: 1.575rem;
+        }
+    }
+
 
     &__slider {
         position: absolute;
@@ -23,6 +49,9 @@
 
     &__trigger {
         position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         top: 50%;
         left: -2%;
         border-radius: 50%;

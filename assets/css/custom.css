@@ -162,9 +162,17 @@ button { color: inherit; cursor: pointer; padding: 0; background-color: transpar
 
 .theme-switch.active .theme-switch__trigger { -webkit-transform: translateY(-50%) translate(2rem); transform: translateY(-50%) translate(2rem); }
 
+.theme-switch.active .theme-switch__icon--dark { display: block; }
+
+.theme-switch.active .theme-switch__icon--light { display: none; }
+
+.theme-switch__icon--dark { display: none; width: 1.125rem; height: 1.125rem; }
+
+.theme-switch__icon--light { display: block; width: 1.575rem; height: 1.575rem; }
+
 .theme-switch__slider { position: absolute; top: 0; left: 0; bottom: 0; right: 0; background-color: var(--color-font); -webkit-transition: background-color 0.4s; transition: background-color 0.4s; border-radius: 2.95rem; }
 
-.theme-switch__trigger { position: absolute; top: 50%; left: -2%; border-radius: 50%; height: 2.25rem; width: 2.25rem; background: var(--color-bg); -webkit-transform: translateY(-50%); transform: translateY(-50%); will-change: transform; -webkit-transition: -webkit-transform 0.4s; transition: -webkit-transform 0.4s; transition: transform 0.4s; transition: transform 0.4s, -webkit-transform 0.4s; }
+.theme-switch__trigger { position: absolute; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; top: 50%; left: -2%; border-radius: 50%; height: 2.25rem; width: 2.25rem; background: var(--color-bg); -webkit-transform: translateY(-50%); transform: translateY(-50%); will-change: transform; -webkit-transition: -webkit-transform 0.4s; transition: -webkit-transform 0.4s; transition: transform 0.4s; transition: transform 0.4s, -webkit-transform 0.4s; }
 
 .theme-switch__trigger--bg-1 { top: calc(50% + 3px); left: calc(-2% + 3px); background: var(--color-blur-dark); -webkit-filter: blur(4px); filter: blur(4px); z-index: -1; }
 
