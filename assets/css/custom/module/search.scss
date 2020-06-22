@@ -116,3 +116,12 @@
         width: 90%;
     }
 }
+
+
+@media (max-width: 370px) {
+    .search {
+        &__select {
+            padding-left: 2rem;
+        }
+    }
+}

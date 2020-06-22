@@ -99,6 +99,7 @@ h1 br,h2 br,h3 br,h4 br,h5 br,h6 br,p br{display:none}
 .search__icon{position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%) rotate(-90deg);transform:translate(-50%,-50%) rotate(-90deg);fill:var(--color-font);height:.9rem;width:auto;will-change:transform;-webkit-transition:-webkit-transform .3s;transition:-webkit-transform .3s;transition:transform .3s;transition:transform .3s,-webkit-transform .3s}
 .search__icon.active{-webkit-transform:translate(-50%,-50%) rotate(90deg);transform:translate(-50%,-50%) rotate(90deg)}
 @media(max-width:1000px){.search{margin:3.5rem auto 0 auto;width:90%}
+}@media(max-width:370px){.search__select{padding-left:2rem}
 }.sensor:not(:first-child){margin-top:2rem}
 .sensor::first-letter {text-transform:uppercase}
 .sensor__label{margin-right:1.1rem}

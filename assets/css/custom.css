@@ -176,6 +176,8 @@ button { color: inherit; cursor: pointer; padding: 0; background-color: transpar
 
 @media (max-width: 1000px) { .search { margin: 3.5rem auto 0 auto; width: 90%; } }
 
+@media (max-width: 370px) { .search__select { padding-left: 2rem; } }
+
 .sensor:not(:first-child) { margin-top: 2rem; }
 
 .sensor::first-letter { text-transform: uppercase; }
