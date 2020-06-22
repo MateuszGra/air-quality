@@ -1,3 +1,4 @@
+const select = document.querySelector('.search__select');
 const icon = document.querySelector('.search__icon');
 
 select.addEventListener('focusout', () => {

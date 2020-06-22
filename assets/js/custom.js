@@ -1,51 +1,42 @@
 "use strict";
 
-var select = document.querySelector('.search__select');
-var stationName = document.querySelector('.data__name');
-var htmlText = "";
-var dataWrapper = document.querySelector('.data');
-var counter = 0;
-var stations;
-var sensors;
-var quality;
+var loadQuality = function loadQuality() {
+  dataWrapper.innerHTML = "\n    <div class=\"loader\">\n        <img class=\"loader__cloud-1\" src=\"./assets/images/Loader1.svg\">\n        <img class=\"loader__cloud-2\" src=\"./assets/images/Loader2.svg\">\n    </div>";
+  var data = new FormData();
+  data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/' + select.value);
+  fetch('inc/ajax.php', {
+    method: "POST",
+    body: data
+  }).then(function (response) {
+    return response.text();
+  }).then(function (response) {
+    quality = JSON.parse(response);
+    var color = '';
 
-var createSelect = function createSelect(stations) {
-  stations.sort(function (a, b) {
-    return a.city.name.localeCompare(b.city.name);
-  });
-  stations.forEach(function (station) {
-    var option = document.createElement('option');
-    option.text = station.city.name;
+    switch (quality.stIndexLevel.indexLevelName) {
+      case 'Bardzo dobry':
+      case 'Dobry':
+        color = 'font-good';
+        break;
 
-    if (station.addressStreet != null) {
-      option.text += ' ' + station.addressStreet;
+      case 'Umiarkowany':
+      case 'Dostateczny':
+        color = 'font-neutral';
+        break;
+
+      case 'Zły':
+      case 'Bardzo zły':
+        color = 'font-bad';
+        break;
     }
 
-    option.value = station.id;
-    select.add(option);
+    htmlText += "\n            <div class=\"data__wrapper\">\n                <div class=\"box box--left\">\n                    <p>\n                        <span>Indeks jako\u015Bci powietrza:</span>\n                        <span class=\"quality ".concat(color, "\">").concat(quality.stIndexLevel.indexLevelName, "</span>\n                    </p>\n                    <div class=\"image\" data-q=\"").concat(quality.stIndexLevel.indexLevelName, "\"></div>\n                    <p>\n                        <span>Data pomiaru:</span>\n                        <span class=\"date\">").concat(quality.stCalcDate, "</span>\n                    </p>\n                </div>\n            ");
+    loadSensors();
+  }).catch(function (error) {
+    return console.log(error);
   });
 };
-
-var generateSearch = function generateSearch(id) {
-  var string = "?station=".concat(id);
-  history.pushState(false, '', string);
-};
-
-var loadSelectValue = function loadSelectValue() {
-  var params = new URLSearchParams(window.location.search);
-  var station = params.get('station');
-
-  if (station) {
-    select.value = station;
-  } else if (localStorage.getItem('station') != null) {
-    select.value = localStorage.getItem('station');
-  } else {
-    select.value = 117;
-  }
-
-  generateSearch(select.value);
-  localStorage.setItem('station', select.value);
-};
+"use strict";
 
 var loadSensorData = function loadSensorData(id, index) {
   var data = new FormData();
@@ -118,7 +109,7 @@ var loadSensorData = function loadSensorData(id, index) {
     counter++;
 
     if (counter == sensors.length) {
-      htmlText += "</div>";
+      htmlText += "\n                    </div>\n                </div>\n                ";
       dataWrapper.innerHTML = htmlText;
       switchImage();
     }
@@ -126,6 +117,7 @@ var loadSensorData = function loadSensorData(id, index) {
     return console.log(error);
   });
 };
+"use strict";
 
 var loadSensors = function loadSensors() {
   var data = new FormData();
@@ -145,43 +137,7 @@ var loadSensors = function loadSensors() {
     return console.log(error);
   });
 };
-
-var loadQuality = function loadQuality() {
-  dataWrapper.innerHTML = "\n    <div class=\"loader\">\n        <img class=\"loader__cloud-1\" src=\"./assets/images/Loader1.svg\">\n        <img class=\"loader__cloud-2\" src=\"./assets/images/Loader2.svg\">\n    </div>";
-  var data = new FormData();
-  data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/' + select.value);
-  fetch('inc/ajax.php', {
-    method: "POST",
-    body: data
-  }).then(function (response) {
-    return response.text();
-  }).then(function (response) {
-    quality = JSON.parse(response);
-    var color = '';
-
-    switch (quality.stIndexLevel.indexLevelName) {
-      case 'Bardzo dobry':
-      case 'Dobry':
-        color = 'font-good';
-        break;
-
-      case 'Umiarkowany':
-      case 'Dostateczny':
-        color = 'font-neutral';
-        break;
-
-      case 'Zły':
-      case 'Bardzo zły':
-        color = 'font-bad';
-        break;
-    }
-
-    htmlText += "\n            <div class=\"box box--left\">\n                <p>\n                    <span>Indeks jako\u015Bci powietrza:</span>\n                    <span class=\"quality ".concat(color, "\">").concat(quality.stIndexLevel.indexLevelName, "</span>\n                </p>\n                <div class=\"image\" data-q=\"").concat(quality.stIndexLevel.indexLevelName, "\"></div>\n                <p>\n                    <span>Data pomiaru:</span>\n                    <span class=\"date\">").concat(quality.stCalcDate, "</span>\n                </p>\n            </div>\n            ");
-    loadSensors();
-  }).catch(function (error) {
-    return console.log(error);
-  });
-};
+"use strict";
 
 var loadStacions = function loadStacions() {
   var data = new FormData();
@@ -200,14 +156,18 @@ var loadStacions = function loadStacions() {
     return console.log(error);
   });
 };
+"use strict";
 
-loadStacions();
-select.addEventListener('change', function () {
-  localStorage.setItem('station', select.value);
-  htmlText = "";
-  counter = 0;
-  generateSearch(select.value);
-  loadQuality();
+var select = document.querySelector('.search__select');
+var icon = document.querySelector('.search__icon');
+select.addEventListener('focusout', function () {
+  icon.classList.remove('active');
+});
+select.addEventListener('click', function () {
+  icon.classList.toggle('active');
+});
+select.addEventListener('touch', function () {
+  icon.classList.toggle('active');
 });
 "use strict";
 
@@ -227,18 +187,6 @@ var switchImage = function switchImage() {
     wrapper.innerHTML = "\n            <img class=\"image__bg\" src=\"./assets/images/Brak-danych_Tlo".concat(theme, ".svg\"> \n            <img class=\"image__cloud\" src=\"./assets/images/Brak-danych-Chmurka").concat(theme, ".svg\"> \n            ");
   }
 };
-"use strict";
-
-var icon = document.querySelector('.search__icon');
-select.addEventListener('focusout', function () {
-  icon.classList.remove('active');
-});
-select.addEventListener('click', function () {
-  icon.classList.toggle('active');
-});
-select.addEventListener('touch', function () {
-  icon.classList.toggle('active');
-});
 "use strict";
 
 var themeBtn = document.querySelector('.theme-switch');
@@ -269,3 +217,60 @@ if (localStorage.getItem('theme') === 'theme-dark') {
 }
 
 themeBtn.addEventListener('click', toggleTheme);
+"use strict";
+
+var select = document.querySelector('.search__select');
+var stationName = document.querySelector('.data__name');
+var htmlText = "";
+var dataWrapper = document.querySelector('.data');
+var counter = 0;
+var stations;
+var sensors;
+var quality;
+
+var createSelect = function createSelect(stations) {
+  stations.sort(function (a, b) {
+    return a.city.name.localeCompare(b.city.name);
+  });
+  stations.forEach(function (station) {
+    var option = document.createElement('option');
+    option.text = station.city.name;
+
+    if (station.addressStreet != null) {
+      option.text += ' ' + station.addressStreet;
+    }
+
+    option.value = station.id;
+    select.add(option);
+  });
+};
+
+var generateSearch = function generateSearch(id) {
+  var string = "?station=".concat(id);
+  history.pushState(false, '', string);
+};
+
+var loadSelectValue = function loadSelectValue() {
+  var params = new URLSearchParams(window.location.search);
+  var station = params.get('station');
+
+  if (station) {
+    select.value = station;
+  } else if (localStorage.getItem('station') != null) {
+    select.value = localStorage.getItem('station');
+  } else {
+    select.value = 117;
+  }
+
+  generateSearch(select.value);
+  localStorage.setItem('station', select.value);
+};
+
+loadStacions();
+select.addEventListener('change', function () {
+  localStorage.setItem('station', select.value);
+  htmlText = "";
+  counter = 0;
+  generateSearch(select.value);
+  loadQuality();
+});
