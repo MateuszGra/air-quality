@@ -135,7 +135,7 @@ var loadSensors = function loadSensors() {
 };
 
 var loadQuality = function loadQuality() {
-  dataWrapper.innerHTML = '<div class="loader"></div>';
+  dataWrapper.innerHTML = "\n    <div class=\"loader\">\n        <img class=\"loader__cloud-1\" src=\"./assets/images/Loader1.svg\">\n        <img class=\"loader__cloud-2\" src=\"./assets/images/Loader2.svg\">\n    </div>";
   var data = new FormData();
   data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/' + select.value);
   fetch('inc/ajax.php', {

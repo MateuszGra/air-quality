@@ -139,7 +139,11 @@ const loadSensors = () => {
 }
 
 const loadQuality = () => {
-    dataWrapper.innerHTML = '<div class="loader"></div>'
+    dataWrapper.innerHTML = `
+    <div class="loader">
+        <img class="loader__cloud-1" src="./assets/images/Loader1.svg">
+        <img class="loader__cloud-2" src="./assets/images/Loader2.svg">
+    </div>`
 
     const data = new FormData();
     data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/' + select.value);
