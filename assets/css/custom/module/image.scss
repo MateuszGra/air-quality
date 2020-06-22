@@ -15,13 +15,13 @@
 
     &__cloud {
         position: absolute;
-        width: 12.6rem;
-        height: auto;
+        width: auto;
+        height: 13rem;
         top: 55%;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 3;
-        animation: cloud infinite 3s linear;
+        animation: cloud infinite 3.5s linear;
     }
 
     &__addition {
@@ -38,15 +38,15 @@
 
 @keyframes cloud {
     0% {
-        transform: translate(-50%, -48%);
+        transform: translate(-50%, -46%);
     }
 
     50% {
-        transform: translate(-50%, -52%);
+        transform: translate(-50%, -54%);
     }
 
     100% {
-        transform: translate(-50%, -48%);
+        transform: translate(-50%, -46%);
     }
 
 }
