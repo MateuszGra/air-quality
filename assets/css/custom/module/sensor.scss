@@ -5,7 +5,7 @@
     }
 
     &::first-letter {
-        text-transform: uppercase;
+        text-transform: uppercase !important;
     }
 
     &__label {
@@ -63,9 +63,6 @@
 
 @media (max-width: 1000px) {
     .sensor {
-        display: flex;
-        flex-direction: column;
-
         width: 100%;
 
         &__bar {
