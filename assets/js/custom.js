@@ -26,13 +26,24 @@ var createSelect = function createSelect(stations) {
   });
 };
 
+var generateSearch = function generateSearch(id) {
+  var string = "?station=".concat(id);
+  history.pushState(false, '', string);
+};
+
 var loadSelectValue = function loadSelectValue() {
-  if (localStorage.getItem('station') != null) {
+  var params = new URLSearchParams(window.location.search);
+  var station = params.get('station');
+
+  if (station) {
+    select.value = station;
+  } else if (localStorage.getItem('station') != null) {
     select.value = localStorage.getItem('station');
   } else {
     select.value = 117;
   }
 
+  generateSearch(select.value);
   localStorage.setItem('station', select.value);
 };
 
@@ -109,6 +120,7 @@ var loadSensorData = function loadSensorData(id, index) {
     if (counter == sensors.length) {
       htmlText += "</div>";
       dataWrapper.innerHTML = htmlText;
+      switchImage();
     }
   }).catch(function (error) {
     return console.log(error);
@@ -164,7 +176,7 @@ var loadQuality = function loadQuality() {
         break;
     }
 
-    htmlText += "\n            <div class=\"box box--left\">\n                <p>\n                    <span>Indeks jako\u015Bci powietrza:</span>\n                    <span class=\"quality ".concat(color, "\">").concat(quality.stIndexLevel.indexLevelName, "</span>\n                </p>\n                <p>\n                    <span>Data pomiaru:</span>\n                    <span class=\"date\">").concat(quality.stCalcDate, "</span>\n                </p>\n            </div>\n            ");
+    htmlText += "\n            <div class=\"box box--left\">\n                <p>\n                    <span>Indeks jako\u015Bci powietrza:</span>\n                    <span class=\"quality ".concat(color, "\">").concat(quality.stIndexLevel.indexLevelName, "</span>\n                </p>\n                <div class=\"image\" data-q=\"").concat(quality.stIndexLevel.indexLevelName, "\"></div>\n                <p>\n                    <span>Data pomiaru:</span>\n                    <span class=\"date\">").concat(quality.stCalcDate, "</span>\n                </p>\n            </div>\n            ");
     loadSensors();
   }).catch(function (error) {
     return console.log(error);
@@ -194,8 +206,27 @@ select.addEventListener('change', function () {
   localStorage.setItem('station', select.value);
   htmlText = "";
   counter = 0;
+  generateSearch(select.value);
   loadQuality();
 });
+"use strict";
+
+var switchImage = function switchImage() {
+  var wrapper = document.querySelector('.image');
+  var quality = wrapper.dataset.q;
+  var theme = '';
+  if (localStorage.getItem('theme') === 'theme-dark') theme = '_Noc';
+
+  if (quality == 'Bardzo dobry' || quality == 'Dobry') {
+    wrapper.innerHTML = "\n            <img class=\"image__bg\" src=\"./assets/images/Bardzo-dobry_Tlo".concat(theme, ".svg\"> \n            <img class=\"image__cloud\" src=\"./assets/images/Bardzo-dobry_Chmurka").concat(theme, ".svg\"> \n            <img class=\"image__addition\" src=\"./assets/images/Bardzo-dobry_Dodatek").concat(theme, ".svg\"> \n            ");
+  } else if (quality == 'Umiarkowany' || quality == 'Dostateczny') {
+    wrapper.innerHTML = "\n            <img class=\"image__bg\" src=\"./assets/images/Umiarkowany_Tlo".concat(theme, ".svg\"> \n            <img class=\"image__cloud\" src=\"./assets/images/Umiarkowany_Chmurka").concat(theme, ".svg\"> \n            ");
+  } else if (quality == 'Zły' || quality == 'Bardzo zły') {
+    wrapper.innerHTML = "\n            <img class=\"image__bg\" src=\"./assets/images/Zly_Tlo".concat(theme, ".svg\"> \n            <img class=\"image__cloud\" src=\"./assets/images/Zly_Chmurka").concat(theme, ".svg\"> \n            ");
+  } else {
+    wrapper.innerHTML = "\n            <img class=\"image__bg\" src=\"./assets/images/Brak-danych_Tlo".concat(theme, ".svg\"> \n            <img class=\"image__cloud\" src=\"./assets/images/Brak-danych-Chmurka").concat(theme, ".svg\"> \n            ");
+  }
+};
 "use strict";
 
 var icon = document.querySelector('.search__icon');
@@ -225,6 +256,8 @@ var toggleTheme = function toggleTheme() {
     setTheme('theme-dark');
     themeBtn.classList.add('active');
   }
+
+  switchImage();
 };
 
 if (localStorage.getItem('theme') === 'theme-dark') {

@@ -1,0 +1,67 @@
+.image {
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 22rem;
+    height: 18rem;
+
+    &__bg {
+        width: 100%;
+        height: auto;
+        z-index: 1;
+    }
+
+
+    &__cloud {
+        position: absolute;
+        width: 12.6rem;
+        height: auto;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        animation: cloud infinite 3s linear;
+    }
+
+    &__addition {
+        position: absolute;
+        top: 10%;
+        left: 35%;
+        width: 2.75rem;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        animation: addition infinite 2.5s linear;
+    }
+}
+
+
+@keyframes cloud {
+    0% {
+        transform: translate(-50%, -48%);
+    }
+
+    50% {
+        transform: translate(-50%, -52%);
+    }
+
+    100% {
+        transform: translate(-50%, -48%);
+    }
+
+}
+
+@keyframes addition {
+    0% {
+        transform: translate(-45%, -50%);
+    }
+
+    50% {
+        transform: translate(-55%, -50%);
+    }
+
+    100% {
+        transform: translate(-45%, -50%);
+    }
+
+}

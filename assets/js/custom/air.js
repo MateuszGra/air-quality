@@ -21,14 +21,24 @@ const createSelect = (stations) => {
     });
 }
 
+const generateSearch = (id) => {
+    const string = `?station=${id}`;
+    history.pushState(false, '', string);
+}
 
 const loadSelectValue = () => {
-    if (localStorage.getItem('station') != null) {
+    const params = new URLSearchParams(window.location.search);
+    const station = params.get('station');
+
+    if (station) {
+        select.value = station;
+    } else if (localStorage.getItem('station') != null) {
         select.value = localStorage.getItem('station');
     } else {
         select.value = 117;
     }
 
+    generateSearch(select.value);
     localStorage.setItem('station', select.value);
 }
 
@@ -113,6 +123,7 @@ const loadSensorData = (id, index) => {
             if (counter == sensors.length) {
                 htmlText += `</div>`
                 dataWrapper.innerHTML = htmlText;
+                switchImage();
             }
         })
         .catch(error => console.log(error));
@@ -178,13 +189,13 @@ const loadQuality = () => {
                     <span>Indeks jakości powietrza:</span>
                     <span class="quality ${color}">${quality.stIndexLevel.indexLevelName}</span>
                 </p>
+                <div class="image" data-q="${quality.stIndexLevel.indexLevelName}"></div>
                 <p>
                     <span>Data pomiaru:</span>
                     <span class="date">${quality.stCalcDate}</span>
                 </p>
             </div>
             `
-
             loadSensors();
         })
         .catch(error => console.log(error));
@@ -213,9 +224,9 @@ const loadStacions = () => {
 loadStacions();
 
 select.addEventListener('change', () => {
-
     localStorage.setItem('station', select.value);
     htmlText = ``;
     counter = 0;
+    generateSearch(select.value);
     loadQuality();
 });

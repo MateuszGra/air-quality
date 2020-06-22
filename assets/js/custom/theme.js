@@ -13,6 +13,7 @@ const toggleTheme = () => {
         setTheme('theme-dark');
         themeBtn.classList.add('active')
     }
+    switchImage();
 }
 
 
