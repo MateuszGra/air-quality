@@ -43,6 +43,7 @@
         bottom: 0;
         right: 0;
         background-color: var(--color-font);
+        will-change: background-color;
         transition: background-color 0.4s;
         border-radius: 2.95rem;
     }

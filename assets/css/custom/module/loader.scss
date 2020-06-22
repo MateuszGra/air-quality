@@ -2,6 +2,7 @@
     position: relative;
     display: flex;
     justify-content: center;
+    margin-top: 5rem;
 
 
     &__cloud-1 {
@@ -47,10 +48,4 @@
         }
     }
 
-}
-
-@media (max-width: 1000px) {
-    .loader {
-        margin-top: 5rem;
-    }
 }

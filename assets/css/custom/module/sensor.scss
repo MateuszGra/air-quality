@@ -35,6 +35,8 @@
         top: 0;
         height: 100%;
         max-width: 100%;
+        animation: bar 0.7s 0.5s both;
+        transform-origin: 0 100%;
     }
 
     &__percent {
@@ -43,6 +45,17 @@
         min-width: 3.5rem;
         text-align: center;
         color: var(--color-bg);
+    }
+
+}
+
+@keyframes bar {
+    0% {
+        transform: scaleX(0);
+    }
+
+    100% {
+        transform: scaleX(1);
     }
 
 }
