@@ -105,7 +105,7 @@ h1 br,h2 br,h3 br,h4 br,h5 br,h6 br,p br{display:none}
 .sensor__row{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}
 .sensor__bar{position:relative;width:22.75rem;height:1.35rem;background:var(--color-deep);border-radius:2.95rem;margin-top:.5rem;margin-right:1.5rem;overflow:hidden}
 .sensor__indicator{position:absolute;left:0;top:0;height:100%;max-width:100%;-webkit-animation:bar .7s .5s both;animation:bar .7s .5s both;-webkit-transform-origin:0 100%;transform-origin:0 100%}
-.sensor__percent{padding:.6rem .8rem;border-radius:1.5rem;min-width:3.5rem;text-align:center;color:var(--color-bg)}
+.sensor__percent{padding:.6rem .8rem;border-radius:1.5rem;min-width:3.5rem;text-align:center;color:var(--color-bg);font-size:1.2rem}
 @-webkit-keyframes bar{0%{-webkit-transform:scaleX(0);transform:scaleX(0)}
 100%{-webkit-transform:scaleX(1);transform:scaleX(1)}
 }@keyframes bar{0%{-webkit-transform:scaleX(0);transform:scaleX(0)}

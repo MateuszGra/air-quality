@@ -75,7 +75,7 @@ const loadSensorData = (id, index) => {
                         <div class="sensor__indicator ${color}" style="width: ${percent}%"></div>
                     </div>
 
-                    <span class="sensor__percent count ${color}" >${percent}%</span>
+                    <span class="sensor__percent ${color}" >${percent}%</span>
                 </div>
             </div>
             `
