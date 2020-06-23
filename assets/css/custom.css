@@ -1,9 +1,5 @@
 :root { --color-good: #68E0B7; --color-bad: #F9807D; --color-neutral: #27CBDE; --font-family: gill-sans-nova, sans-serif; }
 
-.theme-light { --color-bg: #F5F9FF; --color-blur-light: #FFFFFF; --color-font: #576A8A; --color-blur-dark: #D6E0F0; --color-deep: transparent linear-gradient(180deg, #D6E0F0 0%, #D6E0F0 1%, #FFFFFF 100%) 0% 0% no-repeat padding-box; }
-
-.theme-dark { --color-bg: #2B2F35; --color-blur-light: #3B3E42; --color-font: #F5F9FF; --color-blur-dark: #181C22; --color-deep: transparent linear-gradient(360deg, #21262e 0%, #10131858 53%, #202020 100%) 0% 0% no-repeat padding-box; }
-
 * { -webkit-box-sizing: border-box; box-sizing: border-box; }
 
 html { font-family: var(--font-family); font-size: 16px; color: var(--color-font); }
@@ -110,9 +106,9 @@ button { color: inherit; cursor: pointer; padding: 0; background-color: transpar
 
 .image__bg { width: 100%; height: auto; z-index: 1; }
 
-.image__cloud { position: absolute; width: auto; height: 13rem; top: 55%; left: 50%; z-index: 3; -webkit-animation: cloud infinite 3.5s linear; animation: cloud infinite 3.5s linear; }
+.image__cloud { position: absolute; width: auto; height: 13rem; top: 55%; left: 50%; z-index: 3; will-change: transform; -webkit-animation: cloud infinite 3.5s linear; animation: cloud infinite 3.5s linear; }
 
-.image__addition { position: absolute; top: 10%; left: 35%; width: 2.75rem; z-index: 2; -webkit-animation: addition infinite 2.5s linear; animation: addition infinite 2.5s linear; }
+.image__addition { position: absolute; top: 10%; left: 35%; width: 2.75rem; z-index: 2; will-change: transform; -webkit-animation: addition infinite 2.5s linear; animation: addition infinite 2.5s linear; }
 
 @-webkit-keyframes cloud { 0% { -webkit-transform: translate(-50%, -46%); transform: translate(-50%, -46%); }
   50% { -webkit-transform: translate(-50%, -54%); transform: translate(-50%, -54%); }
@@ -199,7 +195,7 @@ button { color: inherit; cursor: pointer; padding: 0; background-color: transpar
 @media (max-width: 1000px) { .sensor { width: 100%; }
   .sensor__bar { -webkit-box-flex: 1; -ms-flex-positive: 1; flex-grow: 1; } }
 
-.theme-switch { position: relative; margin: 3.53rem 14.7% 0 0; -ms-flex-item-align: end; align-self: flex-end; width: 4rem; height: 1.5rem; border: none; background: transparent; outline: none; cursor: pointer; }
+.theme-switch { position: relative; margin: 3.53rem 14.7% 0 0; -ms-flex-item-align: end; align-self: flex-end; border: none; background: transparent; outline: none; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 
 .theme-switch.active .theme-switch__trigger { -webkit-transform: translateY(-50%) translate(2rem); transform: translateY(-50%) translate(2rem); }
 
@@ -211,7 +207,7 @@ button { color: inherit; cursor: pointer; padding: 0; background-color: transpar
 
 .theme-switch__icon--light { display: block; width: 1.575rem; height: 1.575rem; }
 
-.theme-switch__slider { position: absolute; top: 0; left: 0; bottom: 0; right: 0; background-color: var(--color-font); will-change: background-color; -webkit-transition: background-color 0.4s; transition: background-color 0.4s; border-radius: 2.95rem; }
+.theme-switch__slider { width: 4rem; height: 1.5rem; background-color: var(--color-font); will-change: background-color; -webkit-transition: background-color 0.4s; transition: background-color 0.4s; border-radius: 2.95rem; }
 
 .theme-switch__trigger { position: absolute; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; top: 50%; left: -2%; border-radius: 50%; height: 2.25rem; width: 2.25rem; background: var(--color-bg); -webkit-transform: translateY(-50%); transform: translateY(-50%); will-change: transform; -webkit-transition: -webkit-transform 0.4s; transition: -webkit-transform 0.4s; transition: transform 0.4s; transition: transform 0.4s, -webkit-transform 0.4s; }
 

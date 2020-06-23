@@ -2,12 +2,11 @@
     position: relative;
     margin: 3.53rem 14.7% 0 0;
     align-self: flex-end;
-    width: 4rem;
-    height: 1.5rem;
     border: none;
     background: transparent;
     outline: none;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 
     &.active {
         .theme-switch__trigger {
@@ -40,11 +39,8 @@
 
 
     &__slider {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
+        width: 4rem;
+        height: 1.5rem;
         background-color: var(--color-font);
         will-change: background-color;
         transition: background-color 0.4s;
