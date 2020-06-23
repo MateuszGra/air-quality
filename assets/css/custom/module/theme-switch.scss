@@ -4,6 +4,9 @@
     align-self: flex-end;
     width: 4rem;
     height: 1.5rem;
+    border: none;
+    background: transparent;
+    outline: none;
     cursor: pointer;
 
     &.active {
