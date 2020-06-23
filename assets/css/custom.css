@@ -207,7 +207,7 @@ button { color: inherit; cursor: pointer; padding: 0; background-color: transpar
 
 .theme-switch__icon--light { display: block; width: 1.575rem; height: 1.575rem; }
 
-.theme-switch__slider { width: 4rem; height: 1.5rem; background-color: var(--color-font); will-change: background-color; -webkit-transition: background-color 0.4s; transition: background-color 0.4s; border-radius: 2.95rem; }
+.theme-switch__slider { width: 4rem; height: 1.3rem; background-color: var(--color-font); will-change: background-color; -webkit-transition: background-color 0.4s; transition: background-color 0.4s; border-radius: 2.95rem; }
 
 .theme-switch__trigger { position: absolute; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; top: 50%; left: -2%; border-radius: 50%; height: 2.25rem; width: 2.25rem; background: var(--color-bg); -webkit-transform: translateY(-50%); transform: translateY(-50%); will-change: transform; -webkit-transition: -webkit-transform 0.4s; transition: -webkit-transform 0.4s; transition: transform 0.4s; transition: transform 0.4s, -webkit-transform 0.4s; }
 
