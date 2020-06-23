@@ -1,7 +1,7 @@
 "use strict";
 
 var loadQuality = function loadQuality() {
-  dataWrapper.innerHTML = "\n    <div class=\"loader\">\n        <img class=\"loader__cloud-1\" src=\"./assets/images/Loader1.svg\">\n        <img class=\"loader__cloud-2\" src=\"./assets/images/Loader2.svg\">\n    </div>";
+  dataWrapper.innerHTML = "\n    <div class=\"loader\">\n        <img class=\"loader__cloud-1\" src=\"assets/images/Loader1.svg\">\n        <img class=\"loader__cloud-2\" src=\"assets/images/Loader2.svg\">\n    </div>";
   var data = new FormData();
   data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/' + select.value);
   fetch('inc/ajax.php', {
@@ -184,13 +184,13 @@ var switchImage = function switchImage() {
   if (localStorage.getItem('theme') === 'theme-dark') theme = '_Noc';
 
   if (index == 'Bardzo dobry' || index == 'Dobry') {
-    wrapper.innerHTML = "\n            <img class=\"image__bg\" src=\"./assets/images/Bardzo-dobry_Tlo".concat(theme, ".svg\"> \n            <img class=\"image__cloud\" src=\"./assets/images/Bardzo-dobry_Chmurka").concat(theme, ".svg\"> \n            <img class=\"image__addition\" src=\"./assets/images/Bardzo-dobry_Dodatek").concat(theme, ".svg\"> \n            ");
+    wrapper.innerHTML = "\n            <img class=\"image__bg\" src=\"assets/images/Bardzo-dobry_Tlo".concat(theme, ".svg\"> \n            <img class=\"image__cloud\" src=\"assets/images/Bardzo-dobry_Chmurka").concat(theme, ".svg\"> \n            <img class=\"image__addition\" src=\"assets/images/Bardzo-dobry_Dodatek").concat(theme, ".svg\"> \n            ");
   } else if (index == 'Umiarkowany' || index == 'Dostateczny') {
-    wrapper.innerHTML = "\n            <img class=\"image__bg\" src=\"./assets/images/Umiarkowany_Tlo".concat(theme, ".svg\"> \n            <img class=\"image__cloud\" src=\"./assets/images/Umiarkowany_Chmurka").concat(theme, ".svg\"> \n            ");
+    wrapper.innerHTML = "\n            <img class=\"image__bg\" src=\"assets/images/Umiarkowany_Tlo".concat(theme, ".svg\"> \n            <img class=\"image__cloud\" src=\"assets/images/Umiarkowany_Chmurka").concat(theme, ".svg\"> \n            ");
   } else if (index == 'Zły' || index == 'Bardzo zły') {
-    wrapper.innerHTML = "\n            <img class=\"image__bg\" src=\"./assets/images/Zly_Tlo".concat(theme, ".svg\"> \n            <img class=\"image__cloud\" src=\"./assets/images/Zly_Chmurka").concat(theme, ".svg\"> \n            ");
+    wrapper.innerHTML = "\n            <img class=\"image__bg\" src=\"assets/images/Zly_Tlo".concat(theme, ".svg\"> \n            <img class=\"image__cloud\" src=\"assets/images/Zly_Chmurka").concat(theme, ".svg\"> \n            ");
   } else {
-    wrapper.innerHTML = "\n            <img class=\"image__bg\" src=\"./assets/images/Brak-danych_Tlo".concat(theme, ".svg\"> \n            <img class=\"image__cloud\" src=\"./assets/images/Brak-danych-Chmurka").concat(theme, ".svg\"> \n            ");
+    wrapper.innerHTML = "\n            <img class=\"image__bg\" src=\"assets/images/Brak-danych_Tlo".concat(theme, ".svg\"> \n            <img class=\"image__cloud\" src=\"assets/images/Brak-danych-Chmurka").concat(theme, ".svg\"> \n            ");
   }
 };
 "use strict";

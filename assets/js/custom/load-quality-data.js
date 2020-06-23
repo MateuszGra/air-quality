@@ -1,8 +1,8 @@
 const loadQuality = () => {
     dataWrapper.innerHTML = `
     <div class="loader">
-        <img class="loader__cloud-1" src="./assets/images/Loader1.svg">
-        <img class="loader__cloud-2" src="./assets/images/Loader2.svg">
+        <img class="loader__cloud-1" src="assets/images/Loader1.svg">
+        <img class="loader__cloud-2" src="assets/images/Loader2.svg">
     </div>`
 
     const data = new FormData();
