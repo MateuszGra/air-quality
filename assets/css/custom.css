@@ -203,7 +203,7 @@ button { color: inherit; cursor: pointer; padding: 0; background-color: transpar
 
 .theme-switch.active .theme-switch__icon--light { display: none; }
 
-.theme-switch__icon--dark { display: none; width: 1.125rem; height: 1.125rem; }
+.theme-switch__icon--dark { display: none; width: 1.2rem; height: 1.2rem; }
 
 .theme-switch__icon--light { display: block; width: 1.575rem; height: 1.575rem; }
 
