@@ -91,4 +91,46 @@
         top: 1.5rem;
         right: 1.5rem;
     }
+
+    &__station {
+        text-align: center;
+    }
+}
+
+@media (max-width: 1000px) {
+    .popup {
+        &__content {
+            width: 80%;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .popup {
+        &__content {
+            width: 90%;
+        }
+
+        &__title {
+            font-size: 1.6rem;
+        }
+
+        &__close {
+            height: 2.5rem;
+            width: 2.5rem;
+        }
+    }
+}
+
+
+@media (max-width: 330px) {
+    .popup {
+        &__title {
+            font-size: 1.3rem;
+        }
+
+        &__content {
+            padding: 3rem 2rem;
+        }
+    }
 }
