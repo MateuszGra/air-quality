@@ -61,10 +61,11 @@ require '../src/SMTP.php';
 function sendMail($stationID, $email, $stations) {
     $quality = getQuality($stationID);
     $subject = 'Indeks jakości powietrza: '.$quality;
-    $message_body = '<p>Stacja pomiarowa:</p><h3>'.getAdress($stationID, $stations).'</h3>';
-    $message_body.= '<p>Indeks jakości powietrza:</p><h2>'.$quality.'</h2>';
-    $message_body.= '<p>Dokładne pomiary: <a href="air.mgrabowski.eu/?station='.$stationID.'">air.mgrabowski.eu/?station='.$stationID.'</a></p>';
-    $message_body.= '<i>Wiadomość została wygenerowana utomatycznie, prosimy na nią nie odpowiadać. Dostajesz informacje dzięki subskrypcji, w przypadku rezygnacji z dalszego otrzymywania podobnych wiadomości kliknij w poniższy link:</i>';
+    $message_body = '
+    <p>Stacja pomiarowa:</p><h3>'.getAdress($stationID, $stations).'</h3>
+    <p>Indeks jakości powietrza:</p><h2>'.$quality.'</h2>
+    <p>Dokładne pomiary: <a href="air.mgrabowski.eu/?station='.$stationID.'">air.mgrabowski.eu/?station='.$stationID.'</a></p>
+    <i>Wiadomość została wygenerowana automatycznie, prosimy na nią nie odpowiadać. W przypadku rezygnacji z dalszego otrzymywania podobnych wiadomości kliknij w poniższy link: </i>';
     
     $mail = new PHPMailer(true);
           try {

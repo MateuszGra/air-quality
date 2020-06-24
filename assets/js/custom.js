@@ -38,15 +38,18 @@ var validation = function validation() {
 
 var addToDataBase = function addToDataBase() {
   var email = document.querySelector('.form__input');
+  var returnHTML = document.querySelector('.form__return');
   var data = new FormData();
   data.append('email', email.value);
+  data.append('id', select.value);
   fetch('inc/subscription.php', {
     method: "POST",
     body: data
   }).then(function (response) {
     return response.text();
   }).then(function (response) {
-    console.log(response);
+    returnHTML.innerHTML = response;
+    form.requestFullscreen();
   }).catch(function (error) {
     return console.log(error);
   });

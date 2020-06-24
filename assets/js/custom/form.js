@@ -34,8 +34,11 @@ const validation = () => {
 
 const addToDataBase = () => {
     const email = document.querySelector('.form__input');
+    const returnHTML = document.querySelector('.form__return');
+
     const data = new FormData();
     data.append('email', email.value);
+    data.append('id', select.value);
 
     fetch('inc/subscription.php', {
             method: "POST",
@@ -43,7 +46,8 @@ const addToDataBase = () => {
         })
         .then(response => response.text())
         .then(response => {
-            console.log(response);
+            returnHTML.innerHTML = response;
+            form.requestFullscreen();
         })
         .catch(error => console.log(error));
 }
