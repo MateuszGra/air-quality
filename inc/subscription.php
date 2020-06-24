@@ -9,14 +9,13 @@ require '../src/SMTP.php';
 
 $email = strval($_POST['email']);
 $stationID = $_POST['id'];
-$userID = uniqid();
 
 
-function addToDataBase($userID, $stationID, $email) {
+function addToDataBase($stationID, $email) {
     $dataBase = mysqli_connect('localhost','root','','air');
 
-    $sql = 'INSERT INTO users (id, station, email)
-    VALUES ("'.$userID.'", "'.$stationID.'", "'.$email.'")';
+    $sql = 'INSERT INTO users (station, email)
+    VALUES ("'.$stationID.'", "'.$email.'")';
     
     if ($dataBase->query($sql) === TRUE) {
         sendMail($email);
@@ -28,7 +27,7 @@ function addToDataBase($userID, $stationID, $email) {
     mysqli_close($dataBase);
 }
 
-addToDataBase($userID, $stationID, $email);
+addToDataBase($stationID, $email);
 
 
 function sendMail($email) {

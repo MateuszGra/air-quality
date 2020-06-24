@@ -49,7 +49,7 @@ var addToDataBase = function addToDataBase() {
     return response.text();
   }).then(function (response) {
     returnHTML.innerHTML = response;
-    form.requestFullscreen();
+    form.reset();
   }).catch(function (error) {
     return console.log(error);
   });

@@ -47,7 +47,7 @@ const addToDataBase = () => {
         .then(response => response.text())
         .then(response => {
             returnHTML.innerHTML = response;
-            form.requestFullscreen();
+            form.reset();
         })
         .catch(error => console.log(error));
 }
