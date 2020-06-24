@@ -5,7 +5,6 @@
 html {
   font-family: var(--font-family);
   font-size: $base-font-size;
-  color: var(--color-font);
 }
 
 body {
@@ -13,12 +12,17 @@ body {
   padding: 0;
   position: relative;
   overflow-x: hidden;
-  background: var(--color-bg);
 }
 
 main {
+  position: relative;
   display: flex;
   flex-direction: column;
+  background: var(--color-bg);
+  color: var(--color-font);
+  z-index: 0;
+  min-width: 100vw;
+  min-height: 100vh;
 }
 
 

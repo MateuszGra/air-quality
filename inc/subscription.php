@@ -19,9 +19,9 @@ function addToDataBase($stationID, $email) {
     
     if ($dataBase->query($sql) === TRUE) {
         sendMail($email);
-        echo "Dziękujemy, za chwilę otrzymasz wiaodmość z potwierdzeniem.";
+        echo '<span class="font-good">Dziękujemy, za chwilę otrzymasz wiadomość z potwierdzeniem.<span>';
     } else {
-        echo "Przepraszamy, spróbuj ponownie później";
+        echo '<span class="font-bad">Przepraszamy, spróbuj ponownie później<span>';
     }
     
     mysqli_close($dataBase);

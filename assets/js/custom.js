@@ -39,6 +39,7 @@ var validation = function validation() {
 var addToDataBase = function addToDataBase() {
   var email = document.querySelector('.form__input');
   var returnHTML = document.querySelector('.form__return');
+  returnHTML.innerHTML = "\n    <div class=\"loader loader--margin\">\n        <img class=\"loader__cloud-1 small\" src=\"assets/images/Loader1.svg\">\n        <img class=\"loader__cloud-2 small\" src=\"assets/images/Loader2.svg\">\n    </div>";
   var data = new FormData();
   data.append('email', email.value);
   data.append('id', select.value);
@@ -50,6 +51,7 @@ var addToDataBase = function addToDataBase() {
   }).then(function (response) {
     returnHTML.innerHTML = response;
     form.reset();
+    placeholder.classList.remove('active');
   }).catch(function (error) {
     return console.log(error);
   });

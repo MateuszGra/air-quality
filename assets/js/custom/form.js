@@ -35,6 +35,11 @@ const validation = () => {
 const addToDataBase = () => {
     const email = document.querySelector('.form__input');
     const returnHTML = document.querySelector('.form__return');
+    returnHTML.innerHTML = `
+    <div class="loader loader--margin">
+        <img class="loader__cloud-1 small" src="assets/images/Loader1.svg">
+        <img class="loader__cloud-2 small" src="assets/images/Loader2.svg">
+    </div>`
 
     const data = new FormData();
     data.append('email', email.value);
@@ -48,6 +53,7 @@ const addToDataBase = () => {
         .then(response => {
             returnHTML.innerHTML = response;
             form.reset();
+            placeholder.classList.remove('active')
         })
         .catch(error => console.log(error));
 }

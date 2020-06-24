@@ -40,11 +40,11 @@
 
 * { -webkit-box-sizing: border-box; box-sizing: border-box; }
 
-html { font-family: var(--font-family); font-size: 16px; color: var(--color-font); }
+html { font-family: var(--font-family); font-size: 16px; }
 
-body { margin: 0; padding: 0; position: relative; overflow-x: hidden; background: var(--color-bg); }
+body { margin: 0; padding: 0; position: relative; overflow-x: hidden; }
 
-main { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; }
+main { position: relative; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; background: var(--color-bg); color: var(--color-font); z-index: 0; min-width: 100vw; min-height: 100vh; }
 
 @media (max-width: 1600px) { html { font-size: 14px; } }
 
@@ -132,7 +132,7 @@ span { font-weight: 300; }
 
 .form__input-label { max-width: 100%; position: relative; margin-top: 2rem; }
 
-.form__return { margin-top: 1rem; font-size: 1.4rem; }
+.form__return { margin-top: 1rem; font-size: 1.4rem; min-height: 2rem; }
 
 .form__placeholder { position: absolute; left: 2rem; top: 50%; -webkit-transform: translateY(-50%); transform: translateY(-50%); will-change: transform; -webkit-transition: -webkit-transform 0.4s; transition: -webkit-transform 0.4s; transition: transform 0.4s; transition: transform 0.4s, -webkit-transform 0.4s; -webkit-transform-origin: left; transform-origin: left; font-size: 1.4rem; }
 
@@ -168,17 +168,17 @@ span { font-weight: 300; }
 
 .image__bg { width: 100%; height: auto; z-index: 1; }
 
-.image__cloud { position: absolute; width: auto; height: 13rem; top: 55%; left: 50%; z-index: 3; will-change: transform; -webkit-animation: cloud infinite 3.5s linear; animation: cloud infinite 3.5s linear; }
+.image__cloud { position: absolute; width: auto; height: 13rem; top: 0; left: 0; bottom: 0; right: 0; margin: auto; z-index: 3; -webkit-animation: cloud infinite 3.5s linear; animation: cloud infinite 3.5s linear; }
 
-.image__addition { position: absolute; top: 10%; left: 35%; width: 2.75rem; z-index: 2; will-change: transform; -webkit-animation: addition infinite 2.5s linear; animation: addition infinite 2.5s linear; }
+.image__addition { position: absolute; top: 10%; left: 35%; right: 0; bottom: 0; width: 2.75rem; z-index: 2; -webkit-animation: addition infinite 2.5s linear; animation: addition infinite 2.5s linear; }
 
-@-webkit-keyframes cloud { 0% { -webkit-transform: translate(-50%, -46%); transform: translate(-50%, -46%); }
-  50% { -webkit-transform: translate(-50%, -54%); transform: translate(-50%, -54%); }
-  100% { -webkit-transform: translate(-50%, -46%); transform: translate(-50%, -46%); } }
+@-webkit-keyframes cloud { 0% { -webkit-transform: translateY(-4%); transform: translateY(-4%); }
+  50% { -webkit-transform: translateY(4%); transform: translateY(4%); }
+  100% { -webkit-transform: translateY(-4%); transform: translateY(-4%); } }
 
-@keyframes cloud { 0% { -webkit-transform: translate(-50%, -46%); transform: translate(-50%, -46%); }
-  50% { -webkit-transform: translate(-50%, -54%); transform: translate(-50%, -54%); }
-  100% { -webkit-transform: translate(-50%, -46%); transform: translate(-50%, -46%); } }
+@keyframes cloud { 0% { -webkit-transform: translateY(-4%); transform: translateY(-4%); }
+  50% { -webkit-transform: translateY(4%); transform: translateY(4%); }
+  100% { -webkit-transform: translateY(-4%); transform: translateY(-4%); } }
 
 @-webkit-keyframes addition { 0% { -webkit-transform: translate(-45%, -50%); transform: translate(-45%, -50%); }
   50% { -webkit-transform: translate(-55%, -50%); transform: translate(-55%, -50%); }
@@ -190,9 +190,15 @@ span { font-weight: 300; }
 
 .loader { position: relative; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; margin-top: 5rem; }
 
+.loader--margin { margin-top: 0; }
+
 .loader__cloud-1 { width: 8rem; height: auto; -webkit-animation: cloud-1 2s infinite both; animation: cloud-1 2s infinite both; }
 
+.loader__cloud-1.small { width: 2.5rem; }
+
 .loader__cloud-2 { left: 10rem; width: 5.5rem; height: auto; -webkit-animation: cloud-2 1.5s infinite both; animation: cloud-2 1.5s infinite both; }
+
+.loader__cloud-2.small { width: 2rem; }
 
 @-webkit-keyframes cloud-1 { 0% { -webkit-transform: translate(20%); transform: translate(20%); }
   50% { -webkit-transform: translate(5%); transform: translate(5%); }

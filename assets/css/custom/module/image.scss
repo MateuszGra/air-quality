@@ -17,10 +17,12 @@
         position: absolute;
         width: auto;
         height: 13rem;
-        top: 55%;
-        left: 50%;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
         z-index: 3;
-        will-change: transform;
         animation: cloud infinite 3.5s linear;
     }
 
@@ -28,9 +30,10 @@
         position: absolute;
         top: 10%;
         left: 35%;
+        right: 0;
+        bottom: 0;
         width: 2.75rem;
         z-index: 2;
-        will-change: transform;
         animation: addition infinite 2.5s linear;
     }
 }
@@ -38,15 +41,15 @@
 
 @keyframes cloud {
     0% {
-        transform: translate(-50%, -46%);
+        transform: translateY(-4%);
     }
 
     50% {
-        transform: translate(-50%, -54%);
+        transform: translateY(4%);
     }
 
     100% {
-        transform: translate(-50%, -46%);
+        transform: translateY(-4%);
     }
 
 }

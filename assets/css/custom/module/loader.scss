@@ -4,11 +4,18 @@
     justify-content: center;
     margin-top: 5rem;
 
+    &--margin {
+        margin-top: 0;
+    }
 
     &__cloud-1 {
         width: 8rem;
         height: auto;
         animation: cloud-1 2s infinite both;
+
+        &.small {
+            width: 2.5rem;
+        }
     }
 
     &__cloud-2 {
@@ -16,6 +23,10 @@
         width: 5.5rem;
         height: auto;
         animation: cloud-2 1.5s infinite both;
+
+        &.small {
+            width: 2rem;
+        }
     }
 
 
