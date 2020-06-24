@@ -142,18 +142,7 @@ var loadSensors = function loadSensors() {
   }).catch(function (error) {
     return console.log(error);
   });
-}; //test
-
-
-fetch('inc/mailing.php', {
-  method: "GET"
-}).then(function (response) {
-  return response.text();
-}).then(function (response) {
-  console.log(response);
-}).catch(function (error) {
-  return console.log(error);
-});
+};
 "use strict";
 
 var createSelect = function createSelect(stations) {
