@@ -114,6 +114,10 @@
     .search {
         margin: 3.5rem auto 0 auto;
         width: 90%;
+
+        &__select {
+            font-size: 1.35rem;
+        }
     }
 }
 

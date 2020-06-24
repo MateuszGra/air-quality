@@ -1,5 +1,9 @@
 :root { --color-good: #68E0B7; --color-bad: #F9807D; --color-neutral: #27CBDE; --font-family: gill-sans-nova, sans-serif; }
 
+.theme-light { --color-bg: #F5F9FF; --color-blur-light: #FFFFFF; --color-font: #576A8A; --color-blur-dark: #D6E0F0; --color-deep: transparent linear-gradient(180deg, #D6E0F0 0%, #D6E0F0 1%, #FFFFFF 100%) 0% 0% no-repeat padding-box; }
+
+.theme-dark { --color-bg: #2B2F35; --color-blur-light: #3B3E42; --color-font: #F5F9FF; --color-blur-dark: #181C22; --color-deep: transparent linear-gradient(360deg, #21262e 0%, #10131858 53%, #202020 100%) 0% 0% no-repeat padding-box; }
+
 * { -webkit-box-sizing: border-box; box-sizing: border-box; }
 
 html { font-family: var(--font-family); font-size: 16px; color: var(--color-font); }
@@ -168,7 +172,8 @@ button { color: inherit; cursor: pointer; padding: 0; background-color: transpar
 
 .search__icon.active { -webkit-transform: translate(-50%, -50%) rotate(90deg); transform: translate(-50%, -50%) rotate(90deg); }
 
-@media (max-width: 1000px) { .search { margin: 3.5rem auto 0 auto; width: 90%; } }
+@media (max-width: 1000px) { .search { margin: 3.5rem auto 0 auto; width: 90%; }
+  .search__select { font-size: 1.35rem; } }
 
 @media (max-width: 370px) { .search__select { padding-left: 2rem; } }
 
