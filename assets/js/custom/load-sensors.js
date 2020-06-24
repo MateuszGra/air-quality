@@ -9,7 +9,7 @@ const loadSensors = () => {
         .then(response => response.text())
         .then(response => {
             sensors = JSON.parse(response);
-            htmlText += `<div class="box box--right">`
+            htmlText += `<div class="box box--right box-shadow">`
 
             sensors.forEach((sensor, index) => {
                 loadSensorData(sensor.id, index);

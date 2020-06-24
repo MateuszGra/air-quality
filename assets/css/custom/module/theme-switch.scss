@@ -2,11 +2,8 @@
     position: relative;
     margin: 3.53rem 14.7% 0 0;
     align-self: flex-end;
-    border: none;
     background: transparent;
-    outline: none;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
+
 
     &.active {
         .theme-switch__trigger {

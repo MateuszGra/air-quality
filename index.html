@@ -37,19 +37,61 @@
       <div class="theme-switch__trigger theme-switch__trigger--bg-1"></div>
       <div class="theme-switch__trigger theme-switch__trigger--bg-2"></div>
     </button>
-    <div class="search">
-      <select class="search__select"></select>
-      <div class="search__btn-1">
-        <svg class="search__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 20.99">
-          <path id="Icon_ionic-ios-arrow-back" data-name="Icon ionic-ios-arrow-back"
-            d="M14.868,16.686,22.81,8.75a1.5,1.5,0,0,0-2.125-2.118l-9,8.992a1.5,1.5,0,0,0-.044,2.068l9.036,9.054A1.5,1.5,0,1,0,22.8,24.628Z"
-            transform="translate(-11.25 -6.194)" />
-        </svg>
+    <header class="header">
+      <div class="search btn-shadow">
+        <select class="search__select"></select>
+        <div class="search__btn-1">
+          <svg class="search__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 20.99">
+            <path id="Icon_ionic-ios-arrow-back" data-name="Icon ionic-ios-arrow-back"
+              d="M14.868,16.686,22.81,8.75a1.5,1.5,0,0,0-2.125-2.118l-9,8.992a1.5,1.5,0,0,0-.044,2.068l9.036,9.054A1.5,1.5,0,1,0,22.8,24.628Z"
+              transform="translate(-11.25 -6.194)" />
+          </svg>
+        </div>
+        <div class="search__btn-2"></div>
+        <div class="search__btn-3"></div>
       </div>
-      <div class="search__btn-2"></div>
-      <div class="search__btn-3"></div>
-    </div>
+      <button class="popup__btn btn-shadow btn-animation">
+        <svg class="popup__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <path
+            d="M24 0l-6 22-8.129-7.239 7.802-8.234-10.458 7.227-7.215-1.754 24-12zm-15 16.668v7.332l3.258-4.431-3.258-2.901z" />
+        </svg>
+      </button>
+    </header>
     <section class="data">
+      <!-- AJAX -->
+    </section>
+    <section class="popup">
+      <div class="popup__content box-shadow">
+        <h1 class="popup__title">Zapisz się do subskrypcji, otrzymuj codzniennie wiadomość z informacją o jakości
+          powietrza z
+          wybranej stacji.</h1>
+        <form class="form">
+          <p class="popup__stacion">Stacja: <span class="js-station bold"></span></p>
+          <label class="form__input-label">
+            <span class="form__placeholder">E-mail</span>
+            <input class="form__input" type="text">
+          </label>
+          <label class="form__checkbox-label">
+            <input class="form__checkbox" type="checkbox">
+            <span>
+              Wyrażam zgodę na przetwarzanie moich danych osobowych w postacji adresu email, przez adminisratora danych
+              w celu otrzymywania informacji w formie darmowej subskrypcji.
+            </span>
+          </label>
+          <div class="form__submit-shadow btn-shadow btn-animation">
+            <button class="form__submit">Zapisz się</button>
+          </div>
+        </form>
+        <div class="popup__close-shadow btn-shadow btn-animation">
+          <button class="popup__close">
+            <svg class="popup__close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              viewBox="0 0 24 24">
+              <path
+                d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
+            </svg>
+          </button>
+        </div>
+      </div>
     </section>
   </main>
   <script src="assets/js/vendor.min.js"></script>

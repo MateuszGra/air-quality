@@ -1,5 +1,84 @@
 "use strict";
 
+var form = document.querySelector('.form');
+var vError;
+
+var createTooltip = function createTooltip(text, parent) {
+  vError = document.createElement('div');
+  vError.classList.add('form__tooltip');
+  vError.textContent = text;
+  parent.appendChild(vError);
+  return false;
+};
+
+var validation = function validation() {
+  var inputLabel = document.querySelector('.form__input-label');
+  var checkboxLabel = document.querySelector('.form__checkbox-label');
+
+  if (input.value == '') {
+    input.focus();
+    return createTooltip('To pole jest wymagane.', inputLabel);
+  }
+
+  var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+  if (!input.value.match(emailPattern)) {
+    input.focus();
+    return createTooltip('Błędny adres e-mail.', inputLabel);
+  }
+
+  var checkbox = document.querySelector('.form__checkbox');
+
+  if (checkbox.checked == false) {
+    return createTooltip('Wymagana zgoda', checkboxLabel);
+  }
+
+  return true;
+};
+
+var addToDataBase = function addToDataBase() {
+  var email = document.querySelector('.form__input');
+  var data = new FormData();
+  data.append('email', email.value);
+  fetch('inc/subscription.php', {
+    method: "POST",
+    body: data
+  }).then(function (response) {
+    return response.text();
+  }).then(function (response) {
+    console.log(response);
+  }).catch(function (error) {
+    return console.log(error);
+  });
+};
+
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  if (validation()) {
+    addToDataBase();
+  }
+});
+document.addEventListener('click', function () {
+  if (vError) vError.remove();
+});
+document.addEventListener('touch', function () {
+  if (vError) vError.remove();
+});
+"use strict";
+
+var input = document.querySelector('.form__input');
+var placeholder = document.querySelector('.form__placeholder');
+input.addEventListener('focus', function (e) {
+  placeholder.classList.add('active');
+});
+input.addEventListener('focusout', function (e) {
+  if (input.value == '') {
+    placeholder.classList.remove('active');
+  }
+});
+"use strict";
+
 var loadQuality = function loadQuality() {
   dataWrapper.innerHTML = "\n    <div class=\"loader\">\n        <img class=\"loader__cloud-1\" src=\"assets/images/Loader1.svg\">\n        <img class=\"loader__cloud-2\" src=\"assets/images/Loader2.svg\">\n    </div>";
   var data = new FormData();
@@ -30,7 +109,7 @@ var loadQuality = function loadQuality() {
         break;
     }
 
-    htmlText += "\n            <div class=\"data__wrapper\">\n                <div class=\"box box--left\">\n                    <p>\n                        <span>Indeks jako\u015Bci powietrza:</span>\n                        <span class=\"quality ".concat(color, "\">").concat(quality.stIndexLevel.indexLevelName, "</span>\n                    </p>\n                    <div class=\"image\"></div>\n                    <p>\n                        <span>Data pomiaru:</span>\n                        <span class=\"date\">").concat(quality.stCalcDate, "</span>\n                    </p>\n                </div>\n            ");
+    htmlText += "\n            <div class=\"data__wrapper\">\n                <div class=\"box box--left box-shadow\">\n                    <p>\n                        <span>Indeks jako\u015Bci powietrza:</span>\n                        <span class=\"quality ".concat(color, "\">").concat(quality.stIndexLevel.indexLevelName, "</span>\n                    </p>\n                    <div class=\"image\"></div>\n                    <p>\n                        <span>Data pomiaru:</span>\n                        <span class=\"date\">").concat(quality.stCalcDate, "</span>\n                    </p>\n                </div>\n            ");
     loadSensors();
   }).catch(function (error) {
     return console.log(error);
@@ -135,7 +214,7 @@ var loadSensors = function loadSensors() {
     return response.text();
   }).then(function (response) {
     sensors = JSON.parse(response);
-    htmlText += "<div class=\"box box--right\">";
+    htmlText += "<div class=\"box box--right box-shadow\">";
     sensors.forEach(function (sensor, index) {
       loadSensorData(sensor.id, index);
     });
@@ -179,6 +258,28 @@ var loadStacions = function loadStacions() {
     return console.log(error);
   });
 };
+"use strict";
+
+var showBtn = document.querySelector('.popup__btn');
+var closeBtn = document.querySelector('.popup__close');
+var popup = document.querySelector('.popup');
+
+var tooglePopup = function tooglePopup() {
+  return popup.classList.toggle('active');
+};
+
+closeBtn.addEventListener('click', tooglePopup);
+closeBtn.addEventListener('touch', tooglePopup);
+showBtn.addEventListener('click', tooglePopup);
+showBtn.addEventListener('touch', tooglePopup);
+document.addEventListener('click', function (e) {
+  if (e.target.matches('.popup')) tooglePopup();
+}, false);
+document.addEventListener('keydown', function (event) {
+  if (event.keyCode == 27) {
+    popup.classList.remove('active');
+  }
+});
 "use strict";
 
 var select = document.querySelector('.search__select');
@@ -255,6 +356,7 @@ var quality;
 var generateSearch = function generateSearch(id) {
   var string = "?station=".concat(id);
   history.pushState(false, '', string);
+  importStationToPopup();
 };
 
 var loadSelectValue = function loadSelectValue() {
@@ -273,6 +375,11 @@ var loadSelectValue = function loadSelectValue() {
   localStorage.setItem('station', select.value);
 };
 
+var importStationToPopup = function importStationToPopup() {
+  var popupStacion = document.querySelector('.js-station');
+  popupStacion.textContent = select.options[select.selectedIndex].text;
+};
+
 loadStacions();
 select.addEventListener('change', function () {
   localStorage.setItem('station', select.value);
@@ -280,4 +387,5 @@ select.addEventListener('change', function () {
   counter = 0;
   generateSearch(select.value);
   loadQuality();
+  importStationToPopup();
 });

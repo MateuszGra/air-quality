@@ -10,6 +10,7 @@ let quality;
 const generateSearch = (id) => {
     const string = `?station=${id}`;
     history.pushState(false, '', string);
+    importStationToPopup();
 }
 
 const loadSelectValue = () => {
@@ -28,6 +29,10 @@ const loadSelectValue = () => {
     localStorage.setItem('station', select.value);
 }
 
+const importStationToPopup = () => {
+    const popupStacion = document.querySelector('.js-station');
+    popupStacion.textContent = select.options[select.selectedIndex].text;
+}
 
 loadStacions();
 
@@ -37,4 +42,6 @@ select.addEventListener('change', () => {
     counter = 0;
     generateSearch(select.value);
     loadQuality();
+    importStationToPopup();
+
 });

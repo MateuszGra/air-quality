@@ -21,29 +21,6 @@ main {
   flex-direction: column;
 }
 
-.font-good {
-  color: var(--color-good);
-}
-
-.font-neutral {
-  color: var(--color-neutral);
-}
-
-.font-bad {
-  color: var(--color-bad);
-}
-
-.bg-good {
-  background: var(--color-good);
-}
-
-.bg-neutral {
-  background: var(--color-neutral);
-}
-
-.bg-bad {
-  background: var(--color-bad);
-}
 
 @media (max-width: 1600px) {
   html {

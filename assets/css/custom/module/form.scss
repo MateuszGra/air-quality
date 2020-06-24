@@ -1,0 +1,120 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+
+    &__input {
+        height: 3rem;
+        width: 22rem;
+        border-radius: 2rem;
+        background: var(--color-deep);
+        padding-left: 2rem;
+        color: var(--color-font);
+        font-size: 1.2rem;
+        font-family: var(--font-family);
+        font-weight: 300;
+    }
+
+    &__input-label {
+        position: relative;
+        margin-top: 2rem;
+    }
+
+    &__placeholder {
+        position: absolute;
+        left: 2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        will-change: transform;
+        transition: transform 0.4s;
+        transform-origin: left;
+        font-size: 1.4rem;
+
+        &.active {
+            transform: scale(0.7) translateY(-5rem);
+        }
+    }
+
+    &__checkbox-label {
+        position: relative;
+        display: flex;
+        margin-top: 1.5rem;
+        width: 70%;
+        cursor: pointer;
+    }
+
+    &__checkbox {
+        appearance: none;
+        background: var(--color-deep);
+        min-width: 1.5rem;
+        min-height: 1.5rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 3px;
+        margin: 0.3rem 1rem 0 0;
+        will-change: background-color;
+        transition: background-color 0.3s;
+        cursor: pointer;
+
+        &:checked {
+            background: var(--color-good);
+        }
+    }
+
+    &__submit {
+        position: relative;
+        display: flex;
+        background: var(--color-bg);
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+        border-radius: 3.8rem;
+
+        &-shadow {
+            margin-top: 1.5rem;
+            z-index: 0;
+
+            &::after {
+                border-radius: 3.8rem;
+            }
+
+
+            &::before {
+                border-radius: 3.8rem;
+
+            }
+
+            &:hover {
+                .form__submit {
+                    transform: translate(-1px, -1px);
+                }
+            }
+        }
+
+    }
+
+    &__tooltip {
+        position: absolute;
+        color: white;
+        background: var(--color-bad);
+        padding: 0.5rem 1rem;
+        border-radius: 1rem;
+        transform: translate(-50%, -120%);
+        top: -3px;
+        left: 50%;
+        white-space: nowrap;
+
+        &::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            bottom: -9px;
+            left: 10%;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-top: 10px solid var(--color-bad);
+        }
+    }
+
+}
