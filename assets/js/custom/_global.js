@@ -7,20 +7,6 @@ let stations;
 let sensors;
 let quality;
 
-const createSelect = (stations) => {
-
-    stations.sort((a, b) => a.city.name.localeCompare(b.city.name));
-    stations.forEach(station => {
-        const option = document.createElement('option');
-        option.text = station.city.name;
-        if (station.addressStreet != null) {
-            option.text += ' ' + station.addressStreet;
-        }
-        option.value = station.id;
-        select.add(option);
-    });
-}
-
 const generateSearch = (id) => {
     const string = `?station=${id}`;
     history.pushState(false, '', string);

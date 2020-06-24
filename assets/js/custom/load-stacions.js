@@ -1,3 +1,17 @@
+const createSelect = (stations) => {
+
+    stations.sort((a, b) => a.city.name.localeCompare(b.city.name));
+    stations.forEach(station => {
+        const option = document.createElement('option');
+        option.text = station.city.name;
+        if (station.addressStreet != null) {
+            option.text += ' ' + station.addressStreet;
+        }
+        option.value = station.id;
+        select.add(option);
+    });
+}
+
 const loadStacions = () => {
     const data = new FormData();
     data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/station/findAll');

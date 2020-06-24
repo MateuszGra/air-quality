@@ -142,8 +142,36 @@ var loadSensors = function loadSensors() {
   }).catch(function (error) {
     return console.log(error);
   });
-};
+}; //test
+
+
+fetch('inc/mailing.php', {
+  method: "GET"
+}).then(function (response) {
+  return response.text();
+}).then(function (response) {
+  console.log(response);
+}).catch(function (error) {
+  return console.log(error);
+});
 "use strict";
+
+var createSelect = function createSelect(stations) {
+  stations.sort(function (a, b) {
+    return a.city.name.localeCompare(b.city.name);
+  });
+  stations.forEach(function (station) {
+    var option = document.createElement('option');
+    option.text = station.city.name;
+
+    if (station.addressStreet != null) {
+      option.text += ' ' + station.addressStreet;
+    }
+
+    option.value = station.id;
+    select.add(option);
+  });
+};
 
 var loadStacions = function loadStacions() {
   var data = new FormData();
@@ -234,23 +262,6 @@ var counter = 0;
 var stations;
 var sensors;
 var quality;
-
-var createSelect = function createSelect(stations) {
-  stations.sort(function (a, b) {
-    return a.city.name.localeCompare(b.city.name);
-  });
-  stations.forEach(function (station) {
-    var option = document.createElement('option');
-    option.text = station.city.name;
-
-    if (station.addressStreet != null) {
-      option.text += ' ' + station.addressStreet;
-    }
-
-    option.value = station.id;
-    select.add(option);
-  });
-};
 
 var generateSearch = function generateSearch(id) {
   var string = "?station=".concat(id);
