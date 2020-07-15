@@ -356,6 +356,25 @@ themeBtn.addEventListener('click', toggleTheme);
 themeBtn.addEventListener('touch', toggleTheme);
 "use strict";
 
+var params = new URLSearchParams(window.location.search);
+var unsub = params.get('unsub');
+
+if (unsub) {
+  var data = new FormData();
+  data.append('hash', unsub);
+  fetch('inc/unsub.php', {
+    method: "POST",
+    body: data
+  }).then(function (response) {
+    return response.text();
+  }).then(function (response) {
+    console.log(response);
+  }).catch(function (error) {
+    return console.log(error);
+  });
+}
+"use strict";
+
 var select = document.querySelector('.search__select');
 var stationName = document.querySelector('.data__name');
 var htmlText = "";

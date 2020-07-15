@@ -4,6 +4,8 @@ $stationID = $_POST['id'];
 
 function addToDataBase($stationID, $email) {
     $dataBase = mysqli_connect('localhost','root','','air');
+    include 'hash.php';
+    $hash = hashString($email);
 
     $sql = 'INSERT INTO users (station, email)
     VALUES ("'.$stationID.'", "'.$email.'")';
@@ -16,17 +18,18 @@ function addToDataBase($stationID, $email) {
         <h3>Właśnie zapisałeś się do codziennej subskrypcji o jakości powietrza.</h3>
         <p>Będziesz od teraz otrzymywać codziennie rano wiadomość o stanie jakości powietrza z wybranej stacji.</p>
         <p>Jeżeli chcesz sprawdzać informacje częściej, zawsze możesz skorzystać z strony: <a href="air.mgrabowski.eu">air.mgrabowski.eu</a>.</p>
-        <p><i>Wiadomość została wygenerowana automatycznie, prosimy na nią nie odpowiadać. W przypadku rezygnacji z dalszego otrzymywania podobnych wiadomości kliknij w poniższy link: </i></p>
+        <i>Wiadomość została wygenerowana automatycznie, prosimy na nią nie odpowiadać. W przypadku rezygnacji z dalszego otrzymywania podobnych wiadomości kliknij w link: 
+        <a href="air.mgrabowski.eu/?unsub='.$hash.'">Wypisz się</a> 
+        </i>
         ';
         send($email, $subject, $message_body);
         echo '<span class="font-good">Dziękujemy, za chwilę otrzymasz wiadomość z potwierdzeniem.<span>';
     } else {
-        echo '<span class="font-bad">Przepraszamy, spróbuj ponownie później<span>';
+        echo '<span class="font-bad">Przepraszamy, spróbuj ponownie później.<span>';
     }
     
     mysqli_close($dataBase);
 }
 
 addToDataBase($stationID, $email);
-
 ?>

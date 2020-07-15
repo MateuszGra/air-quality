@@ -1,18 +1,7 @@
 <?php
+include 'send-mail.php';
+include 'hash.php';
 $stations = getStations();
-$users = getDataBase();
-
-function getDataBase() {
-    $dataBase = mysqli_connect('localhost','root','','air');
-    $results = mysqli_query($dataBase,"SELECT * FROM users");
-    $users = [];
-    while($row = mysqli_fetch_array($results)){
-        array_push($users, $row);
-    }
-    mysqli_close($dataBase);
-
-    return $users;
-}
 
 function ajax($url) {
     $ch = curl_init($url);
@@ -24,7 +13,7 @@ function ajax($url) {
     return $data;
 }
 
-function getStations(){
+function getStations() {
     $url = 'http://api.gios.gov.pl/pjp-api/rest/station/findAll';
     $data = ajax($url);
     $stationArray = json_decode($data, true);
@@ -50,19 +39,25 @@ function getAdress($id, $stations) {
     return $adress;
 }
 
-include 'send-mail.php';
-foreach ($users as $user) {
-    $stationID = $user['station'];
+$dataBase = mysqli_connect('localhost','root','','air');
+$results = mysqli_query($dataBase,"SELECT * FROM users");
+
+while($row = mysqli_fetch_array($results)){
+    $email = $row['email'];
+    $stationID = $row['station'];
     $quality = getQuality($stationID);
+    $hash = hashString($email);
     $subject = 'Indeks jakości powietrza: '.$quality;
     $message_body = '
     <p>Indeks jakości powietrza:</p><h2>'.$quality.'</h2>
     <p>Stacja pomiarowa:</p><h3>'.getAdress($stationID, $stations).'</h3>
     <p>Dokładne pomiary: <a href="air.mgrabowski.eu/?station='.$stationID.'">air.mgrabowski.eu/?station='.$stationID.'</a></p>
-    <i>Wiadomość została wygenerowana automatycznie, prosimy na nią nie odpowiadać. W przypadku rezygnacji z dalszego otrzymywania podobnych wiadomości kliknij w poniższy link: </i>';
+    <i>Wiadomość została wygenerowana automatycznie, prosimy na nią nie odpowiadać. W przypadku rezygnacji z dalszego otrzymywania podobnych wiadomości kliknij w link:
+    <a href="air.mgrabowski.eu/?unsub='.$hash.'">Wypisz się</a> 
+    </i>';
 
-    send($user['email'], $subject, $message_body);
+    send($email, $subject, $message_body);
 }
-
+mysqli_close($dataBase);
 
 ?>   
