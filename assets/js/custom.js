@@ -122,10 +122,57 @@ var loadQuality = function loadQuality() {
 };
 "use strict";
 
+var sensorsData = [];
+
 var decimal = function decimal(n, k) {
   var factor = Math.pow(10, k + 1);
   n = Math.round(Math.round(n * factor) / 10);
   return n / (factor / 10);
+};
+
+var sensorTemplate = function sensorTemplate(value, element) {
+  var maxValue;
+  var unit = 'µg/m3';
+
+  switch (element.param.idParam) {
+    case 1:
+      maxValue = 350;
+      break;
+
+    case 3:
+      maxValue = 50;
+      break;
+
+    case 5:
+      maxValue = 120;
+      break;
+
+    case 6:
+      maxValue = 200;
+      break;
+
+    case 8:
+      maxValue = 10000;
+      unit = 'mg/m3';
+      break;
+
+    case 10:
+      maxValue = 5;
+      break;
+
+    case 69:
+      maxValue = 25;
+      break;
+  }
+
+  var percent = Math.round(value / maxValue * 100);
+  var color = '';
+  if (percent < 40) color = 'bg-good';else if (percent < 100) color = 'bg-neutral';else color = 'bg-bad';
+  var sensor = {
+    percent: percent,
+    HTML: "\n        <div class=\"sensor\">\n            <p>\n                <span class=\"sensor__label\" data-id=\"".concat(element.param.idParam, "\">").concat(element.param.paramName, ": </span>\n                <span>").concat(decimal(value, 5), " ").concat(unit, "</span>\n            </p>\n            <div class=\"sensor__row\">\n                <div class=\"sensor__bar\">\n                    <div class=\"sensor__indicator ").concat(color, "\" style=\"width: ").concat(percent, "%\"></div>\n                </div>\n\n                <span class=\"sensor__percent ").concat(color, "\" >").concat(percent, "%</span>\n            </div>\n        </div>\n        ")
+  };
+  sensorsData.push(sensor);
 };
 
 var loadSensorData = function loadSensorData(id, index) {
@@ -138,7 +185,7 @@ var loadSensorData = function loadSensorData(id, index) {
     return response.text();
   }).then(function (response) {
     var sensorData = JSON.parse(response);
-    var value = 'brak danych';
+    var value = false;
 
     for (var i = 0; i < sensorData.values.length; i++) {
       if (sensorData.values[i].value != null) {
@@ -147,58 +194,17 @@ var loadSensorData = function loadSensorData(id, index) {
       }
     }
 
-    var maxValue;
-    var unit = 'µg/m3';
-
-    switch (sensors[index].param.idParam) {
-      case 1:
-        maxValue = 350;
-        break;
-
-      case 3:
-        maxValue = 50;
-        break;
-
-      case 5:
-        maxValue = 120;
-        break;
-
-      case 6:
-        maxValue = 200;
-        break;
-
-      case 8:
-        maxValue = 10000;
-        unit = 'mg/m3';
-        break;
-
-      case 10:
-        maxValue = 5;
-        break;
-
-      case 69:
-        maxValue = 25;
-        break;
-    }
-
-    var percent = Math.round(value / maxValue * 100);
-    var color = '';
-
-    if (percent < 40) {
-      color = 'bg-good';
-    } else if (percent < 100) {
-      color = 'bg-neutral';
-    } else {
-      color = 'bg-bad';
-    }
-
-    if (value != 'brak danych') {
-      htmlText += "\n            <div class=\"sensor\">\n                <p>\n                    <span class=\"sensor__label\" data-id=\"".concat(sensors[index].param.idParam, "\">").concat(sensors[index].param.paramName, ": </span>\n                    <span>").concat(decimal(value, 5), " ").concat(unit, "</span>\n                </p>\n                <div class=\"sensor__row\">\n                    <div class=\"sensor__bar\">\n                        <div class=\"sensor__indicator ").concat(color, "\" style=\"width: ").concat(percent, "%\"></div>\n                    </div>\n\n                    <span class=\"sensor__percent ").concat(color, "\" >").concat(percent, "%</span>\n                </div>\n            </div>\n            ");
-    }
-
+    if (value) sensorTemplate(value, sensors[index]);
     counter++;
 
     if (counter == sensors.length) {
+      sensorsData.sort(function (a, b) {
+        return b.percent - a.percent;
+      });
+      sensorsData.forEach(function (sensor) {
+        htmlText += sensor.HTML;
+      });
+      sensorsData.splice(0, sensorsData.length);
       htmlText += "\n                    </div>\n                </div>\n                ";
       dataWrapper.innerHTML = htmlText;
       switchImage();
@@ -270,7 +276,8 @@ var closeBtn = document.querySelector('.popup__close');
 var popup = document.querySelector('.popup');
 
 var tooglePopup = function tooglePopup() {
-  return popup.classList.toggle('active');
+  popup.classList.toggle('active');
+  returnHTML.innerHTML = '';
 };
 
 closeBtn.addEventListener('click', tooglePopup);

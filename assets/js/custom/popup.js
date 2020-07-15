@@ -2,7 +2,10 @@ const showBtn = document.querySelector('.popup__btn');
 const closeBtn = document.querySelector('.popup__close');
 const popup = document.querySelector('.popup');
 
-const tooglePopup = () => popup.classList.toggle('active');
+const tooglePopup = () => {
+    popup.classList.toggle('active');
+    returnHTML.innerHTML = '';
+}
 
 closeBtn.addEventListener('click', tooglePopup);
 closeBtn.addEventListener('touch', tooglePopup);

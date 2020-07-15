@@ -132,7 +132,7 @@ span { font-weight: 300; }
 
 .form__input-label { max-width: 100%; position: relative; margin-top: 2rem; }
 
-.form__return { margin-top: 1rem; font-size: 1.4rem; min-height: 2rem; }
+.form__return { margin-top: 1rem; font-size: 1.4rem; min-height: 2rem; text-align: center; }
 
 .form__placeholder { position: absolute; left: 2rem; top: 50%; -webkit-transform: translateY(-50%); transform: translateY(-50%); will-change: transform; -webkit-transition: -webkit-transform 0.4s; transition: -webkit-transform 0.4s; transition: transform 0.4s; transition: transform 0.4s, -webkit-transform 0.4s; -webkit-transform-origin: left; transform-origin: left; font-size: 1.4rem; }
 

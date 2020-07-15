@@ -69,7 +69,7 @@ h1 br,h2 br,h3 br,h4 br,h5 br,h6 br,p br{display:none}
 }.form{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin-top:2rem}
 .form__input{height:3rem;width:22rem;max-width:100%;border-radius:2rem;background:var(--color-deep);padding-left:2rem;color:var(--color-font);font-size:1.2rem;font-family:var(--font-family);font-weight:300}
 .form__input-label{max-width:100%;position:relative;margin-top:2rem}
-.form__return{margin-top:1rem;font-size:1.4rem;min-height:2rem}
+.form__return{margin-top:1rem;font-size:1.4rem;min-height:2rem;text-align:center}
 .form__placeholder{position:absolute;left:2rem;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);will-change:transform;-webkit-transition:-webkit-transform .4s;transition:-webkit-transform .4s;transition:transform .4s;transition:transform .4s,-webkit-transform .4s;-webkit-transform-origin:left;transform-origin:left;font-size:1.4rem}
 .form__placeholder.active{-webkit-transform:scale(0.7) translateY(-5rem);transform:scale(0.7) translateY(-5rem)}
 .form__checkbox-label{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;margin-top:1.5rem;width:70%;cursor:pointer}
