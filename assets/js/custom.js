@@ -1,7 +1,7 @@
 "use strict";
 
 var form = document.querySelector('.form');
-var returnHTML = document.querySelector('.form__return');
+var returnHTML = document.querySelector('.form-return-js');
 var vError;
 
 var createTooltip = function createTooltip(text, parent) {
@@ -271,25 +271,40 @@ var loadStacions = function loadStacions() {
 };
 "use strict";
 
-var showBtn = document.querySelector('.popup__btn');
-var closeBtn = document.querySelector('.popup__close');
-var popup = document.querySelector('.popup');
+var showBtn = document.querySelectorAll('.popup-show-js');
+var closeBtn = document.querySelectorAll('.popup-close-js');
 
-var tooglePopup = function tooglePopup() {
-  popup.classList.toggle('active');
+var openPopup = function openPopup(id) {
+  var popup = document.getElementById(id);
+  popup.classList.add('active');
+};
+
+var closePopup = function closePopup(id) {
+  var popup = document.getElementById(id);
+  popup.classList.remove('active');
   returnHTML.innerHTML = '';
 };
 
-closeBtn.addEventListener('click', tooglePopup);
-closeBtn.addEventListener('touch', tooglePopup);
-showBtn.addEventListener('click', tooglePopup);
-showBtn.addEventListener('touch', tooglePopup);
+closeBtn.forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    closePopup(btn.dataset.id);
+  });
+});
+showBtn.forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    openPopup(btn.dataset.id);
+  });
+});
 document.addEventListener('click', function (e) {
-  if (e.target.matches('.popup')) tooglePopup();
+  if (e.target.matches('.popup')) {
+    closePopup(e.target.dataset.id);
+  }
 }, false);
 document.addEventListener('keydown', function (event) {
   if (event.keyCode == 27) {
-    popup.classList.remove('active');
+    closeBtn.forEach(function (btn) {
+      closePopup(btn.dataset.id);
+    });
   }
 });
 "use strict";
@@ -357,9 +372,12 @@ themeBtn.addEventListener('touch', toggleTheme);
 "use strict";
 
 var params = new URLSearchParams(window.location.search);
+var unsubHTML = document.querySelector('.unsub-return-js');
 var unsub = params.get('unsub');
 
 if (unsub) {
+  openPopup('unsub');
+  unsubHTML.innerHTML = "\n    <div class=\"loader loader--margin\">\n        <img class=\"loader__cloud-1\" src=\"assets/images/Loader1.svg\">\n        <img class=\"loader__cloud-2\" src=\"assets/images/Loader2.svg\">\n    </div>";
   var data = new FormData();
   data.append('hash', unsub);
   fetch('inc/unsub.php', {
@@ -368,9 +386,9 @@ if (unsub) {
   }).then(function (response) {
     return response.text();
   }).then(function (response) {
-    console.log(response);
+    unsubHTML.innerHTML = response;
   }).catch(function (error) {
-    return console.log(error);
+    unsubHTML.innerHTML = response;
   });
 }
 "use strict";

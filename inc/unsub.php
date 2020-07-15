@@ -18,11 +18,11 @@ function remove($hash) {
 }
 
 if (remove($hash)) {
-    echo '<p>Adres mailowy został usunięty z bazdy danych.</p>'; 
+    echo '<h1 class="popup__title">Adres mailowy został usunięty z bazdy danych.</h1>'; 
 } else {
     echo '
-    <p>Wystąpił błąd, ale nic się nie martw, możesz poprosić administratora o ręczne usunięcie danych z bazy.</p>
-    <p>Kontakt: <a href="mailto:mxgrabowski@gmail.com">mxgrabowski@gmail.com</a></p>
+    <h1 class="popup__title"> <span class="font-bad">Wystąpił błąd</span>, ale nic się nie martw, możesz poprosić administratora o ręczne usunięcie danych z bazy.</h1>
+    <p class="unsub__contact">Kontakt: <a class="link" href="mailto:mxgrabowski@gmail.com">mxgrabowski@gmail.com</a></p>
     ';
 }
 ?>

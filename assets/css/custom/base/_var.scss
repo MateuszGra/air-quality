@@ -140,3 +140,9 @@ $base-margin: 0 !default;
 .bold {
     font-weight: 500;
 }
+
+.link {
+    &:hover {
+        text-decoration: underline;
+    }
+}

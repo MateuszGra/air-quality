@@ -1,5 +1,5 @@
 const form = document.querySelector('.form');
-const returnHTML = document.querySelector('.form__return');
+const returnHTML = document.querySelector('.form-return-js');
 let vError;
 
 const createTooltip = (text, parent) => {

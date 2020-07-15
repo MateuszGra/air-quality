@@ -50,7 +50,7 @@
         <div class="search__btn-2"></div>
         <div class="search__btn-3"></div>
       </div>
-      <button class="popup__btn btn-shadow btn-animation">
+      <button class="popup__btn btn-shadow btn-animation popup-show-js" data-id="sub">
         <svg class="popup__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
           <path
             d="M24 0l-6 22-8.129-7.239 7.802-8.234-10.458 7.227-7.215-1.754 24-12zm-15 16.668v7.332l3.258-4.431-3.258-2.901z" />
@@ -60,7 +60,7 @@
     <section class="data">
       <!-- AJAX -->
     </section>
-    <section class="popup">
+    <section class="popup" id="sub" data-id="sub">
       <div class="popup__content box-shadow">
         <h1 class="popup__title">Zapisz się do subskrypcji, otrzymuj codziennie wiadomość z informacją o jakości
           powietrza z
@@ -78,15 +78,32 @@
               w celu otrzymywania informacji w formie darmowej subskrypcji.
             </span>
           </label>
-          <div class="form__submit-shadow btn-shadow btn-animation">
+          <div class="form__submit-shadow btn-shadow">
             <button class="form__submit">Zapisz się</button>
           </div>
-          <div class="form__return">
+          <div class="form__return form-return-js">
             <!-- AJAX -->
           </div>
         </form>
         <div class="popup__close-shadow btn-shadow btn-animation">
-          <button class="popup__close">
+          <button class="popup__close popup-close-js" data-id="sub">
+            <svg class="popup__close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              viewBox="0 0 24 24">
+              <path
+                d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+    <section class="popup" id="unsub" data-id="unsub">
+      <div class="popup__content box-shadow">
+        <div class="form__return unsub-return-js">
+          <!-- AJAX -->
+        </div>
+        </form>
+        <div class="popup__close-shadow btn-shadow btn-animation">
+          <button class="popup__close popup-close-js" data-id="unsub">
             <svg class="popup__close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
               viewBox="0 0 24 24">
               <path

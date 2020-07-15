@@ -1,7 +1,14 @@
 const params = new URLSearchParams(window.location.search);
+const unsubHTML = document.querySelector('.unsub-return-js')
 const unsub = params.get('unsub');
 
 if (unsub) {
+    openPopup('unsub');
+    unsubHTML.innerHTML = `
+    <div class="loader loader--margin">
+        <img class="loader__cloud-1" src="assets/images/Loader1.svg">
+        <img class="loader__cloud-2" src="assets/images/Loader2.svg">
+    </div>`
     const data = new FormData();
     data.append('hash', unsub);
 
@@ -11,7 +18,9 @@ if (unsub) {
         })
         .then(response => response.text())
         .then(response => {
-            console.log(response);
+            unsubHTML.innerHTML = response;
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+            unsubHTML.innerHTML = response;
+        });
 }
