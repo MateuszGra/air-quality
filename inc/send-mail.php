@@ -31,8 +31,6 @@ function send($email, $subject, $message_body) {
 
       $mail->send();
 
-    } catch (Exception $e) {
-        echo 'Błąd podczas wysyłania wiadomości';
-    }
+    } catch (Exception $e) {}
 }
 ?>

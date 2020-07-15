@@ -1,12 +1,26 @@
 <?php
+include 'data-base.php';
 $email = strval($_POST['email']);
 $stationID = $_POST['id'];
 
-function addToDataBase($stationID, $email) {
-    include 'data-base.php';
+function validation($email, $dataBase){
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo '<span class="font-bad bold">Błędny adres email</span>';
+        return false;
+    }
+
+    $check = mysqli_query($dataBase, "SELECT * FROM users WHERE email='$email'"); 
+    if(mysqli_num_rows($check) > 0){
+        echo '<span class="font-bad bold">Adres email istnieje już w bazie danych</span>';
+        return false;
+    }
+
+    return true;
+}
+
+function addToDataBase($stationID, $email, $dataBase) {
     include 'hash.php';
     $hash = hashString($email);
-
     $sql = 'INSERT INTO users (station, email)
     VALUES ("'.$stationID.'", "'.$email.'")';
     
@@ -16,7 +30,7 @@ function addToDataBase($stationID, $email) {
         $message_body = '
         <h2>Gratulację,</h2>
         <h3>Właśnie zapisałeś się do subskrypcji.</h3>
-        <p>Będziesz od teraz otrzymywać powiadomieniem o niskim indeksie jakości powietrza z wybranej stacji.</p>
+        <p>Będziesz od teraz otrzymywać powiadomienie o złej jakości powietrza z wybranej stacji.</p>
         <p>Jeżeli chcesz sprawdzać informacje częściej, zawsze możesz skorzystać z strony: <a href="air.mgrabowski.eu">air.mgrabowski.eu</a>.</p>
         <i>Wiadomość została wygenerowana automatycznie, prosimy na nią nie odpowiadać. W przypadku rezygnacji z dalszego otrzymywania podobnych wiadomości kliknij w link: 
         <a href="air.mgrabowski.eu/?unsub='.$hash.'">Wypisz się</a> 
@@ -30,6 +44,5 @@ function addToDataBase($stationID, $email) {
     
     mysqli_close($dataBase);
 }
-
-addToDataBase($stationID, $email);
+if(validation($email, $dataBase)) addToDataBase($stationID, $email, $dataBase);
 ?>

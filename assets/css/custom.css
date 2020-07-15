@@ -134,7 +134,7 @@ span { font-weight: 300; }
 
 .form__input-label { max-width: 100%; position: relative; margin-top: 2rem; }
 
-.form__return { margin-top: 1rem; font-size: 1.4rem; min-height: 2rem; }
+.form__return { text-align: center; margin-top: 1rem; font-size: 1.4rem; min-height: 2rem; }
 
 .form__placeholder { position: absolute; left: 2rem; top: 50%; -webkit-transform: translateY(-50%); transform: translateY(-50%); will-change: transform; -webkit-transition: -webkit-transform 0.4s; transition: -webkit-transform 0.4s; transition: transform 0.4s; transition: transform 0.4s, -webkit-transform 0.4s; -webkit-transform-origin: left; transform-origin: left; font-size: 1.4rem; }
 
@@ -323,4 +323,12 @@ span { font-weight: 300; }
 
 @media (max-width: 600px) { .theme-switch { margin: 2rem 5% 0 0; } }
 
-.unsub__contact { margin-top: 2rem; }
+.unsub__contact { margin-top: 2rem; text-align: center; }
+
+.unsub__content { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; text-align: center; }
+
+.unsub__title { font-size: 2.5rem; margin-top: 1.5rem; }
+
+.unsub__subtitle { font-size: 1.6rem; margin-top: 1rem; }
+
+@media (max-width: 600px) { .unsub__contact { margin-top: 1rem; } }

@@ -1,5 +1,33 @@
 .unsub {
     &__contact {
         margin-top: 2rem;
+        text-align: center;
     }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    &__title {
+        font-size: 2.5rem;
+        margin-top: 1.5rem;
+    }
+
+    &__subtitle {
+        font-size: 1.6rem;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .unsub {
+        &__contact {
+            margin-top: 1rem;
+        }
+    }
+
 }

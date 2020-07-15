@@ -62,8 +62,7 @@
     </section>
     <section class="popup" id="sub" data-id="sub">
       <div class="popup__content box-shadow">
-        <h1 class="popup__title">Zapisz się do subskrypcji, otrzymuj codziennie wiadomość z informacją o jakości
-          powietrza z
+        <h1 class="popup__title">Zapisz się do subskrypcji, otrzymuj mailowe powiadomienie o złej jakości powietrza z
           wybranej stacji.</h1>
         <form class="form">
           <p class="popup__station">Stacja: <span class="js-station bold"></span></p>
@@ -97,11 +96,14 @@
       </div>
     </section>
     <section class="popup" id="unsub" data-id="unsub">
-      <div class="popup__content box-shadow">
+      <div class="popup__content unsub__content box-shadow">
         <div class="form__return unsub-return-js">
           <!-- AJAX -->
         </div>
         </form>
+        <div class="form__submit-shadow btn-shadow btn-animation">
+          <button class="form__submit popup-close-js" data-id="unsub">Zamknij</button>
+        </div>
         <div class="popup__close-shadow btn-shadow btn-animation">
           <button class="popup__close popup-close-js" data-id="unsub">
             <svg class="popup__close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
