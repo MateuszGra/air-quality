@@ -1,4 +1,5 @@
 const form = document.querySelector('.form');
+const returnHTML = document.querySelector('.form__return');
 let vError;
 
 const createTooltip = (text, parent) => {
@@ -34,7 +35,6 @@ const validation = () => {
 
 const addToDataBase = () => {
     const email = document.querySelector('.form__input');
-    const returnHTML = document.querySelector('.form__return');
     returnHTML.innerHTML = `
     <div class="loader loader--margin">
         <img class="loader__cloud-1 small" src="assets/images/Loader1.svg">
@@ -53,7 +53,7 @@ const addToDataBase = () => {
         .then(response => {
             returnHTML.innerHTML = response;
             form.reset();
-            placeholder.classList.remove('active')
+            placeholder.classList.remove('active');
         })
         .catch(error => console.log(error));
 }

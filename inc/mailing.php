@@ -1,8 +1,8 @@
 <?php
 $stations = getStations();
-$users = detDataBase();
+$users = getDataBase();
 
-function detDataBase() {
+function getDataBase() {
     $dataBase = mysqli_connect('localhost','root','','air');
     $results = mysqli_query($dataBase,"SELECT * FROM users");
     $users = [];
@@ -51,52 +51,18 @@ function getAdress($id, $stations) {
     return $adress;
 }
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require '../src/Exception.php';
-require '../src/PHPMailer.php';
-require '../src/SMTP.php';
-
-function sendMail($stationID, $email, $stations) {
+include 'send-mail.php';
+foreach ($users as $user) {
+    $stationID = $user['station'];
     $quality = getQuality($stationID);
     $subject = 'Indeks jakości powietrza: '.$quality;
     $message_body = '
-    <p>Stacja pomiarowa:</p><h3>'.getAdress($stationID, $stations).'</h3>
     <p>Indeks jakości powietrza:</p><h2>'.$quality.'</h2>
+    <p>Stacja pomiarowa:</p><h3>'.getAdress($stationID, $stations).'</h3>
     <p>Dokładne pomiary: <a href="air.mgrabowski.eu/?station='.$stationID.'">air.mgrabowski.eu/?station='.$stationID.'</a></p>
     <i>Wiadomość została wygenerowana automatycznie, prosimy na nią nie odpowiadać. W przypadku rezygnacji z dalszego otrzymywania podobnych wiadomości kliknij w poniższy link: </i>';
-    
-    $mail = new PHPMailer(true);
-          try {
-            $mail->SMTPDebug = 0;
-            $mail->isSMTP();
-            $mail->CharSet = "UTF-8";
-            $mail->IsHTML(true);
-    
-            $mail->Host       = 'mail23.mydevil.net';
-            $mail->SMTPAuth   = true;
-            $mail->Username   = 'test@mgrabowski.eu';
-            $mail->Password   = 'Test123';
-            $mail->SMTPSecure = 'ssl';
-            $mail->Port       = 465;
-    
-            $mail->setFrom('test@mgrabowski.eu');
-            $mail->addAddress($email);
-    
-            $mail->isHTML(true);
-            $mail->Subject = $subject;
-            $mail->Body    = $message_body;
-    
-            $mail->send();
-            echo 'Message has been sent<br>';
-          } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}<br>";
-          }
-}
 
-foreach ($users as $user) {
-    sendMail($user['station'], $user['email'], $stations);
+    send($user['email'], $subject, $message_body);
 }
 
 
