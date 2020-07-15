@@ -20,9 +20,9 @@ const loadStacions = () => {
             method: "POST",
             body: data,
         })
-        .then(response => response.text())
+        .then(response => response.json())
         .then(response => {
-            stations = JSON.parse(response);
+            stations = response;
 
             createSelect(stations);
             loadSelectValue();

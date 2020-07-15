@@ -12,9 +12,9 @@ const loadQuality = () => {
             method: "POST",
             body: data,
         })
-        .then(response => response.text())
+        .then(response => response.json())
         .then(response => {
-            quality = JSON.parse(response);
+            quality = response;
             let color = '';
 
             switch (quality.stIndexLevel.indexLevelName) {

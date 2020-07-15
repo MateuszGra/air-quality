@@ -70,9 +70,9 @@ const loadSensorData = (id, index) => {
             method: "POST",
             body: data,
         })
-        .then(response => response.text())
+        .then(response => response.json())
         .then(response => {
-            const sensorData = JSON.parse(response);
+            const sensorData = response;
             let value = false;
 
             for (let i = 0; i < sensorData.values.length; i++) {

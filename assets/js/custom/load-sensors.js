@@ -6,9 +6,9 @@ const loadSensors = () => {
             method: "POST",
             body: data,
         })
-        .then(response => response.text())
+        .then(response => response.json())
         .then(response => {
-            sensors = JSON.parse(response);
+            sensors = response;
             htmlText += `<div class="box box--right box-shadow">`
 
             sensors.forEach((sensor, index) => {

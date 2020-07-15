@@ -92,9 +92,9 @@ var loadQuality = function loadQuality() {
     method: "POST",
     body: data
   }).then(function (response) {
-    return response.text();
+    return response.json();
   }).then(function (response) {
-    quality = JSON.parse(response);
+    quality = response;
     var color = '';
 
     switch (quality.stIndexLevel.indexLevelName) {
@@ -182,9 +182,9 @@ var loadSensorData = function loadSensorData(id, index) {
     method: "POST",
     body: data
   }).then(function (response) {
-    return response.text();
+    return response.json();
   }).then(function (response) {
-    var sensorData = JSON.parse(response);
+    var sensorData = response;
     var value = false;
 
     for (var i = 0; i < sensorData.values.length; i++) {
@@ -222,9 +222,9 @@ var loadSensors = function loadSensors() {
     method: "POST",
     body: data
   }).then(function (response) {
-    return response.text();
+    return response.json();
   }).then(function (response) {
-    sensors = JSON.parse(response);
+    sensors = response;
     htmlText += "<div class=\"box box--right box-shadow\">";
     sensors.forEach(function (sensor, index) {
       loadSensorData(sensor.id, index);
@@ -259,9 +259,9 @@ var loadStacions = function loadStacions() {
     method: "POST",
     body: data
   }).then(function (response) {
-    return response.text();
+    return response.json();
   }).then(function (response) {
-    stations = JSON.parse(response);
+    stations = response;
     createSelect(stations);
     loadSelectValue();
     loadQuality();
