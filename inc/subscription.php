@@ -3,7 +3,7 @@ $email = strval($_POST['email']);
 $stationID = $_POST['id'];
 
 function addToDataBase($stationID, $email) {
-    $dataBase = mysqli_connect('localhost','root','','air');
+    include 'data-base.php';
     include 'hash.php';
     $hash = hashString($email);
 

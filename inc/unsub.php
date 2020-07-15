@@ -2,7 +2,7 @@
 $hash = $_POST['hash'];
 
 function remove($hash) {
-    $dataBase = mysqli_connect('localhost','root','','air');
+    include 'data-base.php';
     $results = mysqli_query($dataBase,"SELECT * FROM users");
     while($row = mysqli_fetch_array($results)){
         $email= $row['email'];

@@ -38,8 +38,7 @@ function getAdress($id, $stations) {
 
     return $adress;
 }
-
-$dataBase = mysqli_connect('localhost','root','','air');
+include 'data-base.php';
 $results = mysqli_query($dataBase,"SELECT * FROM users");
 
 while($row = mysqli_fetch_array($results)){
@@ -59,5 +58,4 @@ while($row = mysqli_fetch_array($results)){
     send($email, $subject, $message_body);
 }
 mysqli_close($dataBase);
-
 ?>   
