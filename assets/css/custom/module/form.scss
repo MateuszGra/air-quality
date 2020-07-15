@@ -10,7 +10,7 @@
         max-width: 100%;
         border-radius: 2rem;
         background: var(--color-deep);
-        padding-left: 2rem;
+        padding: 0 2rem;
         color: var(--color-font);
         font-size: 1.2rem;
         font-family: var(--font-family);
@@ -27,7 +27,6 @@
         text-align: center;
         margin-top: 1rem;
         font-size: 1.4rem;
-        min-height: 2rem;
     }
 
     &__placeholder {
@@ -128,10 +127,27 @@
 
 }
 
+
+@media (max-width: 1000px) {
+    .form {
+        &__input {
+            font-size: 1.35rem;
+        }
+
+        &__placeholder {
+            font-size: 1.35rem;
+        }
+    }
+}
+
 @media (max-width: 600px) {
     .form {
         &__checkbox-label {
             width: 100%;
+        }
+
+        &__return {
+            font-size: 1.2rem;
         }
     }
 }
