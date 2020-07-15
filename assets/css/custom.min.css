@@ -76,7 +76,7 @@ h1 br,h2 br,h3 br,h4 br,h5 br,h6 br,p br{display:none}
 .form__checkbox-label{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;margin-top:1.5rem;width:70%;cursor:pointer}
 .form__checkbox{-webkit-appearance:none;-moz-appearance:none;appearance:none;background:var(--color-deep);min-width:1.5rem;min-height:1.5rem;width:1.5rem;height:1.5rem;border-radius:3px;margin:.3rem 1rem 0 0;will-change:background-color;-webkit-transition:background-color .3s;transition:background-color .3s;cursor:pointer}
 .form__checkbox:checked{background:var(--color-good)}
-.form__submit{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;color:var(--color-bg);background:var(--color-good);padding:1rem 2rem;font-size:1.2rem;border-radius:3.8rem}
+.form__submit{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;background:var(--color-bg);padding:1rem 2rem;font-size:1.2rem;border-radius:3.8rem}
 .form__submit-shadow{margin-top:1.5rem;z-index:0}
 .form__submit-shadow::after{border-radius:3.8rem}
 .form__submit-shadow::before{border-radius:3.8rem}
