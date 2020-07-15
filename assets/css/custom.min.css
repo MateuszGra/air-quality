@@ -58,7 +58,7 @@ h1 br,h2 br,h3 br,h4 br,h5 br,h6 br,p br{display:none}
 .box--left{margin:0 0 3.5rem 0}
 }@media(max-width:600px){.box{padding:3rem 10%}
 .box--left{margin:0 0 3rem 0}
-}.data{margin:5rem 0}
+}.data{margin:4.5rem 0}
 .data__wrapper{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;-webkit-animation:show 1s;animation:show 1s}
 @-webkit-keyframes show{0%{opacity:0}
 100%{opacity:1}

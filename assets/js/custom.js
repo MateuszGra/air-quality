@@ -67,9 +67,6 @@ form.addEventListener('submit', function (e) {
 document.addEventListener('click', function () {
   if (vError) vError.remove();
 });
-document.addEventListener('touch', function () {
-  if (vError) vError.remove();
-});
 "use strict";
 
 var input = document.querySelector('.form__input');
@@ -317,9 +314,6 @@ select.addEventListener('focusout', function () {
 select.addEventListener('click', function () {
   icon.classList.toggle('active');
 });
-select.addEventListener('touch', function () {
-  icon.classList.toggle('active');
-});
 "use strict";
 
 var switchImage = function switchImage() {
@@ -368,7 +362,6 @@ if (localStorage.getItem('theme') === 'theme-dark') {
 }
 
 themeBtn.addEventListener('click', toggleTheme);
-themeBtn.addEventListener('touch', toggleTheme);
 "use strict";
 
 var params = new URLSearchParams(window.location.search);

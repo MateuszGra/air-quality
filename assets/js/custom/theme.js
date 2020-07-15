@@ -26,4 +26,3 @@ if (localStorage.getItem('theme') === 'theme-dark') {
 }
 
 themeBtn.addEventListener('click', toggleTheme);
-themeBtn.addEventListener('touch', toggleTheme);

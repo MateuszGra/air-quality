@@ -68,7 +68,3 @@ form.addEventListener('submit', (e) => {
 document.addEventListener('click', () => {
     if (vError) vError.remove();
 })
-
-document.addEventListener('touch', () => {
-    if (vError) vError.remove();
-})

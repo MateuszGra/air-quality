@@ -8,7 +8,3 @@ select.addEventListener('focusout', () => {
 select.addEventListener('click', () => {
     icon.classList.toggle('active')
 });
-
-select.addEventListener('touch', () => {
-    icon.classList.toggle('active')
-});
