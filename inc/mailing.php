@@ -14,7 +14,6 @@ function getDataBase() {
     return $users;
 }
 
-
 function ajax($url) {
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
