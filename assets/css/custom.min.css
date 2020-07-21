@@ -194,5 +194,7 @@ h1 br,h2 br,h3 br,h4 br,h5 br,h6 br,p br{display:none}
 .unsub__content{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;text-align:center}
 .unsub__title{font-size:2.5rem;margin-top:1.5rem}
 .unsub__subtitle{font-size:1.6rem;margin-top:1rem}
+.unsub__shadow{margin-top:2rem}
 @media(max-width:600px){.unsub__contact{margin-top:1rem}
+.unsub__shadow{margin-top:1rem}
 }

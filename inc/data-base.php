@@ -1,7 +1,11 @@
 <?php
-    $server = 'localhost';
-    $base = 'root';
+    $dsn = 'mysql:dbname=air;host=localhost';
+    $user = 'root';
     $password = '';
-    $db = 'air';
-    $dataBase = mysqli_connect($server, $base, $password, $db);
+
+    try {
+        $dbh = new PDO($dsn, $user, $password);
+    } catch (PDOException $e) {
+        echo 'Brak połączenia z bazą. ';
+    }
 ?>

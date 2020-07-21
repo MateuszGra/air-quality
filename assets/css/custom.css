@@ -355,4 +355,7 @@ span { font-weight: 300; }
 
 .unsub__subtitle { font-size: 1.6rem; margin-top: 1rem; }
 
-@media (max-width: 600px) { .unsub__contact { margin-top: 1rem; } }
+.unsub__shadow { margin-top: 2rem; }
+
+@media (max-width: 600px) { .unsub__contact { margin-top: 1rem; }
+  .unsub__shadow { margin-top: 1rem; } }
