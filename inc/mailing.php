@@ -48,14 +48,12 @@
     foreach($data as $row) {
         $stationID = $row['station'];
 
-        // if (array_key_exists(strval($stationID), $stationsData)) {
-        //     $quality = $stationsData[$stationID];
-        // } else {
-        //     $quality = getQuality($stationID);
-        //     $stationsData[$stationID] = $quality;
-        // }
-
-        $quality = 'Dostateczny';
+        if (array_key_exists(strval($stationID), $stationsData)) {
+            $quality = $stationsData[$stationID];
+        } else {
+            $quality = getQuality($stationID);
+            $stationsData[$stationID] = $quality;
+        }
 
         if ($quality === 'Dostateczny' || $quality === 'Zły' || $quality === 'Bardzo zły') {
             switch ($quality) {
