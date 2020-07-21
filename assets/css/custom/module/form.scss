@@ -9,9 +9,9 @@
         width: 22rem;
         max-width: 100%;
         border-radius: 2rem;
-        background: var(--color-deep);
         padding: 0 2rem;
         color: var(--color-font);
+        border: 2px solid var(--color-font);
         font-size: 1.2rem;
         font-family: var(--font-family);
         font-weight: 300;
@@ -31,16 +31,18 @@
 
     &__placeholder {
         position: absolute;
-        left: 2rem;
+        left: 1.5rem;
         top: 50%;
         transform: translateY(-50%);
         will-change: transform;
         transition: transform 0.4s;
         transform-origin: left;
         font-size: 1.4rem;
+        padding: 0 0.5rem;
+        background: var(--color-bg);
 
         &.active {
-            transform: scale(0.7) translateY(-5rem);
+            transform: scale(0.7) translateY(-3.5rem);
         }
     }
 
@@ -54,7 +56,7 @@
 
     &__checkbox {
         appearance: none;
-        background: var(--color-deep);
+        border: 2px solid var(--color-font);
         min-width: 1.5rem;
         min-height: 1.5rem;
         width: 1.5rem;
@@ -66,7 +68,8 @@
         cursor: pointer;
 
         &:checked {
-            background: var(--color-good);
+            background: url(../images/check.svg) no-repeat center;
+            background-size: 1.2rem;
         }
     }
 

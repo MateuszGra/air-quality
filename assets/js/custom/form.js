@@ -34,6 +34,7 @@ const validation = () => {
 }
 
 const addToDataBase = () => {
+    returnHTML.innerHTML = '';
     const email = document.querySelector('.form__input');
     const loader = document.querySelector('.form__loader');
     loader.classList.add('active');
