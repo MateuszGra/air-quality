@@ -196,5 +196,5 @@ h1 br,h2 br,h3 br,h4 br,h5 br,h6 br,p br{display:none}
 .unsub__subtitle{font-size:1.6rem;margin-top:1rem}
 .unsub__shadow{margin-top:2rem}
 @media(max-width:600px){.unsub__contact{margin-top:1rem}
-.unsub__shadow{margin-top:1rem}
+.unsub__shadow{margin-top:1.5rem}
 }
