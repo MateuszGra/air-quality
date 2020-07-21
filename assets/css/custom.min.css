@@ -77,11 +77,22 @@ h1 br,h2 br,h3 br,h4 br,h5 br,h6 br,p br{display:none}
 .form__checkbox{-webkit-appearance:none;-moz-appearance:none;appearance:none;background:var(--color-deep);min-width:1.5rem;min-height:1.5rem;width:1.5rem;height:1.5rem;border-radius:3px;margin:.3rem 1rem 0 0;will-change:background-color;-webkit-transition:background-color .3s;transition:background-color .3s;cursor:pointer}
 .form__checkbox:checked{background:var(--color-good)}
 .form__submit{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;background:var(--color-bg);padding:1rem 2rem;font-size:1.2rem;border-radius:3.8rem}
-.form__submit-shadow{margin-top:1.5rem;z-index:0}
+.form__submit-shadow{z-index:0}
 .form__submit-shadow::after{border-radius:3.8rem}
 .form__submit-shadow::before{border-radius:3.8rem}
 .form__submit-shadow:hover .form__submit{-webkit-transform:translate(-1px,-1px);transform:translate(-1px,-1px)}
-.form__tooltip{position:absolute;color:white;background:var(--color-bad);padding:.5rem 1rem;border-radius:1rem;-webkit-transform:translate(-50%,-120%);transform:translate(-50%,-120%);top:-3px;left:50%;white-space:nowrap}
+.form__submit-wrapper{position:relative;margin-top:1.5rem}
+.form__loader{position:absolute;right:-5.5rem;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);will-change:opacity;-webkit-transition:.3s opacity;transition:.3s opacity;opacity:0}
+.form__loader .loader__cloud-1{-webkit-animation-play-state:paused;animation-play-state:paused}
+.form__loader .loader__cloud-2{-webkit-animation-play-state:paused;animation-play-state:paused}
+.form__loader.active{opacity:1}
+.form__loader.active .loader__cloud-1{-webkit-animation-play-state:running;animation-play-state:running}
+.form__loader.active .loader__cloud-2{-webkit-animation-play-state:running;animation-play-state:running}
+@-webkit-keyframes spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}
+100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}
+}@keyframes spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}
+100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}
+}.form__tooltip{position:absolute;color:white;background:var(--color-bad);padding:.5rem 1rem;border-radius:1rem;-webkit-transform:translate(-50%,-120%);transform:translate(-50%,-120%);top:-3px;left:50%;white-space:nowrap}
 .form__tooltip::after{content:'';position:absolute;width:0;height:0;bottom:-9px;left:10%;border-left:7px solid transparent;border-right:7px solid transparent;border-top:10px solid var(--color-bad)}
 @media(max-width:1000px){.form__input{font-size:1.35rem}
 .form__placeholder{font-size:1.35rem}

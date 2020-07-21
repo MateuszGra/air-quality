@@ -79,7 +79,6 @@
         border-radius: 3.8rem;
 
         &-shadow {
-            margin-top: 1.5rem;
             z-index: 0;
 
             &::after {
@@ -99,6 +98,54 @@
             }
         }
 
+        &-wrapper{
+            position: relative;
+            margin-top: 1.5rem;
+        }
+
+    }
+
+    &__loader{
+        position: absolute;
+        right: -5.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        will-change: opacity;
+        transition: 0.3s opacity;
+        opacity: 0;
+
+        & .loader__cloud-1{
+            animation-play-state: paused;
+        }
+
+        
+        & .loader__cloud-2{
+            animation-play-state: paused;
+        }
+
+        &.active{
+            opacity: 1;
+
+            & .loader__cloud-1{
+                animation-play-state: running;
+            }
+    
+            
+            & .loader__cloud-2{
+                animation-play-state: running;
+            }
+        }
+    }
+
+
+    @keyframes spin {
+        0%{
+            transform: rotate(0deg);
+        }
+
+        100%{
+            transform: rotate(360deg);
+        }
     }
 
     &__tooltip {
