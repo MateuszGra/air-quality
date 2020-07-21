@@ -48,12 +48,14 @@
     foreach($data as $row) {
         $stationID = $row['station'];
 
-        if (array_key_exists(strval($stationID), $stationsData)) {
-            $quality = $stationsData[$stationID];
-        } else {
-            $quality = getQuality($stationID);
-            $stationsData[$stationID] = $quality;
-        }
+        // if (array_key_exists(strval($stationID), $stationsData)) {
+        //     $quality = $stationsData[$stationID];
+        // } else {
+        //     $quality = getQuality($stationID);
+        //     $stationsData[$stationID] = $quality;
+        // }
+
+        $quality = 'Dostateczny';
 
         if ($quality === 'Dostateczny' || $quality === 'Zły' || $quality === 'Bardzo zły') {
             switch ($quality) {
@@ -72,11 +74,11 @@
             $hash = hashString($email);
             $subject = 'Uwaga! Indeks jakości powietrza: '.$quality;
             $message_body = '
-            <p>Indeks jakości powietrza:</p><h2>'.$quality.'</h2>'.$info.'
+            <p>Indeks jakości powietrza:</p><h1>'.$quality.'</h1>'.$info.'
             <p>Stacja pomiarowa:</p><h3>'.getAdress($stationID, $stations).'</h3>
-            <p>Dokładne pomiary: <a href="air.mgrabowski.eu/?station='.$stationID.'">air.mgrabowski.eu/?station='.$stationID.'</a></p>
+            <p>Dokładne pomiary: <a href="air.mgrabowski.eu/?station='.$stationID.'">air.mgrabowski.eu/?station='.$stationID.'</a></p><br><br>
             <i>Wiadomość została wygenerowana automatycznie, prosimy na nią nie odpowiadać. W przypadku rezygnacji z dalszego otrzymywania podobnych wiadomości kliknij w link:
-            <a href="air.mgrabowski.eu/?unsub='.$hash.'">Wypisz się</a> 
+            <a href="air.mgrabowski.eu/?unsub='.$hash.'">wypisz się</a> 
             </i>';
 
             send($email, $subject, $message_body);
