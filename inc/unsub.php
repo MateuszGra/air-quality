@@ -9,7 +9,7 @@
 
         foreach($data as $row) {
             $email= $row['email'];
-            if (password_verify($email, $hash)){ 
+            if (password_verify($email, $hash)){
                 $sth = $dbh->prepare('DELETE FROM users WHERE email=:email');
                 $sth->bindParam(':email', $email, PDO::PARAM_STR);
                 $sth->execute();
@@ -23,7 +23,7 @@
         echo '
         <h1 class="unsub__title font-good">Anulowano subskrypcję</h1>
         <h2 class="unsub__subtitle">Twój adres mailowy został usunięty z bazdy danych.<br> Nie będziesz już otrzymywać powiadomień.</h2>
-        '; 
+        ';
     } else {
         echo '
         <h1 class="unsub__title font-bad">Wystąpił błąd</h1>

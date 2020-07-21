@@ -76,10 +76,10 @@
             <p>Stacja pomiarowa:</p><h3>'.getAdress($stationID, $stations).'</h3>
             <p>Dokładne pomiary: <a href="air.mgrabowski.eu/?station='.$stationID.'">air.mgrabowski.eu/?station='.$stationID.'</a></p><br><br>
             <i>Wiadomość została wygenerowana automatycznie, prosimy na nią nie odpowiadać. W przypadku rezygnacji z dalszego otrzymywania podobnych wiadomości kliknij w link:
-            <a href="air.mgrabowski.eu/?unsub='.$hash.'">wypisz się</a> 
+            <a href="air.mgrabowski.eu/?unsub='.$hash.'">wypisz się</a>
             </i>';
 
             send($email, $subject, $message_body);
         }
     }
-?>   
+?>
