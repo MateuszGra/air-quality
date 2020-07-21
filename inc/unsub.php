@@ -17,7 +17,6 @@
             }
         }
         return false;
-        mysqli_close($dataBase);
     }
 
     if (remove($hash)) {
