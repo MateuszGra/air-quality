@@ -48,8 +48,9 @@
     foreach($data as $row) {
         $stationID = $row['station'];
 
-        if (array_key_exists(strval($stationID), $stationsData)) {
+        if (array_key_exists($stationID, $stationsData)) {
             $quality = $stationsData[$stationID];
+            echo 'z bazy';
         } else {
             $quality = getQuality($stationID);
             $stationsData[$stationID] = $quality;
