@@ -1,25 +1,26 @@
 <?php
-    $hash = $_POST['hash'];
+    $token = $_POST['token'];
+    $id = $_POST['id'];
 
-    function remove($hash) {
+    function remove($token, $id) {
         include 'data-base.php';
-        $sth = $dbh->prepare('SELECT * FROM users');
+        $sth = $dbh->prepare('SELECT * FROM users WHERE id=:id');
+        $sth->bindParam(':id', $id, PDO::PARAM_INT);
         $sth->execute();
-        $data = $sth->fetchAll();
+        $row = $sth->fetch();
+        $email = $row['email'];
 
-        foreach($data as $row) {
-            $email= $row['email'];
-            if (password_verify($email, $hash)){
-                $sth = $dbh->prepare('DELETE FROM users WHERE email=:email');
-                $sth->bindParam(':email', $email, PDO::PARAM_STR);
-                $sth->execute();
-                if ($sth) return true;
-            }
+        if (password_verify($email, $token)){
+            $sth = $dbh->prepare('DELETE FROM users WHERE id=:id');
+            $sth->bindParam(':id', $id, PDO::PARAM_INT);
+            $sth->execute();
+            if ($sth) return true;
         }
+
         return false;
     }
 
-    if (remove($hash)) {
+    if (remove($token, $id)) {
         echo '
         <h1 class="unsub__title font-good">Anulowano subskrypcję</h1>
         <h2 class="unsub__subtitle">Twój adres mailowy został usunięty z bazdy danych.<br> Nie będziesz już otrzymywać powiadomień.</h2>

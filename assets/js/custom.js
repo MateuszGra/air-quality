@@ -369,13 +369,15 @@ themeBtn.addEventListener('click', toggleTheme);
 
 var params = new URLSearchParams(window.location.search);
 var unsubHTML = document.querySelector('.unsub-return-js');
-var unsub = params.get('unsub');
+var token = params.get('t');
+var id = params.get('un');
 
-if (unsub) {
+if (token && id) {
   openPopup('unsub');
   unsubHTML.innerHTML = "\n    <div class=\"loader loader--no-margin\">\n        <img class=\"loader__cloud-1\" src=\"assets/images/Loader1.svg\">\n        <img class=\"loader__cloud-2\" src=\"assets/images/Loader2.svg\">\n    </div>";
   var data = new FormData();
-  data.append('hash', unsub);
+  data.append('token', token);
+  data.append('id', id);
   fetch('inc/unsub.php', {
     method: "POST",
     body: data

@@ -1,8 +1,9 @@
 const params = new URLSearchParams(window.location.search);
 const unsubHTML = document.querySelector('.unsub-return-js')
-const unsub = params.get('unsub');
+const token = params.get('t');
+const id = params.get('un');
 
-if (unsub) {
+if (token && id) {
     openPopup('unsub');
     unsubHTML.innerHTML = `
     <div class="loader loader--no-margin">
@@ -10,7 +11,8 @@ if (unsub) {
         <img class="loader__cloud-2" src="assets/images/Loader2.svg">
     </div>`
     const data = new FormData();
-    data.append('hash', unsub);
+    data.append('token', token);
+    data.append('id', id);
 
     fetch('inc/unsub.php', {
             method: "POST",

@@ -1,8 +1,10 @@
 <?php
+    $start = microtime(true);
     include 'send-mail.php';
     include 'hash.php';
     $stations = getStations();
     $stationsData = [];
+    $mails = [];
 
     function ajax($url) {
         $ch = curl_init($url);
@@ -69,6 +71,7 @@
             }
 
             $email = $row['email'];
+            $id = $row['id'];
             $hash = hashString($email);
             $subject = 'Uwaga! Indeks jakości powietrza: '.$quality;
             $message_body = '
@@ -76,10 +79,15 @@
             <p>Stacja pomiarowa:</p><h3>'.getAdress($stationID, $stations).'</h3>
             <p>Dokładne pomiary: <a href="air.mgrabowski.eu/?station='.$stationID.'">air.mgrabowski.eu/?station='.$stationID.'</a></p><br><br>
             <i>Wiadomość została wygenerowana automatycznie, prosimy na nią nie odpowiadać. W przypadku rezygnacji z dalszego otrzymywania podobnych wiadomości kliknij w link:
-            <a href="air.mgrabowski.eu/?unsub='.$hash.'">wypisz się</a>
+            <a href="air.mgrabowski.eu/?un='.$id.'&t='.$hash.'">wypisz się</a>
             </i>';
 
-            send($email, $subject, $message_body);
+            if (send($email, $subject, $message_body)) $mails[$id] = $stationID;
         }
+
     }
+    $timeElapsed = microtime(true) - $start;
+
+    include 'raport.php';
+    sendRaport($timeElapsed, $stationsData, $mails);
 ?>

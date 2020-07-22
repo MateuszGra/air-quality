@@ -30,7 +30,9 @@
         $mail->Body    = $message_body;
 
         $mail->send();
-
-      } catch (Exception $e) {}
+      } catch (Exception $e) {
+        return false;
+      }
+      return true;
   }
 ?>

@@ -29,6 +29,7 @@
         $sth->bindParam(':email', $email, PDO::PARAM_STR);
         $sth->bindParam(':station', $stationID, PDO::PARAM_STR);
         $sth->execute();
+        $id = $dbh->lastInsertId();
 
         if ($sth) {
             include 'send-mail.php';
@@ -38,7 +39,7 @@
             <p>Będziesz od teraz otrzymywać powiadomienie o złej jakości powietrza z wybranej stacji.</p>
             <p>Jeżeli chcesz sprawdzać informacje częściej, zawsze możesz skorzystać z strony: <a href="air.mgrabowski.eu">air.mgrabowski.eu</a>.</p><br><br>
             <i>Wiadomość została wygenerowana automatycznie, prosimy na nią nie odpowiadać. W przypadku rezygnacji z dalszego otrzymywania podobnych wiadomości kliknij w link: 
-            <a href="air.mgrabowski.eu/?unsub='.$hash.'">wypisz się</a>
+            <a href="air.mgrabowski.eu/?un='.$id.'&t='.$hash.'">wypisz się</a>
             </i>
             ';
             send($email, $subject, $message_body);
