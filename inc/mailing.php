@@ -4,7 +4,7 @@
     include 'hash.php';
     $stations = getStations();
     $stationsData = [];
-    $mails = [];
+    $users = [];
 
     function ajax($url) {
         $ch = curl_init($url);
@@ -49,6 +49,12 @@
 
     foreach($data as $row) {
         $stationID = $row['station'];
+        $user = [
+            'id' => $row['id'],
+            'station' => $stationID,
+            'mail' => '',
+            'quality' => '',
+        ];
 
         if (array_key_exists($stationID, $stationsData)) {
             $quality = $stationsData[$stationID];
@@ -56,6 +62,8 @@
             $quality = getQuality($stationID);
             $stationsData[$stationID] = $quality;
         }
+        $user['quality'] = $quality;
+        $qualityLower = strtolower($quality);
 
         if ($quality === 'Dostateczny' || $quality === 'Zły' || $quality === 'Bardzo zły') {
             switch ($quality) {
@@ -73,7 +81,7 @@
             $email = $row['email'];
             $id = $row['id'];
             $hash = hashString($email);
-            $subject = 'Uwaga! Indeks jakości powietrza: '.$quality;
+            $subject = 'Uwaga! Indeks jakości powietrza: '.$qualityLower;
             $message_body = '
             <p>Indeks jakości powietrza:</p><h1>'.$quality.'</h1>'.$info.'
             <p>Stacja pomiarowa:</p><h3>'.getAdress($stationID, $stations).'</h3>
@@ -82,12 +90,15 @@
             <a href="air.mgrabowski.eu/?un='.$id.'&t='.$hash.'">wypisz się</a>
             </i>';
 
-            if (send($email, $subject, $message_body)) $mails[$id] = $stationID;
+            send($email, $subject, $message_body)? $user['mail'] = 'Tak' : $user['mail'] = 'Błąd';
+        } else {
+            $user['mail'] = 'Nie';
         }
-
+        array_push($users, $user);
     }
+
     $timeElapsed = microtime(true) - $start;
 
     include 'raport.php';
-    sendRaport($timeElapsed, $stationsData, $mails);
+    sendRaport($timeElapsed, $users);
 ?>
