@@ -1,0 +1,9 @@
+Data: 29-07-2020 13:15:26
+Czas wykonania: 2.9720659255981s
+
+ID: 40 | Stacja: 117 | Powiadomienie: Nie | Indeks: Dobry
+ID: 42 | Stacja: 117 | Powiadomienie: Nie | Indeks: Dobry
+ID: 43 | Stacja: 552 | Powiadomienie: Nie | Indeks: Bardzo dobry
+ID: 44 | Stacja: 232 | Powiadomienie: Nie | Indeks: Bardzo dobry
+ID: 45 | Stacja: 605 | Powiadomienie: Nie | Indeks: 
+ID: 46 | Stacja: 117 | Powiadomienie: Nie | Indeks: Dobry
