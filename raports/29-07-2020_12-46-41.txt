@@ -1,5 +1,5 @@
-Data: 29-07-2020 12:24:22
-Czas wykonania: 3.2931389808655s
+Data: 29-07-2020 12:46:41
+Czas wykonania: 2.52090716362s
 
 ID: 40 | Stacja: 117 | Powiadomienie: Nie | Indeks: Dobry
 ID: 42 | Stacja: 117 | Powiadomienie: Nie | Indeks: Dobry
