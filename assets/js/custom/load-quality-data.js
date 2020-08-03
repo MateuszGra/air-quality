@@ -6,7 +6,7 @@ const loadQuality = () => {
     </div>`
 
     const data = new FormData();
-    data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/' + select.value);
+    data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/' + select.dataset.id);
 
     fetch('inc/ajax.php', {
             method: "POST",

@@ -18,30 +18,38 @@ const loadSelectValue = () => {
     const station = params.get('station');
 
     if (station) {
-        select.value = station;
+        select.dataset.id = station;
     } else if (localStorage.getItem('station') != null) {
-        select.value = localStorage.getItem('station');
+        select.dataset.id = localStorage.getItem('station');
     } else {
-        select.value = 117;
+        select.dataset.id = 117;
     }
 
-    generateSearch(select.value);
-    localStorage.setItem('station', select.value);
+    generateSearch(select.dataset.id );
+    localStorage.setItem('station', select.dataset.id );
 }
 
 const importStationToPopup = () => {
     const popupStacion = document.querySelector('.js-station');
-    popupStacion.textContent = select.options[select.selectedIndex].text;
+    popupStacion.textContent = select.value;
 }
 
 loadStacions();
 
-select.addEventListener('change', () => {
-    localStorage.setItem('station', select.value);
-    htmlText = ``;
-    counter = 0;
-    generateSearch(select.value);
-    loadQuality();
-    importStationToPopup();
+const observer = new MutationObserver(function(mutations) {
+  mutations.forEach(function(mutation) {
+    if (mutation.type == "attributes") {
+        select.value = document.querySelector(`.search__list-el[data-id="${select.dataset.id}"]`).innerText;
+        localStorage.setItem('station', select.dataset.id );
+        htmlText = ``;
+        counter = 0;
+        generateSearch(select.dataset.id );
+        loadQuality();
+        importStationToPopup();
+    }
+  });
+});
 
+observer.observe(select, {
+  attributes: true
 });

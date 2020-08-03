@@ -40,7 +40,7 @@ const addToDataBase = () => {
     loader.classList.add('active');
     const data = new FormData();
     data.append('email', email.value);
-    data.append('id', select.value);
+    data.append('id', select.dataset.id);
 
     fetch('inc/subscription.php', {
             method: "POST",

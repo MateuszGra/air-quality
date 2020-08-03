@@ -1,14 +1,7 @@
 const createSelect = (stations) => {
-
     stations.sort((a, b) => a.city.name.localeCompare(b.city.name));
     stations.forEach(station => {
-        const option = document.createElement('option');
-        option.text = station.city.name;
-        if (station.addressStreet != null) {
-            option.text += ' ' + station.addressStreet;
-        }
-        option.value = station.id;
-        select.add(option);
+        selectList.innerHTML += `<li class="search__list-el" data-id="${station.id}">${station.city.name}</li>`;
     });
 }
 
@@ -23,10 +16,12 @@ const loadStacions = () => {
         .then(response => response.json())
         .then(response => {
             stations = response;
+            stations.forEach(station => {
+                if (station.addressStreet != null) station.city.name += ' ' + station.addressStreet;
+            });
 
             createSelect(stations);
             loadSelectValue();
-            loadQuality();
         })
         .catch(error => console.log(error));
 }

@@ -1,17 +1,29 @@
 .search {
     position: relative;
     background: var(--color-bg);
-    border-radius: 3.8rem;
+    border-radius: 2.1rem;
     height: 4.35rem;
     width: 38.28rem;
     margin-right: 3.65rem;
+
+    &.active{
+        border-radius: 2.1rem 2.1rem 0 0;
+
+        &::after{
+            border-radius: 2.1rem 2.1rem 0 0;
+        }
+
+        &::before{
+            border-radius: 2.1rem 2.1rem 0 0;
+        }
+    }
 
     &__select {
         position: absolute;
         top: 0;
         left: 0;
         background: transparent;
-        border-radius: 3.8rem;
+        border-radius: 2.1rem;
         height: 100%;
         width: 100%;
         padding: 0 4.5rem 0 2.85rem;
@@ -23,21 +35,16 @@
         cursor: pointer;
         font-family: var(--font-family);
         font-weight: 300;
-
-        option {
-            background: var(--color-bg);
-            line-height: 1.3rem;
-            outline: var(--color-bg);
-        }
+        font-size: 16px;
     }
 
     &::after {
-        border-radius: 3.8rem;
+        border-radius: 2.1rem;
     }
 
 
     &::before {
-        border-radius: 3.8rem;
+        border-radius: 2.1rem;
     }
 
 
@@ -80,15 +87,55 @@
         position: absolute;
         left: 50%;
         top: 50%;
-        transform: translate(-50%, -50%) rotate(-90deg);
+        transform: translate(-50%, -50%);
         fill: var(--color-font);
-        height: 0.9rem;
+        height: 1.3rem;
         width: auto;
-        will-change: transform;
-        transition: transform 0.3s;
+    }
+
+    &__list{
+        display: none;
+        background: var(--color-bg);
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        max-height: calc(15 * 30px);
+        overflow: auto;
+        z-index: 10;
+        font-size: 16px;
+        border-radius: 0 0 2.1rem 2.1rem;
 
         &.active {
-            transform: translate(-50%, -50%) rotate(90deg);
+            display: block;
+        }
+    }
+
+    &__list-wrapper{
+        position: absolute;
+        left: 0;
+        top: 4.2rem;
+        width: 100%;
+        z-index: 10;
+
+        &.btn-shadow::before{
+            bottom: -2px;
+            border-radius: 0 0 2.1rem 2.1rem;
+        }
+
+        &.btn-shadow::after{
+            bottom: -2px;
+            border-radius: 0 0 2.1rem 2.1rem;
+        }
+    }
+
+    &__list-el{
+        padding: 7px 0 7px 2.85rem;
+        cursor: pointer;
+
+        &.active {
+            background: var(--color-font);
+            color: var(--color-bg);
         }
     }
 
@@ -99,8 +146,8 @@
         flex-grow: 1;
         margin-right: 5%;
 
-        &__select {
-            font-size: 1.35rem;
+        &__list{
+            max-height: calc(7 * 30px);
         }
     }
 }
@@ -110,6 +157,10 @@
     .search {
         &__select {
             padding-left: 1.6rem;
+        }
+
+        &__list-el{
+            padding: 7px 0.6rem 7px 1.6rem;
         }
     }
 }

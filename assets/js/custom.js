@@ -44,7 +44,7 @@ var addToDataBase = function addToDataBase() {
   loader.classList.add('active');
   var data = new FormData();
   data.append('email', email.value);
-  data.append('id', select.value);
+  data.append('id', select.dataset.id);
   fetch('inc/subscription.php', {
     method: "POST",
     body: data
@@ -87,7 +87,7 @@ input.addEventListener('focusout', function (e) {
 var loadQuality = function loadQuality() {
   dataWrapper.innerHTML = "\n    <div class=\"loader\">\n        <img class=\"loader__cloud-1\" src=\"assets/images/Loader1.svg\">\n        <img class=\"loader__cloud-2\" src=\"assets/images/Loader2.svg\">\n    </div>";
   var data = new FormData();
-  data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/' + select.value);
+  data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/' + select.dataset.id);
   fetch('inc/ajax.php', {
     method: "POST",
     body: data
@@ -217,7 +217,7 @@ var loadSensorData = function loadSensorData(id, index) {
 
 var loadSensors = function loadSensors() {
   var data = new FormData();
-  data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/station/sensors/' + select.value);
+  data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/station/sensors/' + select.dataset.id);
   fetch('inc/ajax.php', {
     method: "POST",
     body: data
@@ -240,15 +240,7 @@ var createSelect = function createSelect(stations) {
     return a.city.name.localeCompare(b.city.name);
   });
   stations.forEach(function (station) {
-    var option = document.createElement('option');
-    option.text = station.city.name;
-
-    if (station.addressStreet != null) {
-      option.text += ' ' + station.addressStreet;
-    }
-
-    option.value = station.id;
-    select.add(option);
+    selectList.innerHTML += "<li class=\"search__list-el\" data-id=\"".concat(station.id, "\">").concat(station.city.name, "</li>");
   });
 };
 
@@ -262,9 +254,11 @@ var loadStacions = function loadStacions() {
     return response.json();
   }).then(function (response) {
     stations = response;
+    stations.forEach(function (station) {
+      if (station.addressStreet != null) station.city.name += ' ' + station.addressStreet;
+    });
     createSelect(stations);
     loadSelectValue();
-    loadQuality();
   }).catch(function (error) {
     return console.log(error);
   });
@@ -310,12 +304,106 @@ document.addEventListener('keydown', function (event) {
 "use strict";
 
 var select = document.querySelector('.search__select');
-var icon = document.querySelector('.search__icon');
-select.addEventListener('focusout', function () {
-  icon.classList.remove('active');
-});
+var selectList = document.querySelector('.search__list');
+var searchWrapper = document.querySelector('.search');
+
+var closeSearch = function closeSearch() {
+  selectList.classList.remove('active');
+  searchWrapper.classList.remove('active');
+};
+
+var openSearch = function openSearch() {
+  selectList.classList.add('active');
+  if (selectList.offsetHeight > 0) searchWrapper.classList.add('active');
+};
+
 select.addEventListener('click', function () {
-  icon.classList.toggle('active');
+  openSearch();
+});
+document.addEventListener('click', function (e) {
+  if (e.target.matches('.search__list-el')) {
+    select.dataset.id = e.target.dataset.id;
+  }
+
+  if (!e.target.matches('.search__select')) {
+    closeSearch();
+  }
+}, false);
+
+var handleArrowKey = function handleArrowKey(key) {
+  var listEl = document.querySelectorAll('.search__list-el');
+
+  for (var i = 0; i < listEl.length; i++) {
+    if (listEl[i].classList.contains('active')) {
+      listEl[i].classList.remove('active');
+      var next = void 0;
+
+      if (key == 40) {
+        next = i + 1;
+        if (next == listEl.length) next = 0;
+      } else if (key == 38) {
+        next = i - 1;
+        if (next == -1) next = listEl.length - 1;
+      }
+
+      listEl[next].classList.add('active');
+      listEl[next].scrollIntoView();
+      break;
+    } else if (i == listEl.length - 1) {
+      if (key == 40) {
+        listEl[0].classList.add('active');
+        listEl[0].scrollIntoView();
+      } else if (key == 38) {
+        listEl[listEl.length - 1].classList.add('active');
+        listEl[listEl.length - 1].scrollIntoView();
+      }
+    }
+  }
+};
+
+document.addEventListener('keydown', function (e) {
+  if (selectList.classList.contains('active')) {
+    if (e.keyCode == 40 || e.keyCode == 38) handleArrowKey(e.keyCode);
+
+    if (e.keyCode == 13) {
+      var activeEl = document.querySelector('.search__list-el.active');
+
+      if (activeEl) {
+        select.dataset.id = activeEl.dataset.id;
+        closeSearch();
+      }
+    }
+  } else {
+    if (e.keyCode == 13) {
+      openSearch();
+      select.focus();
+    }
+  }
+});
+document.addEventListener('mousemove', function (e) {
+  var lastActive = document.querySelector('.search__list-el.active');
+  if (lastActive) lastActive.classList.remove('active');
+  if (e.target.matches('.search__list-el')) e.target.classList.add('active');
+}, false);
+
+var sortSelect = function sortSelect(stations) {
+  var sortedStations = stations.filter(function (a) {
+    return a.city.name.toLowerCase().includes(select.value.toLowerCase());
+  });
+  sortedStations.sort(function (a, b) {
+    if (a.city.name.toLowerCase().startsWith(select.value.toLowerCase())) return -1;else if (a.city.name.toLowerCase().startsWith(select.value.toLowerCase())) return 1;
+  });
+  var sorted = '';
+  sortedStations.forEach(function (station) {
+    sorted += "<li class=\"search__list-el\" data-id=\"".concat(station.id, "\">").concat(station.city.name, "</li>");
+  });
+  selectList.innerHTML = sorted;
+};
+
+select.addEventListener('input', function (e) {
+  openSearch();
+  sortSelect(stations);
+  if (selectList.offsetHeight == 0) closeSearch();
 });
 "use strict";
 
@@ -411,28 +499,36 @@ var loadSelectValue = function loadSelectValue() {
   var station = params.get('station');
 
   if (station) {
-    select.value = station;
+    select.dataset.id = station;
   } else if (localStorage.getItem('station') != null) {
-    select.value = localStorage.getItem('station');
+    select.dataset.id = localStorage.getItem('station');
   } else {
-    select.value = 117;
+    select.dataset.id = 117;
   }
 
-  generateSearch(select.value);
-  localStorage.setItem('station', select.value);
+  generateSearch(select.dataset.id);
+  localStorage.setItem('station', select.dataset.id);
 };
 
 var importStationToPopup = function importStationToPopup() {
   var popupStacion = document.querySelector('.js-station');
-  popupStacion.textContent = select.options[select.selectedIndex].text;
+  popupStacion.textContent = select.value;
 };
 
 loadStacions();
-select.addEventListener('change', function () {
-  localStorage.setItem('station', select.value);
-  htmlText = "";
-  counter = 0;
-  generateSearch(select.value);
-  loadQuality();
-  importStationToPopup();
+var observer = new MutationObserver(function (mutations) {
+  mutations.forEach(function (mutation) {
+    if (mutation.type == "attributes") {
+      select.value = document.querySelector(".search__list-el[data-id=\"".concat(select.dataset.id, "\"]")).innerText;
+      localStorage.setItem('station', select.dataset.id);
+      htmlText = "";
+      counter = 0;
+      generateSearch(select.dataset.id);
+      loadQuality();
+      importStationToPopup();
+    }
+  });
+});
+observer.observe(select, {
+  attributes: true
 });

@@ -1,6 +1,6 @@
 const loadSensors = () => {
     const data = new FormData();
-    data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/station/sensors/' + select.value);
+    data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/station/sensors/' + select.dataset.id);
 
     fetch('inc/ajax.php', {
             method: "POST",
