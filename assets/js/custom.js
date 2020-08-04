@@ -85,7 +85,12 @@ input.addEventListener('focusout', function (e) {
 "use strict";
 
 var loadQuality = function loadQuality() {
-  dataWrapper.innerHTML = "\n    <div class=\"loader\">\n        <img class=\"loader__cloud-1\" src=\"assets/images/Loader1.svg\">\n        <img class=\"loader__cloud-2\" src=\"assets/images/Loader2.svg\">\n    </div>";
+  var loader = document.querySelector('.loader');
+
+  if (!loader) {
+    dataWrapper.innerHTML = "\n        <div class=\"loader\">\n            <img class=\"loader__cloud-1\" src=\"assets/images/Loader1.svg\">\n            <img class=\"loader__cloud-2\" src=\"assets/images/Loader2.svg\">\n        </div>";
+  }
+
   var data = new FormData();
   data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/' + select.dataset.id);
   fetch('inc/ajax.php', {
@@ -245,6 +250,7 @@ var createSelect = function createSelect(stations) {
 };
 
 var loadStacions = function loadStacions() {
+  dataWrapper.innerHTML = "\n    <div class=\"loader\">\n        <img class=\"loader__cloud-1\" src=\"assets/images/Loader1.svg\">\n        <img class=\"loader__cloud-2\" src=\"assets/images/Loader2.svg\">\n    </div>";
   var data = new FormData();
   data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/station/findAll');
   fetch('inc/ajax.php', {
