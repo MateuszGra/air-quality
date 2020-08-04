@@ -2,6 +2,7 @@ const select = document.querySelector('.search__select');
 const selectList = document.querySelector('.search__list');
 const searchWrapper = document.querySelector('.search');
 
+
 const closeSearch = () => {
     selectList.classList.remove('active');
     searchWrapper.classList.remove('active');
@@ -9,7 +10,8 @@ const closeSearch = () => {
 
 const openSearch = () => {
     selectList.classList.add('active');
-    if(selectList.offsetHeight > 0) searchWrapper.classList.add('active');
+    if(selectList.firstChild) searchWrapper.classList.add('active');
+    else searchWrapper.classList.remove('active');
 }
 
 select.addEventListener('click', () => {
@@ -62,12 +64,11 @@ document.addEventListener('keydown', function (e) {
             if(activeEl) {
                 select.dataset.id = activeEl.dataset.id;
                 closeSearch();
+            } else {
+                const listEl = document.querySelector('.search__list-el');
+                if(listEl) select.dataset.id = listEl.dataset.id;
+                closeSearch();
             }
-        }
-    } else {
-        if (e.keyCode == 13) {
-            openSearch();
-            select.focus();
         }
     }
 });
@@ -94,7 +95,6 @@ const sortSelect = (stations) => {
 }
 
 select.addEventListener('input', (e) => {
-    openSearch();
     sortSelect(stations);
-    if(selectList.offsetHeight == 0) closeSearch();
+    openSearch();
 });
