@@ -126,9 +126,8 @@
         }
 
         &__btn{
-            position: absolute;
-            top: 1rem;
-            left: 5%;
+            align-self: flex-end;
+            margin-bottom: 1.5rem;
         }
     }
 }

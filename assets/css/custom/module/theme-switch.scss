@@ -86,6 +86,9 @@
 
 @media (max-width: 600px) {
     .theme-switch {
-        margin: 2rem 5% 0 0;
+        position: absolute;
+        margin: 0;
+        right: calc(70px + 5%);
+        top: 3.5rem;
     }
 }
