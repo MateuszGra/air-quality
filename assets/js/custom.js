@@ -538,7 +538,7 @@ var observer = new MutationObserver(function (mutations) {
         loadQuality();
         importStationToPopup();
       } else {
-        dataWrapper.innerHTML = "<h2 class=\"error\">Brak wynik\xF3w wyszukiwania :(</h2>";
+        dataWrapper.innerHTML = "<h2 class=\"error\">Brak wynik\xF3w wyszukiwania, lub stacja obecnie nie jest dost\u0119pna :(</h2>";
       }
     }
   });
