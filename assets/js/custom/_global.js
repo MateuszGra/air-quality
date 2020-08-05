@@ -40,13 +40,18 @@ loadStacions();
 const observer = new MutationObserver((mutations) => {
   mutations.forEach((mutation) => {
     if (mutation.type == "attributes") {
-        select.value = document.querySelector(`.search__list-el[data-id="${select.dataset.id}"]`).innerText;
-        localStorage.setItem('station', select.dataset.id );
-        htmlText = ``;
-        counter = 0;
-        generateSearch(select.dataset.id );
-        loadQuality();
-        importStationToPopup();
+        const listEl = document.querySelector(`.search__list-el[data-id="${select.dataset.id}"]`);
+        if(listEl) {
+            select.value = listEl.innerText;
+            localStorage.setItem('station', select.dataset.id );
+            htmlText = ``;
+            counter = 0;
+            generateSearch(select.dataset.id );
+            loadQuality();
+            importStationToPopup();
+        } else {
+            dataWrapper.innerHTML = `<h2 class="error">Brak wyników wyszukiwania :(</h2>`
+        }
     }
   });
 });

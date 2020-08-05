@@ -120,6 +120,8 @@ span { font-weight: 300; }
 
 .data__wrapper { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start; -webkit-animation: show 1s; animation: show 1s; }
 
+.error { text-align: center; }
+
 @-webkit-keyframes show { 0% { opacity: 0; }
   100% { opacity: 1; } }
 

@@ -527,13 +527,19 @@ loadStacions();
 var observer = new MutationObserver(function (mutations) {
   mutations.forEach(function (mutation) {
     if (mutation.type == "attributes") {
-      select.value = document.querySelector(".search__list-el[data-id=\"".concat(select.dataset.id, "\"]")).innerText;
-      localStorage.setItem('station', select.dataset.id);
-      htmlText = "";
-      counter = 0;
-      generateSearch(select.dataset.id);
-      loadQuality();
-      importStationToPopup();
+      var listEl = document.querySelector(".search__list-el[data-id=\"".concat(select.dataset.id, "\"]"));
+
+      if (listEl) {
+        select.value = listEl.innerText;
+        localStorage.setItem('station', select.dataset.id);
+        htmlText = "";
+        counter = 0;
+        generateSearch(select.dataset.id);
+        loadQuality();
+        importStationToPopup();
+      } else {
+        dataWrapper.innerHTML = "<h2 class=\"error\">Brak wynik\xF3w wyszukiwania :(</h2>";
+      }
     }
   });
 });
