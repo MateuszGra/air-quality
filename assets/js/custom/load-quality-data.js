@@ -8,6 +8,10 @@ const loadQuality = () => {
         </div>`
     }
 
+    const station = stations.filter(obj => {
+        return obj.id == select.dataset.id;
+    })
+
     const data = new FormData();
     data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/' + select.dataset.id);
 
@@ -38,7 +42,7 @@ const loadQuality = () => {
             htmlText += `
             <div class="data__wrapper">
                 <div class="box box--left box-shadow">
-                    <p class="station">${select.value}</p>
+                    <p class="station">${station[0].city.name}</p>
                     <p>
                         <span>Indeks jakości powietrza:</span>
                         <span class="quality ${color}">${quality.stIndexLevel.indexLevelName}</span>

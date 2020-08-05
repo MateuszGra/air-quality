@@ -10,7 +10,6 @@ let quality;
 const generateSearch = (id) => {
     const string = `?station=${id}`;
     history.pushState(false, '', string);
-    importStationToPopup();
 }
 
 const loadSelectValue = () => {
@@ -25,19 +24,21 @@ const loadSelectValue = () => {
         select.dataset.id = 117;
     }
 
-    generateSearch(select.dataset.id );
     localStorage.setItem('station', select.dataset.id );
 }
 
 const importStationToPopup = () => {
     const popupStacion = document.querySelector('.js-station');
-    popupStacion.textContent = select.value;
+    const station = stations.filter(obj => {
+        return obj.id == select.dataset.id;
+    })
+    popupStacion.textContent = station[0].city.name;
 }
 
 loadStacions();
 
-const observer = new MutationObserver(function(mutations) {
-  mutations.forEach(function(mutation) {
+const observer = new MutationObserver((mutations) => {
+  mutations.forEach((mutation) => {
     if (mutation.type == "attributes") {
         select.value = document.querySelector(`.search__list-el[data-id="${select.dataset.id}"]`).innerText;
         localStorage.setItem('station', select.dataset.id );

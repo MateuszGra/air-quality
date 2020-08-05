@@ -91,6 +91,9 @@ var loadQuality = function loadQuality() {
     dataWrapper.innerHTML = "\n        <div class=\"loader\">\n            <img class=\"loader__cloud-1\" src=\"assets/images/Loader1.svg\">\n            <img class=\"loader__cloud-2\" src=\"assets/images/Loader2.svg\">\n        </div>";
   }
 
+  var station = stations.filter(function (obj) {
+    return obj.id == select.dataset.id;
+  });
   var data = new FormData();
   data.append('url', 'http://api.gios.gov.pl/pjp-api/rest/aqindex/getIndex/' + select.dataset.id);
   fetch('inc/ajax.php', {
@@ -119,7 +122,7 @@ var loadQuality = function loadQuality() {
         break;
     }
 
-    htmlText += "\n            <div class=\"data__wrapper\">\n                <div class=\"box box--left box-shadow\">\n                    <p class=\"station\">".concat(select.value, "</p>\n                    <p>\n                        <span>Indeks jako\u015Bci powietrza:</span>\n                        <span class=\"quality ").concat(color, "\">").concat(quality.stIndexLevel.indexLevelName, "</span>\n                    </p>\n                    <div class=\"image\"></div>\n                    <p>\n                        <span>Data pomiaru:</span>\n                        <span class=\"date\">").concat(quality.stCalcDate, "</span>\n                    </p>\n                </div>\n            ");
+    htmlText += "\n            <div class=\"data__wrapper\">\n                <div class=\"box box--left box-shadow\">\n                    <p class=\"station\">".concat(station[0].city.name, "</p>\n                    <p>\n                        <span>Indeks jako\u015Bci powietrza:</span>\n                        <span class=\"quality ").concat(color, "\">").concat(quality.stIndexLevel.indexLevelName, "</span>\n                    </p>\n                    <div class=\"image\"></div>\n                    <p>\n                        <span>Data pomiaru:</span>\n                        <span class=\"date\">").concat(quality.stCalcDate, "</span>\n                    </p>\n                </div>\n            ");
     loadSensors();
   }).catch(function (error) {
     return console.log(error);
@@ -495,7 +498,6 @@ var quality;
 var generateSearch = function generateSearch(id) {
   var string = "?station=".concat(id);
   history.pushState(false, '', string);
-  importStationToPopup();
 };
 
 var loadSelectValue = function loadSelectValue() {
@@ -510,13 +512,15 @@ var loadSelectValue = function loadSelectValue() {
     select.dataset.id = 117;
   }
 
-  generateSearch(select.dataset.id);
   localStorage.setItem('station', select.dataset.id);
 };
 
 var importStationToPopup = function importStationToPopup() {
   var popupStacion = document.querySelector('.js-station');
-  popupStacion.textContent = select.value;
+  var station = stations.filter(function (obj) {
+    return obj.id == select.dataset.id;
+  });
+  popupStacion.textContent = station[0].city.name;
 };
 
 loadStacions();
