@@ -391,6 +391,10 @@ document.addEventListener('keydown', function (e) {
         closeSearch();
       }
     }
+
+    if (e.keyCode == 27) {
+      closeSearch();
+    }
   }
 });
 document.addEventListener('mousemove', function (e) {
