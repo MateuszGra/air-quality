@@ -395,12 +395,17 @@ document.addEventListener('mousemove', function (e) {
 }, false);
 
 var sortSelect = function sortSelect(stations) {
-  var sortedStations = stations.filter(function (a) {
-    return a.city.name.toLowerCase().includes(select.value.toLowerCase());
-  });
-  sortedStations.sort(function (a, b) {
-    if (a.city.name.toLowerCase().startsWith(select.value.toLowerCase())) return -1;else if (a.city.name.toLowerCase().startsWith(select.value.toLowerCase())) return 1;
-  });
+  var sortedStations = stations;
+
+  if (select.value) {
+    sortedStations = stations.filter(function (a) {
+      return a.city.name.toLowerCase().includes(select.value.toLowerCase());
+    });
+    sortedStations.sort(function (a, b) {
+      if (a.city.name.toLowerCase().startsWith(select.value.toLowerCase())) return -1;else if (a.city.name.toLowerCase().startsWith(select.value.toLowerCase())) return 1;
+    });
+  }
+
   var sorted = '';
   sortedStations.forEach(function (station) {
     sorted += "<li class=\"search__list-el\" data-id=\"".concat(station.id, "\">").concat(station.city.name, "</li>");

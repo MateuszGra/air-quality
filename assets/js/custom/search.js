@@ -80,11 +80,14 @@ document.addEventListener('mousemove', (e) => {
 }, false);
 
 const sortSelect = (stations) => {
-    const sortedStations = stations.filter(a => a.city.name.toLowerCase().includes(select.value.toLowerCase()))
-    sortedStations.sort((a, b) => {
-        if (a.city.name.toLowerCase().startsWith(select.value.toLowerCase())) return -1;
-        else if (a.city.name.toLowerCase().startsWith(select.value.toLowerCase())) return 1;
-    });
+    let sortedStations = stations;
+    if(select.value){
+        sortedStations = stations.filter(a => a.city.name.toLowerCase().includes(select.value.toLowerCase()))
+        sortedStations.sort((a, b) => {
+            if (a.city.name.toLowerCase().startsWith(select.value.toLowerCase())) return -1;
+            else if (a.city.name.toLowerCase().startsWith(select.value.toLowerCase())) return 1;
+        });
+    }
 
 
     let sorted = '';
