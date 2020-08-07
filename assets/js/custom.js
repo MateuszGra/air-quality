@@ -395,6 +395,16 @@ document.addEventListener('keydown', function (e) {
     if (e.key == 'Escape') {
       closeSearch();
     }
+  } else {
+    if (e.key == 'Enter') {
+      var popupSub = document.querySelector('.popup[data-id="sub"]');
+      var popupUnsub = document.querySelector('.popup[data-id="unsub"]');
+
+      if (!popupSub.classList.contains('active') && !popupUnsub.classList.contains('active')) {
+        select.focus();
+        openSearch();
+      }
+    }
   }
 });
 document.addEventListener('mousemove', function (e) {

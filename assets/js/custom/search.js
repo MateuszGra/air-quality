@@ -72,6 +72,15 @@ document.addEventListener('keydown', function (e) {
         if (e.key == 'Escape') {
             closeSearch();
         }
+    } else{
+        if (e.key == 'Enter') {
+            const popupSub = document.querySelector('.popup[data-id="sub"]');
+            const popupUnsub = document.querySelector('.popup[data-id="unsub"]');
+            if(!popupSub.classList.contains('active') && !popupUnsub.classList.contains('active') ){
+                select.focus();
+                openSearch();
+            }
+        }
     }
 });
 
