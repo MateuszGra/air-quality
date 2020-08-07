@@ -72,7 +72,7 @@ document.addEventListener('keydown', function (e) {
         if (e.key == 'Escape') {
             closeSearch();
         }
-    } else{
+    } else {
         if (e.key == 'Enter') {
             const popupSub = document.querySelector('.popup[data-id="sub"]');
             const popupUnsub = document.querySelector('.popup[data-id="unsub"]');
@@ -86,13 +86,13 @@ document.addEventListener('keydown', function (e) {
 
 document.addEventListener('mousemove', (e) => {
     const lastActive = document.querySelector('.search__list-el.active');
-    if(lastActive) lastActive.classList.remove('active');
+    if (lastActive) lastActive.classList.remove('active');
     if (e.target.matches('.search__list-el')) e.target.classList.add('active');
 }, false);
 
 const sortSelect = (stations) => {
     let sortedStations = stations;
-    if(select.value){
+    if (select.value){
         sortedStations = stations.filter(a => a.city.name.toLowerCase().includes(select.value.toLowerCase()))
         sortedStations.sort((a, b) => {
             if (a.city.name.toLowerCase().startsWith(select.value.toLowerCase())) return -1;
