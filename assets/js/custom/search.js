@@ -2,7 +2,6 @@ const select = document.querySelector('.search__select');
 const selectList = document.querySelector('.search__list');
 const searchWrapper = document.querySelector('.search');
 
-
 const closeSearch = () => {
     selectList.classList.remove('active');
     searchWrapper.classList.remove('active');
@@ -26,7 +25,6 @@ document.addEventListener('click', function (e) {
         closeSearch();
     }
 }, false);
-
 
 const handleArrowKey = (e) => {
     e.preventDefault();
