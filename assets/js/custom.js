@@ -278,13 +278,11 @@ var showBtn = document.querySelectorAll('.popup-show-js');
 var closeBtn = document.querySelectorAll('.popup-close-js');
 
 var openPopup = function openPopup(id) {
-  document.body.classList.add('block');
   var popup = document.getElementById(id);
   popup.classList.add('active');
 };
 
 var closePopup = function closePopup(id) {
-  document.body.classList.remove('block');
   var popup = document.getElementById(id);
   popup.classList.remove('active');
   returnHTML.innerHTML = '';
