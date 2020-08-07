@@ -12,6 +12,11 @@ body {
   padding: 0;
   position: relative;
   overflow-x: hidden;
+
+  &.block{
+    overflow: hidden;
+    max-height: 100vh;
+  }
 }
 
 main {

@@ -2,11 +2,13 @@ const showBtn = document.querySelectorAll('.popup-show-js');
 const closeBtn = document.querySelectorAll('.popup-close-js');
 
 const openPopup = (id) => {
+    document.body.classList.add('block');
     const popup = document.getElementById(id);
     popup.classList.add('active');
 }
 
 const closePopup = (id) => {
+    document.body.classList.remove('block');
     const popup = document.getElementById(id);
     popup.classList.remove('active');
     returnHTML.innerHTML = '';
