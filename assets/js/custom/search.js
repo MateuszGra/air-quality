@@ -28,16 +28,17 @@ document.addEventListener('click', function (e) {
 }, false);
 
 
-const handleArrowKey = (key) => {
+const handleArrowKey = (e) => {
+    e.preventDefault();
     const listEl = document.querySelectorAll('.search__list-el');
     for (let i = 0; i < listEl.length; i++) {
         if(listEl[i].classList.contains('active')) {
             listEl[i].classList.remove('active');
             let next;
-            if (key == 40){
+            if (e.key == 'ArrowDown'){
                 next = i + 1;
                 if (next == listEl.length) next = 0;
-            } else if (key == 38) {
+            } else if (e.key == 'ArrowUp') {
                 next = i - 1;
                 if (next == -1) next = listEl.length -1;
             }
@@ -45,10 +46,10 @@ const handleArrowKey = (key) => {
             listEl[next].scrollIntoView({block: 'nearest'});
             break;
         } else if ( i == listEl.length -1) {
-            if (key == 40){
+            if (e.key == 'ArrowDown'){
                 listEl[0].classList.add('active');
                 listEl[0].scrollIntoView();
-            } else if (key == 38) {
+            } else if (e.key == 'ArrowUp') {
                 listEl[listEl.length -1].classList.add('active');
                 listEl[listEl.length -1].scrollIntoView({block: 'nearest'});
             }
@@ -58,9 +59,8 @@ const handleArrowKey = (key) => {
 
 document.addEventListener('keydown', function (e) {
     if (selectList.classList.contains('active')) {
-        e.preventDefault();
-        if (e.keyCode == 40 || e.keyCode == 38) handleArrowKey(e.keyCode);
-        if (e.keyCode == 13) {
+        if (e.key == 'ArrowUp' || e.key== 'ArrowDown') handleArrowKey(e);
+        if (e.key == 'Enter') {
             const activeEl = document.querySelector('.search__list-el.active');
             if(activeEl) {
                 select.dataset.id = activeEl.dataset.id;
@@ -71,7 +71,7 @@ document.addEventListener('keydown', function (e) {
                 closeSearch();
             }
         }
-        if (e.keyCode == 27) {
+        if (e.key == 'Escape') {
             closeSearch();
         }
     }

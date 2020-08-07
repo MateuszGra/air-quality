@@ -339,7 +339,8 @@ document.addEventListener('click', function (e) {
   }
 }, false);
 
-var handleArrowKey = function handleArrowKey(key) {
+var handleArrowKey = function handleArrowKey(e) {
+  e.preventDefault();
   var listEl = document.querySelectorAll('.search__list-el');
 
   for (var i = 0; i < listEl.length; i++) {
@@ -347,10 +348,10 @@ var handleArrowKey = function handleArrowKey(key) {
       listEl[i].classList.remove('active');
       var next = void 0;
 
-      if (key == 40) {
+      if (e.key == 'ArrowDown') {
         next = i + 1;
         if (next == listEl.length) next = 0;
-      } else if (key == 38) {
+      } else if (e.key == 'ArrowUp') {
         next = i - 1;
         if (next == -1) next = listEl.length - 1;
       }
@@ -361,10 +362,10 @@ var handleArrowKey = function handleArrowKey(key) {
       });
       break;
     } else if (i == listEl.length - 1) {
-      if (key == 40) {
+      if (e.key == 'ArrowDown') {
         listEl[0].classList.add('active');
         listEl[0].scrollIntoView();
-      } else if (key == 38) {
+      } else if (e.key == 'ArrowUp') {
         listEl[listEl.length - 1].classList.add('active');
         listEl[listEl.length - 1].scrollIntoView({
           block: 'nearest'
@@ -376,10 +377,9 @@ var handleArrowKey = function handleArrowKey(key) {
 
 document.addEventListener('keydown', function (e) {
   if (selectList.classList.contains('active')) {
-    e.preventDefault();
-    if (e.keyCode == 40 || e.keyCode == 38) handleArrowKey(e.keyCode);
+    if (e.key == 'ArrowUp' || e.key == 'ArrowDown') handleArrowKey(e);
 
-    if (e.keyCode == 13) {
+    if (e.key == 'Enter') {
       var activeEl = document.querySelector('.search__list-el.active');
 
       if (activeEl) {
@@ -392,7 +392,7 @@ document.addEventListener('keydown', function (e) {
       }
     }
 
-    if (e.keyCode == 27) {
+    if (e.key == 'Escape') {
       closeSearch();
     }
   }
