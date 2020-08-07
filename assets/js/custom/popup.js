@@ -30,8 +30,8 @@ document.addEventListener('click', function (e) {
     }
 }, false);
 
-document.addEventListener('keydown', function (event) {
-    if (event.keyCode == 27) {
+document.addEventListener('keydown', function (e) {
+    if (e.key == 'Escape') {
         closeBtn.forEach(btn => {
             closePopup(btn.dataset.id);
         });
