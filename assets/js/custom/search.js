@@ -42,7 +42,7 @@ const handleArrowKey = (key) => {
                 if (next == -1) next = listEl.length -1;
             }
             listEl[next].classList.add('active');
-            listEl[next].scrollIntoView();
+            listEl[next].scrollIntoView({block: 'nearest'});
             break;
         } else if ( i == listEl.length -1) {
             if (key == 40){
@@ -50,7 +50,7 @@ const handleArrowKey = (key) => {
                 listEl[0].scrollIntoView();
             } else if (key == 38) {
                 listEl[listEl.length -1].classList.add('active');
-                listEl[listEl.length -1].scrollIntoView();
+                listEl[listEl.length -1].scrollIntoView({block: 'nearest'});
             }
         }
     }
@@ -58,6 +58,7 @@ const handleArrowKey = (key) => {
 
 document.addEventListener('keydown', function (e) {
     if (selectList.classList.contains('active')) {
+        e.preventDefault();
         if (e.keyCode == 40 || e.keyCode == 38) handleArrowKey(e.keyCode);
         if (e.keyCode == 13) {
             const activeEl = document.querySelector('.search__list-el.active');

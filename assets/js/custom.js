@@ -356,7 +356,9 @@ var handleArrowKey = function handleArrowKey(key) {
       }
 
       listEl[next].classList.add('active');
-      listEl[next].scrollIntoView();
+      listEl[next].scrollIntoView({
+        block: 'nearest'
+      });
       break;
     } else if (i == listEl.length - 1) {
       if (key == 40) {
@@ -364,7 +366,9 @@ var handleArrowKey = function handleArrowKey(key) {
         listEl[0].scrollIntoView();
       } else if (key == 38) {
         listEl[listEl.length - 1].classList.add('active');
-        listEl[listEl.length - 1].scrollIntoView();
+        listEl[listEl.length - 1].scrollIntoView({
+          block: 'nearest'
+        });
       }
     }
   }
@@ -372,6 +376,7 @@ var handleArrowKey = function handleArrowKey(key) {
 
 document.addEventListener('keydown', function (e) {
   if (selectList.classList.contains('active')) {
+    e.preventDefault();
     if (e.keyCode == 40 || e.keyCode == 38) handleArrowKey(e.keyCode);
 
     if (e.keyCode == 13) {
