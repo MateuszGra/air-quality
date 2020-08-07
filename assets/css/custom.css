@@ -46,7 +46,7 @@ html { font-family: var(--font-family); font-size: 16px; }
 
 body { margin: 0; padding: 0; position: relative; overflow-x: hidden; }
 
-body.block { overflow: hidden; max-height: 100vh; }
+body.block { overflow: hidden; max-height: 100vh; min-width: 100vh; }
 
 main { position: relative; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; background: var(--color-bg); color: var(--color-font); z-index: 0; min-width: 100vw; min-height: 100vh; }
 

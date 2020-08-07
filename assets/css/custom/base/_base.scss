@@ -16,6 +16,7 @@ body {
   &.block{
     overflow: hidden;
     max-height: 100vh;
+    min-width: 100vh;
   }
 }
 
