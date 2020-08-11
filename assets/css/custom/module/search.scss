@@ -4,7 +4,6 @@
     border-radius: 2.1rem;
     height: 4.35rem;
     width: 38.28rem;
-    margin-right: 3.65rem;
 
     &.active{
         border-radius: 2.1rem 2.1rem 0 0;
@@ -124,8 +123,7 @@
 
 @media (max-width: 1000px) {
     .search {
-        flex-grow: 1;
-        margin-right: 5%;
+        width: 100%;
 
         &__list{
             max-height: calc(7 * 30px);
@@ -136,9 +134,6 @@
 
 @media (max-width: 600px) {
     .search {
-        width: 100%;
-        margin-right: 0;
-
         &__select {
             padding: 0 4rem;
         }
