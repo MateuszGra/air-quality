@@ -1,7 +1,5 @@
 .theme-switch {
     position: relative;
-    margin: 2.53rem 14.7% 0 0;
-    align-self: flex-end;
     background: transparent;
 
 
@@ -75,20 +73,5 @@
             filter: blur(4px);
             z-index: -1;
         }
-    }
-}
-
-@media (max-width: 1000px) {
-    .theme-switch {
-        margin: 3rem 5% 0 0;
-    }
-}
-
-@media (max-width: 600px) {
-    .theme-switch {
-        position: absolute;
-        margin: 0;
-        right: calc(70px + 5%);
-        top: 3.5rem;
     }
 }

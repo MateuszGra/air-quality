@@ -34,32 +34,6 @@
         margin-top: 1.5rem;
     }
 
-    &__btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        min-height: 4.35rem;
-        min-width: 4.35rem;
-
-        border-radius: 50%;
-        background: var(--color-bg);
-
-        &:hover {
-            .popup__icon {
-                transform: translate(-1px, -1px);
-            }
-        }
-
-    }
-
-    &__icon {
-        height: 2.4rem;
-        width: auto;
-        fill: var(--color-font);
-        will-change: transform;
-        transition: transform 0.2s;
-    }
 
     &__close {
         display: flex;
@@ -123,11 +97,6 @@
         &__close-shadow {
             top: 1rem;
             right: 1rem;
-        }
-
-        &__btn{
-            align-self: flex-end;
-            margin-bottom: 1.5rem;
         }
     }
 }
