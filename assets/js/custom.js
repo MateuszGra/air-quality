@@ -13,6 +13,7 @@ var createTooltip = function createTooltip(text, parent) {
 };
 
 var validation = function validation() {
+  var input = document.querySelector('.form__input');
   var inputLabel = document.querySelector('.form__input-label');
   var checkboxLabel = document.querySelector('.form__checkbox-label');
 
@@ -53,7 +54,6 @@ var addToDataBase = function addToDataBase() {
   }).then(function (response) {
     returnHTML.innerHTML = response;
     form.reset();
-    placeholder.classList.remove('active');
     loader.classList.remove('active');
   }).catch(function (error) {
     return console.log(error);
@@ -69,18 +69,6 @@ form.addEventListener('submit', function (e) {
 });
 document.addEventListener('click', function () {
   if (vError) vError.remove();
-});
-"use strict";
-
-var input = document.querySelector('.form__input');
-var placeholder = document.querySelector('.form__placeholder');
-input.addEventListener('focus', function (e) {
-  placeholder.classList.add('active');
-});
-input.addEventListener('focusout', function (e) {
-  if (input.value == '') {
-    placeholder.classList.remove('active');
-  }
 });
 "use strict";
 
@@ -268,7 +256,6 @@ var loadStacions = function loadStacions() {
     });
     createSelect(stations);
     loadSelectValue();
-    selectClose.classList.add('active');
   }).catch(function (error) {
     return console.log(error);
   });
@@ -452,8 +439,10 @@ select.addEventListener('input', function (e) {
 var switchImage = function switchImage() {
   var wrapper = document.querySelector('.image');
   var index = quality.stIndexLevel.indexLevelName;
+  var popupImg = document.querySelector('.popup__img');
   var theme = '';
   if (localStorage.getItem('theme') === 'theme-dark') theme = '_Noc';
+  popupImg.src = "assets/images/Newsletter-illustration".concat(theme, ".svg");
 
   if (index == 'Bardzo dobry' || index == 'Dobry') {
     wrapper.innerHTML = "\n            <img class=\"image__bg\" src=\"assets/images/Bardzo-dobry_Tlo".concat(theme, ".svg\"> \n            <img class=\"image__cloud\" src=\"assets/images/Bardzo-dobry_Chmurka").concat(theme, ".svg\"> \n            <img class=\"image__addition\" src=\"assets/images/Bardzo-dobry_Dodatek").concat(theme, ".svg\"> \n            ");
@@ -575,6 +564,8 @@ var observer = new MutationObserver(function (mutations) {
       } else {
         dataWrapper.innerHTML = "<h2 class=\"error\">Brak wynik\xF3w wyszukiwania, lub stacja obecnie nie jest dost\u0119pna :(</h2>";
       }
+
+      if (select.value) selectClose.classList.add('active');
     }
   });
 });

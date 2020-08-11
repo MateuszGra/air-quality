@@ -11,6 +11,7 @@ const createTooltip = (text, parent) => {
 }
 
 const validation = () => {
+    const input = document.querySelector('.form__input');
     const inputLabel = document.querySelector('.form__input-label');
     const checkboxLabel = document.querySelector('.form__checkbox-label');
 
@@ -50,7 +51,6 @@ const addToDataBase = () => {
         .then(response => {
             returnHTML.innerHTML = response;
             form.reset();
-            placeholder.classList.remove('active');
             loader.classList.remove('active');
         })
         .catch(error => console.log(error));

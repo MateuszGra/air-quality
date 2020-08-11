@@ -80,6 +80,7 @@ input {
   margin: 0;
   background: transparent;
   outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 a {
@@ -88,6 +89,10 @@ a {
   font-size: inherit;
   text-decoration: none;
   cursor: pointer;
+}
+
+label {
+  -webkit-tap-highlight-color: transparent;
 }
 
 button {

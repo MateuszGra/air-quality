@@ -52,6 +52,7 @@ const observer = new MutationObserver((mutations) => {
         } else {
             dataWrapper.innerHTML = `<h2 class="error">Brak wyników wyszukiwania, lub stacja obecnie nie jest dostępna :(</h2>`
         }
+        if(select.value) selectClose.classList.add('active');
     }
   });
 });

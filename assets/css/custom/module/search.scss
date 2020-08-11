@@ -58,19 +58,23 @@
 
     &__close {
         position: absolute;
-        display: none;
-        fill: var(--color-font);
-        width: 1rem;
-        height: auto;
         top: 50%;
         right: 2rem;
-        transform: translateY(-50%);
-        cursor: pointer;
+        display: none;
         z-index: 10;
+        background: none;
+        transform: translateY(-50%);
 
         &.active{
             display: block;
         }
+    }
+
+    &__close-icon {
+        fill: var(--color-font);
+        width: 1rem;
+        height: auto;
+        top: 50%;
     }
 
     &__list{
@@ -149,5 +153,29 @@
         &__list-el{
             padding: 7px 0.6rem 7px 1.6rem;
         }
+
+        &__close {
+            top: 50%;
+            right: 1rem;
+            height: 80%;
+            padding: 0 1rem;
+        }
+    }
+}
+
+@media (max-width: 375px) {
+    .search {
+        &__select {
+            padding: 0 3.2rem 0 3rem;
+        }
+
+        &__icon {
+            left: 1rem;
+        }
+
+        &__close {
+            right: 0.3rem;
+        }
+
     }
 }

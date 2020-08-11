@@ -56,17 +56,17 @@ $base-margin: 0 !default;
     background: var(--color-bad);
 }
 
+@mixin shadow-btn {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    filter: blur(4px);
+    z-index: -1;
+}
+
 .btn-shadow {
     position: relative;
-
-    @mixin shadow-btn {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        filter: blur(4px);
-        z-index: -1;
-    }
 
     &::after {
         @include shadow-btn();
@@ -80,6 +80,29 @@ $base-margin: 0 !default;
         right: 3px;
         bottom: 3px;
         background: var(--color-blur-light);
+    }
+}
+
+.input-shadow {
+    position: relative;
+    z-index: 1;
+
+    &::after {
+        @include shadow-btn();
+        box-sizing: border-box;
+        right: -2px;
+        bottom: -2px;
+        border: 0.5rem solid var(--color-blur-dark);
+        border-radius: 0.8rem;
+    }
+
+    &::before {
+        @include shadow-btn();
+        box-sizing: border-box;
+        right: 2px;
+        bottom: 2px;
+        border: 0.5rem solid var(--color-blur-light);
+        border-radius: 0.8rem;
     }
 }
 

@@ -1,9 +1,11 @@
 const switchImage = () => {
     const wrapper = document.querySelector('.image');
     const index = quality.stIndexLevel.indexLevelName;
+    const popupImg = document.querySelector('.popup__img');
     let theme = '';
     if (localStorage.getItem('theme') === 'theme-dark') theme = '_Noc';
 
+    popupImg.src = `assets/images/Newsletter-illustration${theme}.svg`;
 
     if (index == 'Bardzo dobry' || index == 'Dobry') {
         wrapper.innerHTML =

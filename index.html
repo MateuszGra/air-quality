@@ -67,9 +67,11 @@
         <svg class="search__icon" xmlns="http://www.w3.org/2000/svg" width="26.868" height="28.548" viewBox="0 0 26.868 28.548">
           <path id="Path_22051" data-name="Path 22051" d="M15.755,6.359a8.4,8.4,0,1,0,8.4,8.4A8.4,8.4,0,0,0,15.755,6.359ZM24.406,22.71l5.97,5.97A1.679,1.679,0,0,1,28,31.056l-6.213-6.213a11.773,11.773,0,1,1,2.617-2.133Z" transform="translate(-4 -3)"/>
         </svg>
-        <svg  class="search__close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
-        </svg>
+        <button class="search__close">
+          <svg class="search__close-icon" xmlns="http://www.w3.org/2000/svg" width="18.642" height="19.052" viewBox="0 0 18.642 19.052">
+            <path id="Union_3" data-name="Union 3" d="M-2435.3,18.542l-6.377-6.437-6.377,6.437a1.713,1.713,0,0,1-2.438,0,1.752,1.752,0,0,1,0-2.461L-2444,9.526l-6.495-6.556a1.752,1.752,0,0,1,0-2.461,1.713,1.713,0,0,1,2.438,0l6.377,6.437L-2435.3.509a1.713,1.713,0,0,1,2.438,0,1.752,1.752,0,0,1,0,2.461l-6.495,6.556,6.495,6.556a1.75,1.75,0,0,1,0,2.461,1.71,1.71,0,0,1-1.219.51A1.713,1.713,0,0,1-2435.3,18.542Z" transform="translate(2451 0)"/>
+          </svg>
+        </button>
         <div class="search__btn-2"></div>
         <div class="search__btn-3"></div>
         <div class="search__list-wrapper btn-shadow">
@@ -82,23 +84,26 @@
     </section>
     <section class="popup" id="sub" data-id="sub">
       <div class="popup__content box-shadow">
-        <h1 class="popup__title">Zapisz się do subskrypcji, otrzymuj mailowe powiadomienie o złej jakości powietrza z
-          wybranej stacji.</h1>
+        <img class="popup__img" src="">
+        <h2 class="popup__title">Zapisz się do subskrypcji</h2>
+        <h3 class="popup__subtitle">Otrzymuj mailowe powiadomienia <br>o złej jakości powietrza z
+          wybranej stacji</h3>
         <form class="form">
           <p class="popup__station">Stacja: <span class="js-station bold"></span></p>
-          <label class="form__input-label">
-            <span class="form__placeholder">E-mail</span>
-            <input class="form__input" type="text">
+          <label class="form__input-label input-shadow">
+            <input class="form__input" type="text" placeholder="E-mail">
           </label>
           <label class="form__checkbox-label">
-            <input class="form__checkbox" type="checkbox">
+            <div class="form__checkbox-shadow input-shadow">
+              <input class="form__checkbox" type="checkbox">
+            </div>
             <span>
               Wyrażam zgodę na przetwarzanie moich danych osobowych w postacji adresu email, przez adminisratora danych
               w celu otrzymywania informacji w formie darmowej subskrypcji.
             </span>
           </label>
           <div class="form__submit-wrapper">
-            <div class="form__submit-shadow btn-shadow btn-animation">
+            <div class="form__submit-shadow btn-shadow">
               <button class="form__submit">Zapisz się</button>
             </div>
             <div class="form__loader">
@@ -112,10 +117,8 @@
         </form>
         <div class="popup__close-shadow btn-shadow btn-animation">
           <button class="popup__close popup-close-js" data-id="sub">
-            <svg class="popup__close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-              viewBox="0 0 24 24">
-              <path
-                d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
+            <svg class="popup__close-icon" xmlns="http://www.w3.org/2000/svg" width="18.642" height="19.052" viewBox="0 0 18.642 19.052">
+              <path id="Union_3" data-name="Union 3" d="M-2435.3,18.542l-6.377-6.437-6.377,6.437a1.713,1.713,0,0,1-2.438,0,1.752,1.752,0,0,1,0-2.461L-2444,9.526l-6.495-6.556a1.752,1.752,0,0,1,0-2.461,1.713,1.713,0,0,1,2.438,0l6.377,6.437L-2435.3.509a1.713,1.713,0,0,1,2.438,0,1.752,1.752,0,0,1,0,2.461l-6.495,6.556,6.495,6.556a1.75,1.75,0,0,1,0,2.461,1.71,1.71,0,0,1-1.219.51A1.713,1.713,0,0,1-2435.3,18.542Z" transform="translate(2451 0)"/>
             </svg>
           </button>
         </div>
@@ -127,15 +130,13 @@
           <!-- AJAX -->
         </div>
         </form>
-        <div class="form__submit-shadow unsub__shadow btn-shadow btn-animation">
+        <div class="form__submit-shadow unsub__shadow btn-shadow">
           <button class="form__submit popup-close-js" data-id="unsub">Zamknij</button>
         </div>
         <div class="popup__close-shadow btn-shadow btn-animation">
           <button class="popup__close popup-close-js" data-id="unsub">
-            <svg class="popup__close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-              viewBox="0 0 24 24">
-              <path
-                d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
+            <svg class="popup__close-icon" xmlns="http://www.w3.org/2000/svg" width="18.642" height="19.052" viewBox="0 0 18.642 19.052">
+              <path id="Union_3" data-name="Union 3" d="M-2435.3,18.542l-6.377-6.437-6.377,6.437a1.713,1.713,0,0,1-2.438,0,1.752,1.752,0,0,1,0-2.461L-2444,9.526l-6.495-6.556a1.752,1.752,0,0,1,0-2.461,1.713,1.713,0,0,1,2.438,0l6.377,6.437L-2435.3.509a1.713,1.713,0,0,1,2.438,0,1.752,1.752,0,0,1,0,2.461l-6.495,6.556,6.495,6.556a1.75,1.75,0,0,1,0,2.461,1.71,1.71,0,0,1-1.219.51A1.713,1.713,0,0,1-2435.3,18.542Z" transform="translate(2451 0)"/>
             </svg>
           </button>
         </div>
