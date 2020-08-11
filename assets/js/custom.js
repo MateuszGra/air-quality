@@ -268,6 +268,7 @@ var loadStacions = function loadStacions() {
     });
     createSelect(stations);
     loadSelectValue();
+    selectClose.classList.add('active');
   }).catch(function (error) {
     return console.log(error);
   });
@@ -278,11 +279,13 @@ var showBtn = document.querySelectorAll('.popup-show-js');
 var closeBtn = document.querySelectorAll('.popup-close-js');
 
 var openPopup = function openPopup(id) {
+  document.body.classList.add('block');
   var popup = document.getElementById(id);
   popup.classList.add('active');
 };
 
 var closePopup = function closePopup(id) {
+  document.body.classList.remove('block');
   var popup = document.getElementById(id);
   popup.classList.remove('active');
   returnHTML.innerHTML = '';
@@ -315,6 +318,7 @@ document.addEventListener('keydown', function (e) {
 var select = document.querySelector('.search__select');
 var selectList = document.querySelector('.search__list');
 var searchWrapper = document.querySelector('.search');
+var selectClose = document.querySelector('.search__close');
 
 var closeSearch = function closeSearch() {
   selectList.classList.remove('active');
@@ -324,10 +328,17 @@ var closeSearch = function closeSearch() {
 var openSearch = function openSearch() {
   selectList.classList.add('active');
   if (selectList.firstChild) searchWrapper.classList.add('active');else searchWrapper.classList.remove('active');
+  if (select.value) selectClose.classList.add('active');else selectClose.classList.remove('active');
 };
 
 select.addEventListener('click', function () {
   openSearch();
+});
+selectClose.addEventListener('click', function () {
+  select.value = null;
+  sortSelect(stations);
+  openSearch();
+  select.focus();
 });
 document.addEventListener('click', function (e) {
   if (e.target.matches('.search__list-el')) {

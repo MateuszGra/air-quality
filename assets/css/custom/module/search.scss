@@ -16,18 +16,6 @@
         &::before{
             border-radius: 2.1rem 2.1rem 0 0;
         }
-
-        & .search__btn-1 {
-            z-index: 10;
-
-            & .search__icon--magnifier{
-                display: none;
-            }
-
-            & .search__icon--close{
-                display: block;
-            }
-        }
     }
 
     &__select {
@@ -38,7 +26,7 @@
         border-radius: 2.1rem;
         height: 100%;
         width: 100%;
-        padding: 0 4.5rem 0 2.85rem;
+        padding: 0 5rem;
         outline: none;
         appearance: none;
         border: none;
@@ -59,59 +47,30 @@
         border-radius: 2.1rem;
     }
 
-
-    @mixin btn {
-        position: absolute;
-        height: 3rem;
-        width: 3rem;
-        transform: translateY(-50%);
-        border-radius: 50%;
-    }
-
-    &__btn-1 {
-        @include btn();
-        top: 50%;
-        right: 1rem;
-        background: var(--color-bg);
-        z-index: 3;
-    }
-
-    &__btn-2 {
-        @include btn();
-        top: calc(50% + 3px);
-        right: calc(1rem - 3px);
-        background: var(--color-blur-dark);
-        z-index: 2;
-        filter: blur(4px);
-    }
-
-    &__btn-3 {
-        @include btn();
-        top: calc(50% - 3px);
-        right: calc(1rem + 3px);
-        border-radius: 50%;
-        background: var(--color-blur-light);
-        z-index: 1;
-        filter: blur(4px);
-    }
-
     &__icon {
         position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
         fill: var(--color-font);
+        width: 1.3rem;
+        height: auto;
+        top: 50%;
+        left: 2rem;
+        transform: translateY(-50%);
+    }
 
-        &--magnifier{
+    &__close {
+        position: absolute;
+        display: none;
+        fill: var(--color-font);
+        width: 1rem;
+        height: auto;
+        top: 50%;
+        right: 2rem;
+        transform: translateY(-50%);
+        cursor: pointer;
+        z-index: 10;
+
+        &.active{
             display: block;
-            height: 1.3rem;
-            width: auto;
-        }
-    
-        &--close{
-            display: none;
-            height: 1rem;
-            width: 1rem;
         }
     }
 
@@ -181,7 +140,15 @@
         margin-right: 0;
 
         &__select {
-            padding-left: 1.6rem;
+            padding: 0 4rem;
+        }
+
+        &__icon {
+            left: 1.5rem;
+        }
+    
+        &__close {
+            right: 1.5rem;
         }
 
         &__list-el{

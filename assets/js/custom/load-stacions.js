@@ -28,6 +28,7 @@ const loadStacions = () => {
 
             createSelect(stations);
             loadSelectValue();
+            selectClose.classList.add('active');
         })
         .catch(error => console.log(error));
 }

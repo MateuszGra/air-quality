@@ -1,6 +1,7 @@
 const select = document.querySelector('.search__select');
 const selectList = document.querySelector('.search__list');
 const searchWrapper = document.querySelector('.search');
+const selectClose = document.querySelector('.search__close');
 
 const closeSearch = () => {
     selectList.classList.remove('active');
@@ -11,10 +12,20 @@ const openSearch = () => {
     selectList.classList.add('active');
     if(selectList.firstChild) searchWrapper.classList.add('active');
     else searchWrapper.classList.remove('active');
+    if(select.value) selectClose.classList.add('active');
+    else selectClose.classList.remove('active');
 }
 
 select.addEventListener('click', () => {
     openSearch();
+});
+
+
+selectClose.addEventListener('click', () => {
+    select.value = null;
+    sortSelect(stations);
+    openSearch();
+    select.focus();
 });
 
 document.addEventListener('click', function (e) {
@@ -99,7 +110,6 @@ const sortSelect = (stations) => {
             else if (a.city.name.toLowerCase().startsWith(select.value.toLowerCase())) return 1;
         });
     }
-
 
     let sorted = '';
     sortedStations.forEach(station => {
