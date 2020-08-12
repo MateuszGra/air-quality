@@ -92,7 +92,6 @@ $base-margin: 0 !default;
         box-sizing: border-box;
         right: -2px;
         bottom: -2px;
-        border: 0.5rem solid var(--color-blur-dark);
         border-radius: 0.8rem;
     }
 
@@ -101,7 +100,6 @@ $base-margin: 0 !default;
         box-sizing: border-box;
         right: 2px;
         bottom: 2px;
-        border: 0.5rem solid var(--color-blur-light);
         border-radius: 0.8rem;
     }
 }
