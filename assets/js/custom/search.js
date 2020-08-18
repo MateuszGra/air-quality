@@ -52,7 +52,7 @@ const handleArrowKey = (e) => {
                 if (next == -1) next = listEl.length -1;
             }
             listEl[next].classList.add('active');
-            listEl[next].scrollIntoView({block: 'nearest'});
+            listEl[next].scrollIntoView({block: 'nearest', inline: 'start'});
             break;
         } else if ( i == listEl.length -1) {
             if (e.key == 'ArrowDown'){
@@ -60,7 +60,7 @@ const handleArrowKey = (e) => {
                 listEl[0].scrollIntoView();
             } else if (e.key == 'ArrowUp') {
                 listEl[listEl.length -1].classList.add('active');
-                listEl[listEl.length -1].scrollIntoView({block: 'nearest'});
+                listEl[listEl.length -1].scrollIntoView({block: 'nearest', inline: 'start'});
             }
         }
     }
@@ -103,7 +103,7 @@ document.addEventListener('mousemove', (e) => {
 
 const sortSelect = (stations) => {
     let sortedStations = stations;
-    if (select.value){
+    if (select.value) {
         sortedStations = stations.filter(a => a.city.name.toLowerCase().includes(select.value.toLowerCase()))
         sortedStations.sort((a, b) => {
             if (a.city.name.toLowerCase().startsWith(select.value.toLowerCase())) return -1;
@@ -113,7 +113,12 @@ const sortSelect = (stations) => {
 
     let sorted = '';
     sortedStations.forEach(station => {
-        sorted += `<li class="search__list-el" data-id="${station.id}">${station.city.name}</li>`;
+        let city = station.city.name;
+        if (select.value) {
+            const query = new RegExp(`(${select.value})`, 'i');
+            city = station.city.name.replace(query, `<b>$1</b>`);
+        }
+        sorted += `<li class="search__list-el" data-id="${station.id}">${city}</li>`;
     });
     selectList.innerHTML = sorted;
 }

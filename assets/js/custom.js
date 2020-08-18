@@ -356,7 +356,8 @@ var handleArrowKey = function handleArrowKey(e) {
 
       listEl[next].classList.add('active');
       listEl[next].scrollIntoView({
-        block: 'nearest'
+        block: 'nearest',
+        inline: 'start'
       });
       break;
     } else if (i == listEl.length - 1) {
@@ -366,7 +367,8 @@ var handleArrowKey = function handleArrowKey(e) {
       } else if (e.key == 'ArrowUp') {
         listEl[listEl.length - 1].classList.add('active');
         listEl[listEl.length - 1].scrollIntoView({
-          block: 'nearest'
+          block: 'nearest',
+          inline: 'start'
         });
       }
     }
@@ -425,7 +427,14 @@ var sortSelect = function sortSelect(stations) {
 
   var sorted = '';
   sortedStations.forEach(function (station) {
-    sorted += "<li class=\"search__list-el\" data-id=\"".concat(station.id, "\">").concat(station.city.name, "</li>");
+    var city = station.city.name;
+
+    if (select.value) {
+      var query = new RegExp("(".concat(select.value, ")"), 'i');
+      city = station.city.name.replace(query, "<b>$1</b>");
+    }
+
+    sorted += "<li class=\"search__list-el\" data-id=\"".concat(station.id, "\">").concat(city, "</li>");
   });
   selectList.innerHTML = sorted;
 };
