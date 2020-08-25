@@ -328,11 +328,12 @@ selectClose.addEventListener('click', function () {
   select.focus();
 });
 document.addEventListener('click', function (e) {
-  if (e.target.matches('.search__list-el')) {
-    select.dataset.id = e.target.dataset.id;
+  if (e.target.closest('.search__list-el')) {
+    var target = e.target.closest('.search__list-el');
+    select.dataset.id = target.dataset.id;
   }
 
-  if (!e.target.matches('.search__select')) {
+  if (!e.target.closest('.search__select')) {
     closeSearch();
   }
 }, false);
@@ -410,7 +411,11 @@ document.addEventListener('keydown', function (e) {
 document.addEventListener('mousemove', function (e) {
   var lastActive = document.querySelector('.search__list-el.active');
   if (lastActive) lastActive.classList.remove('active');
-  if (e.target.matches('.search__list-el')) e.target.classList.add('active');
+
+  if (e.target.closest('.search__list-el')) {
+    var target = e.target.closest('.search__list-el');
+    target.classList.add('active');
+  }
 }, false);
 
 var sortSelect = function sortSelect(stations) {
