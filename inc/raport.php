@@ -11,10 +11,5 @@
         $fp = fopen('../raports/'.$filemName,'w');
         fwrite($fp, $body);
         fclose($fp);
-
-        $email = 'mxgrabowski@gmail.com';
-        $subject = 'Nowy raport z aplikacji AIR';
-        $message_body = '<h2>Nowy raport: <a href="air.mgrabowski.eu/raports/'.$filemName.'">link</a></h2>';
-        send($email, $subject, $message_body);
     }
 ?>
