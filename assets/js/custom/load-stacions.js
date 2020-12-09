@@ -23,11 +23,19 @@ const loadStacions = () => {
         .then(response => {
             stations = response;
             stations.forEach(station => {
-                if (station.addressStreet != null) station.city.name += ' ' + station.addressStreet;
+                if (station.city && station.addressStreet != null) station.city.name += ' ' + station.addressStreet;
+                else {
+                    if(station.addressStreet) station.city = {name: station.addressStreet};
+                    if(station.stationName) station.city = {name: station.stationName};
+                    else station.city = {name: `brak adresu, id ${station.id}`};
+                }
             });
 
             createSelect(stations);
             loadSelectValue();
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+            dataWrapper.innerHTML = `<h2 class="font-bad center">Wystąpił błąd, prosimy spróbować później.</h2>`;
+            console.error(error)
+        });
 }

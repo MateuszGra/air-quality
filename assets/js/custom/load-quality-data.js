@@ -56,5 +56,8 @@ const loadQuality = () => {
             `
             loadSensors();
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+            dataWrapper.innerHTML = `<h2 class="font-bad center">Wystąpił błąd, prosimy spróbować później.</h2>`;
+            console.error(error)
+        });
 }
