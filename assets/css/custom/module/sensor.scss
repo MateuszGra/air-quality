@@ -48,7 +48,6 @@
         font-size: 1.2rem;
         font-weight: 600;
     }
-
 }
 
 @keyframes bar {
@@ -59,7 +58,6 @@
     100% {
         transform: scaleX(1);
     }
-
 }
 
 
@@ -71,5 +69,12 @@
             flex-grow: 1;
         }
     }
+}
 
+@media (max-width: 1000px) {
+    .sensor {
+        &__bar {
+            width: auto;
+        }
+    }
 }

@@ -53,9 +53,12 @@
 @media (max-width: 600px) {
 
     .box {
-        padding: 3rem 10%;
+        &--right {
+            padding: 3rem 7%;
+        }
 
         &--left {
+            padding: 3rem 10%;
             margin: 0 0 2rem 0;
         }
     }
